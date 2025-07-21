@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  /* Main colors */
+  --color-white: #FFFFFF;
+
+  --color-beige-500: #98908B;
+  --color-beige-100: #F8F4F0;
+
+  --color-grey-900: #201F24;
+  --color-grey-500: #696868;
+  --color-grey-300: #B3B3B3;
+  --color-grey-100: #F2F2F2;
+
+  /* Secondary colors */
+  --color-green: #277C78;
+  --color-yellow: #F2CDAC;
+  --color-cyan: #82C9D7;
+  --color-navy: #626070;
+  --color-red: #C94736;
+  --color-purple: #826CB0;
+
+  /* Other colors */
+  --color-light-purple: #AF81BA;
+  --color-turquoise: #597C7C;
+  --color-brown: #93674F;
+  --color-magenta: #934F6F;
+  --color-blue: #3F82B2;
+  --color-navy-grey: #97A0AC;
+  --color-army-green: #7F9161;
+  --color-gold: #CAB361;
+  --color-orange: #BE6C49;
+}
+
+@theme {
+  --spacing-0: 0;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-075: 6px;
+  --spacing-100: 8px;
+  --spacing-125: 10px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-250: 20px;
+  --spacing-300: 24px;
+  --spacing-350: 28px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-800: 64px;
+  --spacing-900: 72px;
+  --spacing-1000: 80px;
+  --spacing-1200: 96px;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("/assets/fonts/PublicSans-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("/assets/fonts/PublicSans-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@theme {
+  --font-family-public-sans: "Public Sans", sans-serif;
+}
+
+@utility text-preset-1 {
+  font-family: "Public Sans", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-2 {
+  font-family: "Public Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-3 {
+  font-family: "Public Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-4 {
+  font-family: "Public Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-5 {
+  font-family: "Public Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-4-bold {
+  font-family: "Public Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@utility text-preset-5-bold {
+  font-family: "Public Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0;
+}
