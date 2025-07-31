@@ -1,11 +1,35 @@
-export async function loader() {
+import { HomeContent } from "~/components/HomeContent";
+import { PageTitle } from "~/components/PageTitle"
+import { Summary } from "~/components/Summary"
+
+import type { Route } from "./+types/home"
+
+export async function clientLoader() {
+  const baseUrl = typeof window !== 'undefined'
+    ? window.location.origin
+    : 'http://localhost:5173'
+
+  const res = await fetch(`${baseUrl}/data/data.json`)
+  const data = await res.json()
+
+  return {
+    balance: data.balance,
+    transactions: data.transactions,
+    pots: data.pots,
+    budgets: data.budgets
+  }
 }
 
-export default function Index() {
+export default function Index({ loaderData } : Route.ComponentProps) {
+  const { balance, pots, budgets, transactions } = loaderData
+
   return (
-    <div className="p-8">
-      <h1 className="text-preset-1 text-grey-900">Finance App</h1>
-      <p className="text-preset-4 text-grey-500 mt-4">Welcome to your personal finance dashboard.</p>
+    <div className="flex flex-col gap-8 px-4 py-6 md:px-10 md:py-8 grow h-screen overflow-y-auto">
+      <PageTitle title='Overview' />
+
+      <Summary balanceData={balance}/>
+
+      <HomeContent pots={pots} budgets={budgets} transactions={transactions} />
     </div>
   );
 }

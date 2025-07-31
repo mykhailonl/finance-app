@@ -1,14 +1,29 @@
-import { reactRouter } from "@react-router/dev/vite";
-import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import {reactRouter} from "@react-router/dev/vite"
+import tailwindcss from "@tailwindcss/vite"
+import {defineConfig} from "vite"
+import tsconfigPaths from "vite-tsconfig-paths"
 import path from "path";
+import svgr from "@svgr/rollup"
+
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [
+    tailwindcss(),
+    reactRouter(),
+    tsconfigPaths(),
+    svgr({
+      exportType: 'named',
+      ref: true,
+      svgo: false,
+      titleProp: true,
+      include: '**/*.svg',
+    }),
+  ],
+  publicDir: 'public',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './app'),
+      '@assets': path.resolve(__dirname, './public/assets')
     },
   },
 });
