@@ -4,30 +4,66 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="" />
+    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransactions/WidgetTransactions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransactions/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-filter-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-filter-mobile.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-search.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-search.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-sort-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-sort-mobile.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Avatar/Avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Avatar/Avatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Transaction/Transaction.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Transaction/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Transactions/Transactions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Transactions/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/types/IconType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/IconType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Mykhailo Lapchynskyi &lt;mikhaillapchinskyi@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mykhailonl"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mykhailonl&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mykhailonl/finance-app.git",
-    "accountId": "94922eb6-4392-4651-a9b8-bb0da689987e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mykhailonl/finance-app.git&quot;,
+    &quot;accountId&quot;: &quot;94922eb6-4392-4651-a9b8-bb0da689987e&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="30B6xmzPzUzuDW9Z0GpeGxDGqdK" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -36,24 +72,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/transactionsPage&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -69,10 +108,26 @@
       <option name="presentableId" value="Default" />
       <updated>1753088868043</updated>
       <workItem from="1753088869130" duration="5668000" />
+      <workItem from="1753695500050" duration="48173000" />
+      <workItem from="1754042062951" duration="80000" />
+      <workItem from="1754042156811" duration="13650000" />
     </task>
+    <task id="LOCAL-00001" summary="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
+      <option name="closed" value="true" />
+      <created>1753952652129</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753952652129</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
   </component>
 </project>

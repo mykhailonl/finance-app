@@ -17,8 +17,12 @@ export const Recurring = ({ transactions }: RecurringProps) => {
     .reduce((sum, tr) => sum + Math.abs(tr.amount), 0)
 
   return (
-    <SectionWrapper styles='gap-8 grow'>
-      <SectionTitleBlock title="Recurring Bills" linkText="See Details" />
+    <SectionWrapper styles="gap-8 grow">
+      <SectionTitleBlock
+        title="Recurring Bills"
+        linkText="See Details"
+        link="/recurring"
+      />
 
       <div className="flex flex-col gap-3">
         <RecurringBillItem type="paid" value={paidRecurring} />

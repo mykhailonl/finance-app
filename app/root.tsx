@@ -1,5 +1,7 @@
 import './app.css'
 
+import { QueryClient } from '@tanstack/query-core'
+import { QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import {
   isRouteErrorResponse,
@@ -13,6 +15,8 @@ import {
 import { DeviceProvider } from '~/context/ScreenContext'
 
 import type { Route } from './+types/root'
+
+const queryClient = new QueryClient()
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -34,9 +38,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <DeviceProvider>
-      <Outlet />
-    </DeviceProvider>
+    <QueryClientProvider client={queryClient}>
+      <DeviceProvider>
+        <Outlet />
+      </DeviceProvider>
+    </QueryClientProvider>
   )
 }
 

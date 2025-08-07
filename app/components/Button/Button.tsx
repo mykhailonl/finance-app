@@ -1,23 +1,31 @@
 import cn from 'classnames'
-import React from "react"
-import { iconComponents } from "~/types/IconType"
+import React from 'react'
+
+import { iconComponents } from '~/types/IconType'
 
 type ButtonProps = {
-  variant: 'primary' | 'secondary' | 'tertiary' | 'danger',
-  disabled?: boolean,
-  children: React.ReactNode,
-
+  variant: 'primary' | 'secondary' | 'tertiary' | 'danger'
+  disabled?: boolean
+  children: React.ReactNode
+  onClick: () => void
 }
 
-export const Button = ({variant, disabled = false, children}: ButtonProps) => {
+export const Button = ({
+  variant,
+  disabled = false,
+  children,
+  onClick,
+}: ButtonProps) => {
   const CaretDown = iconComponents['caretDown']
   const baseStyles = 'flex items-center'
 
   const variantStyles = {
     primary: 'rounded-lg bg-grey-900 hover:bg-grey-500 justify-center',
-    secondary: 'rounded-lg bg-beige-100 hover:bg-white hover:border hover:border-beige-500 justify-center',
+    secondary:
+      'rounded-lg bg-beige-100 hover:bg-white hover:border hover:border-beige-500 justify-center',
     tertiary: 'gap-3',
-    danger: 'rounded-lg bg-red hover:bg-[linear-gradient(0deg,rgba(255,255,255,0.20)_0%,rgba(255,255,255,0.20)_100%),#C94736] justify-center'
+    danger:
+      'rounded-lg bg-red hover:bg-[linear-gradient(0deg,rgba(255,255,255,0.20)_0%,rgba(255,255,255,0.20)_100%),#C94736] justify-center',
   }
 
   const buttonTextStyles = {
@@ -28,11 +36,19 @@ export const Button = ({variant, disabled = false, children}: ButtonProps) => {
   }
 
   return (
-    <button className={cn(baseStyles, variantStyles[variant], '')}>
-      <p className={cn(buttonTextStyles[variant], 'items-center flex gap-3 justify-between')}>
+    <button
+      className={cn(baseStyles, variantStyles[variant], '')}
+      onClick={onClick}
+    >
+      <p
+        className={cn(
+          buttonTextStyles[variant],
+          'items-center flex gap-3 justify-between'
+        )}
+      >
         {children}
 
-        {variant === 'tertiary' && <CaretDown className='w-3 h-3 -rotate-90'/>}
+        {variant === 'tertiary' && <CaretDown className="w-3 h-3 -rotate-90" />}
       </p>
     </button>
   )

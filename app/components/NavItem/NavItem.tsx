@@ -26,7 +26,7 @@ export const NavItem = ({ href, iconName }: Props) => {
         className={cn(
           'flex items-center',
           isActive ? 'text-green' : 'text-grey-300',
-          isDesktop &&  'flex-col gap-1',
+          isDesktop && 'flex-col gap-1',
           isDesktop && 'flex-row gap-4'
         )}
       >
