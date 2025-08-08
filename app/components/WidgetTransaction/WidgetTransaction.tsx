@@ -7,22 +7,44 @@ import { formatDate } from '~/utils/formatDate'
 
 type Props = {
   transaction: TransactionType
+  hideAvatarOnMobile?: boolean
+  small?: boolean
 }
 
-export const WidgetTransaction = ({ transaction }: Props) => {
+export const WidgetTransaction = ({
+  transaction,
+  hideAvatarOnMobile = false,
+  small = false,
+}: Props) => {
   const formattedAmount = formatAmountToString(transaction.amount)
   const formattedDate = formatDate(transaction.date)
 
   return (
     <div className="flex items-center">
       <div className="flex self-stretch gap-4 items-center grow">
-        <Avatar src={transaction.avatar} alt={transaction.name} />
+        <Avatar
+          src={transaction.avatar}
+          alt={transaction.name}
+          styles={hideAvatarOnMobile ? 'hidden md:flex' : ''}
+        />
 
-        <p className="text-preset-4-bold text-grey-900">{transaction.name}</p>
+        <p
+          className={cn(
+            'text-grey-900',
+            small ? 'text-preset-5-bold' : 'text-preset-4-bold'
+          )}
+        >
+          {transaction.name}
+        </p>
       </div>
 
-      <div className="flex flex-col gap-2 items-end">
-        <p className={cn('text-preset-4-bold', formattedAmount.colorStyle)}>
+      <div className={cn('flex flex-col items-end', small ? 'gap-1' : 'gap-2')}>
+        <p
+          className={cn(
+            small ? 'text-preset-5-bold' : 'text-preset-4-bold',
+            formattedAmount.colorStyle
+          )}
+        >
           {formattedAmount.amount}
         </p>
 

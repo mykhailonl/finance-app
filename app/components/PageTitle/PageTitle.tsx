@@ -1,9 +1,9 @@
 import cn from 'classnames'
 
 type PageTitleProps = {
-  title: string,
+  title: string
   styles?: {
-    containerStyles?: string,
+    containerStyles?: string
     titleStyles?: string
   }
 }

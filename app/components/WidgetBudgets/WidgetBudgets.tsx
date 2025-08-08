@@ -9,7 +9,7 @@ type BudgetsProps = {
   budgets: BudgetType[]
 }
 
-export const Budgets = ({ budgets }: BudgetsProps) => {
+export const WidgetBudgets = ({ budgets }: BudgetsProps) => {
   return (
     <SectionWrapper styles="grow gap-8">
       <SectionTitleBlock

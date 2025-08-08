@@ -1,7 +1,19 @@
 export type ThemeColor =
-  | 'green' | 'yellow' | 'cyan' | 'navy' | 'red' | 'purple'
-  | 'light-purple' | 'turquoise' | 'brown' | 'magenta'
-  | 'blue' | 'navy-grey' | 'army-green' | 'gold' | 'orange'
+  | 'green'
+  | 'yellow'
+  | 'cyan'
+  | 'navy'
+  | 'red'
+  | 'purple'
+  | 'light-purple'
+  | 'turquoise'
+  | 'brown'
+  | 'magenta'
+  | 'blue'
+  | 'navy-grey'
+  | 'army-green'
+  | 'gold'
+  | 'orange'
 
 export const THEME_TO_TW_CLASS: Record<ThemeColor, string> = {
   green: 'bg-green',
@@ -37,4 +49,22 @@ export const THEME_TO_HEX: Record<ThemeColor, string> = {
   'army-green': '#7F9161',
   gold: '#CAB361',
   orange: '#BE6C49',
+}
+
+export const THEME_TO_TW_TEXT: Record<ThemeColor, string> = {
+  green: 'text-green',
+  yellow: 'text-yellow',
+  cyan: 'text-cyan',
+  navy: 'text-navy',
+  red: 'text-red',
+  purple: 'text-purple',
+  'light-purple': 'text-light-purple',
+  turquoise: 'text-turquoise',
+  brown: 'text-brown',
+  magenta: 'text-magenta',
+  blue: 'text-blue',
+  'navy-grey': 'text-navy-grey',
+  'army-green': 'text-army-green',
+  gold: 'text-gold',
+  orange: 'text-orange',
 }

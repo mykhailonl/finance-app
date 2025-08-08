@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Budgets } from '~/components/Budgets'
+import { WidgetBudgets } from '~/components/WidgetBudgets'
 import { Pots } from '~/components/Pots'
 import { Recurring } from '~/components/Recurring'
 import { WidgetTransactions } from '~/components/WidgetTransactions'
@@ -28,7 +28,7 @@ export const HomeContent = ({
       </div>
 
       <div className="flex flex-col gap-4 items-start self-stretch md:gap-6">
-        <Budgets budgets={budgets} />
+        <WidgetBudgets budgets={budgets} />
 
         <Recurring transactions={transactions} />
       </div>

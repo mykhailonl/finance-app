@@ -9,6 +9,8 @@ import { ReactComponent as IconPot } from '@/assets/images/icon-pot.svg'
 import { ReactComponent as SearchIcon } from '@/assets/images/icon-search.svg'
 import { ReactComponent as SortIcon } from '@/assets/images/icon-sort-mobile.svg'
 import { ReactComponent as LogoLarge } from '@/assets/images/logo-large.svg'
+import { ReactComponent as IconEllipse } from '@/assets/images/icon-ellipse.svg'
+import { ReactComponent as IconDots } from '@/assets/images/icon-dots.svg'
 
 export const iconComponents = {
   caretDown: CaretDown,
@@ -22,6 +24,8 @@ export const iconComponents = {
   search: SearchIcon,
   sort: SortIcon,
   filter: FilterIcon,
+  ellipse: IconEllipse,
+  dots: IconDots,
 }
 
 export type IconName = keyof typeof iconComponents

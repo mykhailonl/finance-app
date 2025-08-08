@@ -6,11 +6,11 @@ type Props = {
   styles?: string
 }
 
-export const SectionWrapper = ({ children, styles }: Props) => {
+export const PageWrapper = ({ children, styles }: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col gap-5 self-stretch rounded-xl bg-white px-5 py-6 md:p-8',
+        'flex flex-col gap-8 px-4 py-6 grow h-screen overflow-y-auto md:px-10 md:py-8',
         styles
       )}
     >

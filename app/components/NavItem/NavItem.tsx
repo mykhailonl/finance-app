@@ -6,7 +6,7 @@ import { iconComponents, type NavItems } from '~/types/IconType'
 import type { NavLink as Props } from '~/types/Navigation'
 
 export const NavItem = ({ href, iconName }: Props) => {
-  const { isMobile, isDesktop } = useDevice()
+  const { isMobile, isTablet, isDesktop } = useDevice()
 
   const renderLink = (isActive: boolean) => {
     const Icon = iconComponents[iconName]
@@ -26,7 +26,7 @@ export const NavItem = ({ href, iconName }: Props) => {
         className={cn(
           'flex items-center',
           isActive ? 'text-green' : 'text-grey-300',
-          isDesktop && 'flex-col gap-1',
+          isTablet && 'flex-col gap-1',
           isDesktop && 'flex-row gap-4'
         )}
       >

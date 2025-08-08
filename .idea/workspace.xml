@@ -4,28 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
-      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransactions/WidgetTransactions.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/WidgetTransactions/index.ts" afterDir="false" />
+    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feature/TransactionsPage&#10;&#10;  - Refactored Transaction components to WidgetTransaction&#10;  - Added new transaction page components (filters, list, pagination, etc.)&#10;  - Updated components to use the new widget naming convention&#10;  - Added transaction hooks and utilities&#10;  - Updated icons and component styling">
+      <change afterPath="$PROJECT_DIR$/app/assets/images/icon-dots.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-filter-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-filter-mobile.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-search.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-search.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-sort-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-sort-mobile.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Avatar/Avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Avatar/Avatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-ellipsis.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Budgets/Budgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Budgets/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Button/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Divider/Divider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Divider/Divider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Transaction/Transaction.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Transaction/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Transactions/Transactions.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Transactions/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/PageTitle/PageTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PageTitle/PageTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/context/ScreenContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/context/ScreenContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/transactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/transactions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/types/BudgetType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/BudgetType.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/types/IconType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/IconType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +81,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/transactionsPage&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/budgetsPage&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
@@ -111,6 +114,7 @@
       <workItem from="1753695500050" duration="48173000" />
       <workItem from="1754042062951" duration="80000" />
       <workItem from="1754042156811" duration="13650000" />
+      <workItem from="1754591320978" duration="10438000" />
     </task>
     <task id="LOCAL-00001" summary="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
       <option name="closed" value="true" />

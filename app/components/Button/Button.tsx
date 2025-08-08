@@ -8,6 +8,7 @@ type ButtonProps = {
   disabled?: boolean
   children: React.ReactNode
   onClick: () => void
+  styles?: string
 }
 
 export const Button = ({
@@ -15,6 +16,7 @@ export const Button = ({
   disabled = false,
   children,
   onClick,
+  styles,
 }: ButtonProps) => {
   const CaretDown = iconComponents['caretDown']
   const baseStyles = 'flex items-center'
@@ -37,7 +39,7 @@ export const Button = ({
 
   return (
     <button
-      className={cn(baseStyles, variantStyles[variant], '')}
+      className={cn(baseStyles, variantStyles[variant], styles)}
       onClick={onClick}
     >
       <p
