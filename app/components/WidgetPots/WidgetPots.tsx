@@ -9,7 +9,7 @@ type PotsProps = {
   pots: PotType[]
 }
 
-export const Pots = ({ pots }: PotsProps) => {
+export const WidgetPots = ({ pots }: PotsProps) => {
   const IconPot = iconComponents['pot']
   const totalSaved = pots.reduce((acc, curr) => acc + curr.total, 0)
 

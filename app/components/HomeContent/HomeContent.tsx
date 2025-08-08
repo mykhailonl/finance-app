@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { WidgetBudgets } from '~/components/WidgetBudgets'
-import { Pots } from '~/components/Pots'
-import { Recurring } from '~/components/Recurring'
+import { WidgetPots } from '~/components/WidgetPots'
+import { WidgetRecurring } from '~/components/WidgetRecurring'
 import { WidgetTransactions } from '~/components/WidgetTransactions'
 import type { BudgetType } from '~/types/BudgetType'
 import type { PotType } from '~/types/PotType'
@@ -22,7 +22,7 @@ export const HomeContent = ({
   return (
     <div className="flex flex-col gap-6 items-start lg:flex-row">
       <div className="flex flex-col gap-4 items-start self-stretch grow md:gap-6">
-        <Pots pots={pots} />
+        <WidgetPots pots={pots} />
 
         <WidgetTransactions transactions={transactions.slice(0, 5)} />
       </div>
@@ -30,7 +30,7 @@ export const HomeContent = ({
       <div className="flex flex-col gap-4 items-start self-stretch md:gap-6">
         <WidgetBudgets budgets={budgets} />
 
-        <Recurring transactions={transactions} />
+        <WidgetRecurring transactions={transactions} />
       </div>
     </div>
   )

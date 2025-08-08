@@ -1,6 +1,6 @@
 import { PageTitle } from '~/components/PageTitle'
-import { TransactionsContent } from '~/components/TransactionsContent'
 import { PageWrapper } from '~/components/PageWrapper'
+import { TransactionsContent } from '~/components/TransactionsContent'
 
 export default function Transactions() {
   return (

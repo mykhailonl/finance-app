@@ -5,30 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feature/TransactionsPage&#10;&#10;  - Refactored Transaction components to WidgetTransaction&#10;  - Added new transaction page components (filters, list, pagination, etc.)&#10;  - Updated components to use the new widget naming convention&#10;  - Added transaction hooks and utilities&#10;  - Updated icons and component styling">
-      <change afterPath="$PROJECT_DIR$/app/assets/images/icon-dots.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetPots/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/WidgetRecurring/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-ellipsis.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Budgets/Budgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Budgets/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Button/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Divider/Divider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Divider/Divider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/PageTitle/PageTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PageTitle/PageTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants/theme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/context/ScreenContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/context/ScreenContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Pots/Pots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetPots/WidgetPots.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Pots/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Recurring/Recurring.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetRecurring/WidgetRecurring.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Recurring/index.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/transactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/transactions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/BudgetType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/BudgetType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/IconType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/IconType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/types/PotType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/PotType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/data/data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,27 +65,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/budgetsPage&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/potsPage",
+    "last_opened_file_path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -132,6 +122,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
+    <MESSAGE value="feat: budgetsPage&#10;&#10;  Add complete budgets page implementation with new components (BudgetHero, BudgetInfo, BudgetList, BudgetSection, BudgetsHeader, PageWrapper), custom hooks (useBudgets, useTransactions), budgets&#10;  route, utility functions, and updated existing components. Rename Budgets to WidgetBudgets and update icon assets." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: budgetsPage&#10;&#10;  Add complete budgets page implementation with new components (BudgetHero, BudgetInfo, BudgetList, BudgetSection, BudgetsHeader, PageWrapper), custom hooks (useBudgets, useTransactions), budgets&#10;  route, utility functions, and updated existing components. Rename Budgets to WidgetBudgets and update icon assets." />
   </component>
 </project>

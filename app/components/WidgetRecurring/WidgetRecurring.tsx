@@ -7,7 +7,7 @@ type RecurringProps = {
   transactions: TransactionType[]
 }
 
-export const Recurring = ({ transactions }: RecurringProps) => {
+export const WidgetRecurring = ({ transactions }: RecurringProps) => {
   // TODO double-check
   const paidRecurring = transactions
     .filter(
