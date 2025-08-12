@@ -18,12 +18,11 @@ export async function clientLoader() {
     balance: data.balance,
     transactions: data.transactions,
     pots: data.pots,
-    budgets: data.budgets,
   }
 }
 
 export default function Index({ loaderData }: Route.ComponentProps) {
-  const { balance, pots, budgets, transactions } = loaderData
+  const { balance, pots, transactions } = loaderData
 
   return (
     <PageWrapper>
@@ -31,7 +30,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
 
       <Summary balanceData={balance} />
 
-      <HomeContent pots={pots} budgets={budgets} transactions={transactions} />
+      <HomeContent pots={pots} transactions={transactions} />
     </PageWrapper>
   )
 }

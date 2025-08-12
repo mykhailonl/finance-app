@@ -16,7 +16,7 @@ export const filterByCategory = ({
   const filtered = transactions.filter(
     (transaction) =>
       transaction.category === category &&
-      transaction.date.startsWith('2024-08')
+      transaction.date.startsWith('2025-08')
   )
 
   const spentWithinCategory = filtered.reduce(

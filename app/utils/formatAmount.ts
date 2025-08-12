@@ -1,8 +1,8 @@
-export const formatAmount = (amount: number) => {
+export const formatAmount = (amount: number, abs?: boolean) => {
   const USDollar = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   })
 
-  return USDollar.format(amount)
+  return USDollar.format(abs ? Math.abs(amount) : amount)
 }

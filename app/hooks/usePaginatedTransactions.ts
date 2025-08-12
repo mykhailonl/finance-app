@@ -2,14 +2,23 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 
 import type { FilterOption, SortOption } from '~/types/DropdownType'
 import type { TransactionType } from '~/types/TransactionType'
+import { filterByQuery } from '~/utils/filterByQuery'
 import { getFilterCategory } from '~/utils/getFilterCategory'
+import { sortTransactions } from '~/utils/sortTransactions'
 
-export default function usePaginatedTransactions(
-  page: number,
-  sortBy: SortOption,
-  filterBy: FilterOption,
+type PaginationParams = {
+  page: number
+  sortBy: SortOption
+  filterBy: FilterOption
   query: string
-) {
+}
+
+export default function usePaginatedTransactions({
+  page,
+  sortBy,
+  filterBy,
+  query,
+}: PaginationParams) {
   return useSuspenseQuery({
     queryKey: ['transactions', page, sortBy, filterBy, query],
     queryFn: async () => {
@@ -29,54 +38,15 @@ export default function usePaginatedTransactions(
                 tr.category === getFilterCategory(filterBy)
             )
 
-      const sortedTransactions = (
-        transactions: TransactionType[],
-        sortBy: SortOption
-      ) => {
-        switch (sortBy) {
-          case 'alphAsc':
-            return [...transactions].sort((a, b) =>
-              a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-            )
-          case 'alphDesc':
-            return [...transactions].sort((a, b) =>
-              b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-            )
-          case 'latest':
-            return [...transactions].sort((a, b) => {
-              return new Date(b.date).getTime() - new Date(a.date).getTime()
-            })
-
-          case 'oldest':
-            return [...transactions].sort((a, b) => {
-              return new Date(a.date).getTime() - new Date(b.date).getTime()
-            })
-          case 'highest':
-            return [...transactions].sort((a, b) => {
-              const diff = Math.abs(b.amount) - Math.abs(a.amount)
-              return diff !== 0 ? diff : b.amount - a.amount
-            })
-          case 'lowest':
-            return [...transactions].sort((a, b) => {
-              const diff = Math.abs(a.amount) - Math.abs(b.amount)
-              return diff !== 0 ? diff : b.amount - a.amount
-            })
-          default:
-            return transactions
-        }
-      }
-
       const start = (page - 1) * 10
       const end = page * 10
 
-      const sortedAndFiltered = sortedTransactions(filteredTransactions, sortBy)
-      const filteredByQuery = sortedAndFiltered.filter((tr) =>
-        tr.name.toLowerCase().includes(query.toLowerCase())
-      )
+      const sortedAndFiltered = sortTransactions(filteredTransactions, sortBy)
+      const filtered = filterByQuery(sortedAndFiltered, query)
 
       return {
-        transactions: filteredByQuery.slice(start, end),
-        totalPages: Math.ceil(filteredByQuery.length / 10),
+        transactions: filtered.slice(start, end),
+        totalPages: Math.ceil(filtered.length / 10),
       }
     },
   })

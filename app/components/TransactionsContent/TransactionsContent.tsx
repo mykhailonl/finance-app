@@ -1,33 +1,25 @@
-import { useSearchParams } from 'react-router'
-
 import { Pagination } from '~/components/Pagination'
+import { SectionWrapper } from '~/components/SectionWrapper'
 import { TransactionFilters } from '~/components/TransactionFilters'
 import { TransactionList } from '~/components/TransactionList'
 import usePaginatedTransactions from '~/hooks/usePaginatedTransactions'
-import type { FilterOption, SortOption } from '~/types/DropdownType'
+import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 
 export const TransactionsContent = () => {
-  const [searchParams] = useSearchParams()
-
-  const currentPage = searchParams.get('page') || 1
-  const sortValue = searchParams.get('sort') || 'latest'
-  const filterByValue = searchParams.get('filterBy') || 'all'
-  const queryValue = searchParams.get('query') || ''
-
-  const { data } = usePaginatedTransactions(
-    +currentPage,
-    sortValue as SortOption,
-    filterByValue as FilterOption,
-    queryValue
-  )
+  const { data } = usePaginatedTransactions({
+    page: useSearchParamValue('page')[0],
+    sortBy: useSearchParamValue('sortBy')[0],
+    filterBy: useSearchParamValue('filterBy')[0],
+    query: useSearchParamValue('query')[0],
+  })
 
   return (
-    <div className="bg-white rounded-xl py-6 px-5 flex flex-col gap-6">
+    <SectionWrapper largerGap>
       <TransactionFilters />
 
       <TransactionList transactions={data.transactions} />
 
       <Pagination totalPages={data.totalPages} />
-    </div>
+    </SectionWrapper>
   )
 }

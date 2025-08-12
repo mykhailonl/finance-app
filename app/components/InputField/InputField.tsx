@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import type { ChangeEvent } from 'react'
 
 import { iconComponents, type InputFieldIcons } from '~/types/IconType'
@@ -11,6 +12,7 @@ type Props = {
   iconName: InputFieldIcons
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  styles?: string
 }
 
 export const InputField = ({
@@ -22,11 +24,12 @@ export const InputField = ({
   iconName,
   value,
   onChange,
+  styles,
 }: Props) => {
   const SearchIcon = iconComponents[iconName]
 
   return (
-    <div className="flex items-center gap-1">
+    <div className={cn('flex items-center gap-1', styles)}>
       {showLabel && (
         <label
           htmlFor={`${name}-field`}
@@ -36,7 +39,12 @@ export const InputField = ({
         </label>
       )}
 
-      <div className="flex gap-4 items-center rounded-lg border-beige-500 py-3 px-5 border cursor-pointer">
+      <div
+        className={cn(
+          'flex gap-4 items-center rounded-lg border-beige-500 py-3 px-5 border cursor-pointer',
+          styles
+        )}
+      >
         <input
           type="text"
           id={`${name}-field`}

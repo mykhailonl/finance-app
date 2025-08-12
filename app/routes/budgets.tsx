@@ -15,7 +15,7 @@ export default function Budgets() {
   } = useTransactions({ categories: data.budgetCategories })
 
   const spentWithinBudgets: number = filteredByCategories
-    .filter((tr: TransactionType) => tr.date.startsWith('2024-08'))
+    .filter((tr: TransactionType) => tr.date.startsWith('2025-08'))
     .reduce((sum: number, tr: TransactionType) => sum + Math.abs(tr.amount), 0)
 
   return (

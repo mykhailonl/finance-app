@@ -12,5 +12,6 @@ export default [
     route('transactions', './routes/transactions.tsx'),
     route('budgets', './routes/budgets.tsx'),
     route('pots', './routes/pots.tsx'),
+    route('recurring', './routes/recurring.tsx'),
   ]),
 ] satisfies RouteConfig

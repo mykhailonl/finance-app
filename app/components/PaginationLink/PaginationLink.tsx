@@ -1,7 +1,6 @@
 import cn from 'classnames'
-import { NavLink, useLocation } from 'react-router'
 
-import { getSearchWith } from '~/utils/getSearchWith'
+import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 
 type Props = {
   page: number
@@ -9,15 +8,15 @@ type Props = {
 }
 
 export const PaginationLink = ({ page, isActive }: Props) => {
-  const { search } = useLocation()
-  const updatedSearch = getSearchWith({ page: `${page}` }, search)
+  const [, setPage] = useSearchParamValue('page')
+
   return (
-    <NavLink
+    <button
       className={cn(
-        'flex rounded-lg border  w-10 h-10 items-center justify-center',
+        'flex rounded-lg border w-10 h-10 items-center justify-center',
         isActive ? 'bg-grey-900 border-grey-900' : 'bg-white border-beige-500'
       )}
-      to={`/transactions?${updatedSearch}`}
+      onClick={() => setPage(page)}
     >
       <p
         className={cn(
@@ -27,6 +26,6 @@ export const PaginationLink = ({ page, isActive }: Props) => {
       >
         {page}
       </p>
-    </NavLink>
+    </button>
   )
 }

@@ -2,30 +2,17 @@ import cn from 'classnames'
 import React, { useState } from 'react'
 
 import { Divider } from '~/components/Divider'
-import type {
-  DropdownOptions,
-  FilterOption,
-  SortOption,
-} from '~/types/DropdownType'
+import type { DropdownOptionType, DropdownProps } from '~/types/DropdownType'
 import { iconComponents } from '~/types/IconType'
 
-type Props = {
-  type: 'filter' | 'sort'
-  value: string
-  currentLabel: string
-  onChange: (value: string) => void
-  options: DropdownOptions<SortOption | FilterOption>
-}
-
 // todo close dropdown if another is open or page reloads
-
-export const Dropdown = ({
+export const Dropdown = <T extends DropdownOptionType>({
   type,
   value,
   currentLabel,
   options,
   onChange,
-}: Props) => {
+}: DropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const CaretIcon = iconComponents['caretDown']
 

@@ -4,13 +4,22 @@ import React from 'react'
 type Props = {
   children: React.ReactNode
   styles?: string
+  smallPadding?: boolean
+  largerGap?: boolean
 }
 
-export const SectionWrapper = ({ children, styles }: Props) => {
+export const SectionWrapper = ({
+  children,
+  styles,
+  smallPadding,
+  largerGap,
+}: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col gap-5 self-stretch rounded-xl bg-white px-5 py-6 md:p-8',
+        'flex flex-col self-stretch rounded-xl bg-white',
+        smallPadding ? 'p-5' : 'px-5 py-6 md:p-8',
+        largerGap ? 'gap-6' : 'gap-5',
         styles
       )}
     >

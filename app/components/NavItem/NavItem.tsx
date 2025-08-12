@@ -16,7 +16,7 @@ export const NavItem = ({ href, iconName }: Props) => {
       transactions: 'Transactions',
       budgets: 'Budgets',
       navPots: 'Pots',
-      recurring: 'Recurring Bills',
+      widgetRecurring: 'Recurring Bills',
     }
 
     const displayText = linkTextMap[iconName]

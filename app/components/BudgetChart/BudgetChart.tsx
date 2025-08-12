@@ -9,7 +9,6 @@ interface BudgetChartProps {
   spent: number
 }
 
-// todo move limit calculation to useBudgets? also, get budgets from there?
 export const BudgetChart = ({ budgets, limit, spent }: BudgetChartProps) => {
   return (
     <>

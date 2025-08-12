@@ -6,8 +6,13 @@ type Props = {
   categories?: string[]
 }
 
+interface UseTransactionsReturn {
+  transactions: TransactionType[]
+  filteredByCategories: TransactionType[]
+}
+
 export const useTransactions = ({ categories }: Props = {}) => {
-  return useSuspenseQuery({
+  return useSuspenseQuery<UseTransactionsReturn>({
     queryKey: ['transactions', categories ?? 'all'],
     queryFn: async () => {
       const baseUrl =
@@ -21,10 +26,10 @@ export const useTransactions = ({ categories }: Props = {}) => {
       const filteredByCategories = categories
         ? data.transactions.filter(
             (tr: TransactionType) =>
-              categories.includes(tr.category) && tr.date.startsWith('2024-08')
+              categories.includes(tr.category) && tr.date.startsWith('2025-08')
           )
         : data.transactions.filter((tr: TransactionType) =>
-            tr.date.startsWith('2024-08')
+            tr.date.startsWith('2025-08')
           )
 
       return {

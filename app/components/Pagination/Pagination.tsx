@@ -1,8 +1,9 @@
-import { useSearchParams } from 'react-router'
+import cn from 'classnames'
 
 import { PaginationButton } from '~/components/PaginationButton'
 import { PaginationDots } from '~/components/PaginationDots'
 import { PaginationLink } from '~/components/PaginationLink'
+import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 import { useVisiblePages } from '~/hooks/useVisiblePages'
 
 type Props = {
@@ -10,34 +11,36 @@ type Props = {
 }
 
 export const Pagination = ({ totalPages }: Props) => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const currentPage = searchParams.get('page') || 1
-  const visiblePages = useVisiblePages(+currentPage, totalPages)
+  const [page, setPage] = useSearchParamValue('page')
+  const visiblePages = useVisiblePages(page, totalPages)
 
-  const isFirstPage = +currentPage === 1
-  const isLastPage = +currentPage === totalPages
+  const isFirstPage = page === 1
+  const isLastPage = page === totalPages
 
-  const handlePageChange = (page: number) => {
-    setSearchParams({ page: `${page}` })
-  }
+  const showPagination = totalPages > 1
 
   return (
-    <div className="flex justify-between items-center pt-6">
+    <div
+      className={cn(
+        'justify-between items-center pt-6',
+        showPagination ? 'flex' : 'hidden'
+      )}
+    >
       <PaginationButton
         role="prev"
         disabled={isFirstPage}
-        onClick={() => handlePageChange(+currentPage - 1)}
+        onClick={() => setPage(page - 1)}
       />
 
       <div className="flex gap-2">
-        {visiblePages.map((page, index) =>
-          page === '...' ? (
+        {visiblePages.map((currPage, index) =>
+          currPage === '...' ? (
             <PaginationDots key={`dots-${index}`} />
           ) : (
             <PaginationLink
-              key={page}
-              page={page}
-              isActive={page === +currentPage}
+              key={currPage}
+              page={currPage}
+              isActive={currPage === page}
             />
           )
         )}
@@ -46,7 +49,7 @@ export const Pagination = ({ totalPages }: Props) => {
       <PaginationButton
         role="next"
         disabled={isLastPage}
-        onClick={() => handlePageChange(+currentPage + 1)}
+        onClick={() => setPage(page + 1)}
       />
     </div>
   )

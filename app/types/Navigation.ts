@@ -11,5 +11,5 @@ export const NAV_ITEMS: NavLink[] = [
   { href: '/transactions', iconName: 'transactions' },
   { href: '/budgets', iconName: 'budgets' },
   { href: '/pots', iconName: 'navPots' },
-  { href: '/recurring', iconName: 'recurring' },
+  { href: '/recurring', iconName: 'widgetRecurring' },
 ] as const

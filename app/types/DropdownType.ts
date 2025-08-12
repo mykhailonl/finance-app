@@ -19,6 +19,18 @@ export type FilterOption =
   | 'shopping'
   | 'general'
 
+export type DropdownOptionType = SortOption | FilterOption
+
+export type DropdownType = 'sort' | 'filter'
+
+export type DropdownProps<T extends DropdownOptionType> = {
+  type: DropdownType
+  value: T
+  currentLabel: string
+  onChange: (value: T) => void
+  options: DropdownOptions<T>
+}
+
 export interface DropdownOption<T> {
   value: T
   label: string
