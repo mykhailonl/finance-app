@@ -19,7 +19,7 @@ export const Button = ({
   styles,
 }: ButtonProps) => {
   const CaretDown = iconComponents['caretDown']
-  const baseStyles = 'flex items-center'
+  const baseStyles = 'flex items-center cursor-custom'
 
   const variantStyles = {
     primary: 'rounded-lg bg-grey-900 hover:bg-grey-500 justify-center',
@@ -41,6 +41,7 @@ export const Button = ({
     <button
       className={cn(baseStyles, variantStyles[variant], styles)}
       onClick={onClick}
+      disabled={disabled}
     >
       <p
         className={cn(

@@ -29,6 +29,7 @@ export type DropdownProps<T extends DropdownOptionType> = {
   currentLabel: string
   onChange: (value: T) => void
   options: DropdownOptions<T>
+  styles?: string
 }
 
 export interface DropdownOption<T> {

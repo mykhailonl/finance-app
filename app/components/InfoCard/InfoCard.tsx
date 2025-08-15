@@ -1,5 +1,6 @@
 import cn from 'classnames'
 
+import { Divider } from '~/components/Divider'
 import { THEME_TO_TW_CLASS, type ThemeColor } from '~/constants/theme'
 import { formatAmount } from '~/utils/formatAmount'
 
@@ -9,16 +10,15 @@ type InfoCardProps = {
   color?: ThemeColor
 }
 
-//todo rewrite props to use BudgetType? also, custom Divider instead of div?
+//todo rewrite props to use BudgetType?
 
-export const InfoCard = (info: InfoCardProps) => {
-  const { name, amount, color } = info
+export const InfoCard = ({ name, amount, color }: InfoCardProps) => {
   const formattedAmount = formatAmount(amount)
 
   const colorStyle = THEME_TO_TW_CLASS[color as ThemeColor] || 'bg-beige-100'
   return (
     <div className="flex gap-2 shrink-0 basis-[calc(50%-0.5rem)] md:basis-auto grow">
-      <div className={cn(colorStyle, 'w-1 rounded-lg flex shrink-0')} />
+      <Divider basic={false} styles={cn(colorStyle)} />
 
       <div className="flex flex-col gap-050 text-nowrap shrink-0">
         <p className="text-preset-5 text-grey-500">{name}</p>

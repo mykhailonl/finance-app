@@ -4,61 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feature/TransactionsPage&#10;&#10;  - Refactored Transaction components to WidgetTransaction&#10;  - Added new transaction page components (filters, list, pagination, etc.)&#10;  - Updated components to use the new widget naming convention&#10;  - Added transaction hooks and utilities&#10;  - Updated icons and component styling">
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringFilters/RecurringFilters.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringFilters/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringList/RecurringList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringList/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringTransaction/RecurringTransaction.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/RecurringTransaction/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/SummaryItem/SummaryItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/SummaryItem/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/SummaryItemList/SummaryItemList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/SummaryItemList/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/hooks/useRecurringTransactions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/hooks/useSearchParamValue.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/recurring.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/types/SummaryType.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/extractTransactionDay.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/filterByQuery.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/getDaySuffix.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/getDropdownLabel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/getTransactionStatus.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/sortTransactions.ts" afterDir="false" />
+    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-bill-due.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-bill-due.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-bill-paid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-bill-paid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-recurring-bills.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-recurring-bills.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetChart/BudgetChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Button/Button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/InputField/InputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InputField/InputField.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Pagination/Pagination.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/PaginationButton/PaginationButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PaginationButton/PaginationButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/PaginationLink/PaginationLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PaginationLink/PaginationLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/RecurringBillItem/RecurringBillItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/RecurringBillItem/RecurringBillItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionWrapper/SectionWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Summary/Summary.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Summary/Summary.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SummaryCard/SummaryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/RecurringFilters/RecurringFilters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/RecurringFilters/RecurringFilters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Sidebar/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Sidebar/Sidebar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/TransactionFilters/TransactionFilters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionFilters/TransactionFilters.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/TransactionList/TransactionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionList/TransactionList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/TransactionsContent/TransactionsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionsContent/TransactionsContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/WidgetPots/WidgetPots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetPots/WidgetPots.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/WidgetRecurring/WidgetRecurring.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetRecurring/WidgetRecurring.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/hooks/usePaginatedTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/usePaginatedTransactions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/hooks/useTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useTransactions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/budgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/budgets.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/types/DropdownType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/DropdownType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/IconType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/IconType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/Navigation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/Navigation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/TransactionType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/TransactionType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/filterByCategory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/filterByCategory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/formatAmount.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/formatAmount.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/getSearchWith.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/data/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/formatDate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/formatDate.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +71,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/recurringPage",
+    "git-widget-placeholder": "feature/ui-states",
     "last_opened_file_path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -119,9 +79,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/Users/mykhailolapchynskyi/.nvm/versions/node/v22.17.1/bin/node",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.general",
+    "settings.editor.selected.configurable": "settings.nodejs",
     "ts.external.directory.path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -145,6 +106,9 @@
       <workItem from="1754042062951" duration="80000" />
       <workItem from="1754042156811" duration="13650000" />
       <workItem from="1754591320978" duration="10438000" />
+      <workItem from="1755081164767" duration="823000" />
+      <workItem from="1755254976069" duration="817000" />
+      <workItem from="1755257804843" duration="737000" />
     </task>
     <task id="LOCAL-00001" summary="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
       <option name="closed" value="true" />
@@ -171,6 +135,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
     <MESSAGE value="feat: budgetsPage&#10;&#10;  Add complete budgets page implementation with new components (BudgetHero, BudgetInfo, BudgetList, BudgetSection, BudgetsHeader, PageWrapper), custom hooks (useBudgets, useTransactions), budgets&#10;  route, utility functions, and updated existing components. Rename Budgets to WidgetBudgets and update icon assets." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: budgetsPage&#10;&#10;  Add complete budgets page implementation with new components (BudgetHero, BudgetInfo, BudgetList, BudgetSection, BudgetsHeader, PageWrapper), custom hooks (useBudgets, useTransactions), budgets&#10;  route, utility functions, and updated existing components. Rename Budgets to WidgetBudgets and update icon assets." />
+    <MESSAGE value="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure" />
   </component>
 </project>

@@ -131,3 +131,8 @@
   line-height: 150%;
   letter-spacing: 0;
 }
+
+@theme {
+  /* Custom cursors */
+  --cursor-custom: url('./assets/images/cursor-pointer.svg'), pointer;
+}

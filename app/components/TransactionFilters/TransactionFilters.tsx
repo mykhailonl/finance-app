@@ -7,7 +7,7 @@ import { iconComponents } from '~/types/IconType'
 import { getDropdownLabel } from '~/utils/getDropdownLabel'
 
 export const TransactionFilters = () => {
-  const { isMobile, isTablet } = useDevice()
+  const { isTablet } = useDevice()
 
   const [sortBy, setSortBy] = useSearchParamValue('sortBy')
   const [filterBy, setFilterBy] = useSearchParamValue('filterBy')
@@ -31,39 +31,29 @@ export const TransactionFilters = () => {
       />
 
       <div className="flex gap-6">
-        {isMobile ? (
-          <>
-            <SortIcon className="w-5 h-5" />
+        <Dropdown
+          type="sort"
+          value={sortBy}
+          currentLabel={getDropdownLabel({
+            value: sortBy,
+            options: SORT_OPTIONS,
+            type: 'sort',
+          })}
+          onChange={(value) => setSortBy(value)}
+          options={SORT_OPTIONS}
+        />
 
-            <FilterIcon className="w-5 h-5" />
-          </>
-        ) : (
-          <>
-            <Dropdown
-              type="sort"
-              value={sortBy}
-              currentLabel={getDropdownLabel({
-                value: sortBy,
-                options: SORT_OPTIONS,
-                type: 'sort',
-              })}
-              onChange={(value) => setSortBy(value)}
-              options={SORT_OPTIONS}
-            />
-
-            <Dropdown
-              type="filter"
-              value={filterBy}
-              currentLabel={getDropdownLabel({
-                value: filterBy,
-                options: FILTER_OPTIONS,
-                type: 'filter',
-              })}
-              onChange={(value) => setFilterBy(value)}
-              options={FILTER_OPTIONS}
-            />
-          </>
-        )}
+        <Dropdown
+          type="filter"
+          value={filterBy}
+          currentLabel={getDropdownLabel({
+            value: filterBy,
+            options: FILTER_OPTIONS,
+            type: 'filter',
+          })}
+          onChange={(value) => setFilterBy(value)}
+          options={FILTER_OPTIONS}
+        />
       </div>
     </div>
   )

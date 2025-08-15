@@ -29,7 +29,7 @@ export const InputField = ({
   const SearchIcon = iconComponents[iconName]
 
   return (
-    <div className={cn('flex items-center gap-1', styles)}>
+    <div className={cn('flex items-center gap-1 cursor-custom', styles)}>
       {showLabel && (
         <label
           htmlFor={`${name}-field`}
@@ -41,14 +41,14 @@ export const InputField = ({
 
       <div
         className={cn(
-          'flex gap-4 items-center rounded-lg border-beige-500 py-3 px-5 border cursor-pointer',
+          'flex gap-4 items-center rounded-lg py-3 px-5 border border-beige-500 hover:border-grey-500 active:border-grey-900',
           styles
         )}
       >
         <input
           type="text"
           id={`${name}-field`}
-          className="bg-white flex text-preset-4 w-full rounded-lg outline-hidden"
+          className="bg-white flex text-preset-4 w-full rounded-lg outline-hidden cursor-custom"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
