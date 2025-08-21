@@ -1,6 +1,7 @@
 import { ReactComponent as IconDue } from '@/assets/images/icon-bill-due.svg'
 import { ReactComponent as IconPaid } from '@/assets/images/icon-bill-paid.svg'
 import { ReactComponent as CaretDown } from '@/assets/images/icon-caret-down.svg'
+import { ReactComponent as IconCloseModal } from '@/assets/images/icon-close-modal.svg'
 import { ReactComponent as IconDots } from '@/assets/images/icon-dots.svg'
 import { ReactComponent as IconEllipse } from '@/assets/images/icon-ellipse.svg'
 import { ReactComponent as FilterIcon } from '@/assets/images/icon-filter-mobile.svg'
@@ -12,6 +13,7 @@ import { ReactComponent as IconTransactions } from '@/assets/images/icon-nav-tra
 import { ReactComponent as IconPot } from '@/assets/images/icon-pot.svg'
 import { ReactComponent as IconRecurring } from '@/assets/images/icon-recurring-bills.svg'
 import { ReactComponent as SearchIcon } from '@/assets/images/icon-search.svg'
+import { ReactComponent as IconSelected } from '@/assets/images/icon-selected.svg'
 import { ReactComponent as SortIcon } from '@/assets/images/icon-sort-mobile.svg'
 import { ReactComponent as LogoLarge } from '@/assets/images/logo-large.svg'
 
@@ -32,6 +34,8 @@ export const iconComponents = {
   recurring: IconRecurring,
   due: IconDue,
   paid: IconPaid,
+  closeModal: IconCloseModal,
+  selected: IconSelected,
 }
 
 export type IconName = keyof typeof iconComponents

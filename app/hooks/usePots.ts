@@ -1,5 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
+import type { PotType } from '~/types/PotType'
+
 export default function usePots() {
   return useSuspenseQuery({
     queryKey: ['pots'],
@@ -14,6 +16,7 @@ export default function usePots() {
 
       return {
         pots: data.pots,
+        usedColors: data.pots.map((pot: PotType) => pot.theme),
       }
     },
   })

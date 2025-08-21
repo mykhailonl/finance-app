@@ -9,7 +9,10 @@ type ButtonProps = {
   children: React.ReactNode
   onClick: () => void
   styles?: string
+  showCaret?: boolean
 }
+
+// todo hover for danger state?
 
 export const Button = ({
   variant,
@@ -17,9 +20,10 @@ export const Button = ({
   children,
   onClick,
   styles,
+  showCaret,
 }: ButtonProps) => {
   const CaretDown = iconComponents['caretDown']
-  const baseStyles = 'flex items-center cursor-custom'
+  const baseStyles = 'flex items-center cursor-custom border border-transparent'
 
   const variantStyles = {
     primary: 'rounded-lg bg-grey-900 hover:bg-grey-500 justify-center',
@@ -51,7 +55,7 @@ export const Button = ({
       >
         {children}
 
-        {variant === 'tertiary' && <CaretDown className="w-3 h-3 -rotate-90" />}
+        {showCaret && <CaretDown className="w-3 h-3 -rotate-90" />}
       </p>
     </button>
   )

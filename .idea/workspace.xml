@@ -4,21 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure">
+    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="Add .env files to .gitignore&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-close-modal.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-close-modal.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/icon-selected.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/icon-selected.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/BudgetsHeader/BudgetsHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetsHeader/BudgetsHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Button/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InfoCard/InfoCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/InputField/InputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InputField/InputField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavItem/NavItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/PaginationButton/PaginationButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PaginationButton/PaginationButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/PaginationLink/PaginationLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PaginationLink/PaginationLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Pot/Pot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Pot/Pot.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/PotsHeader/PotsHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PotsHeader/PotsHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/ProgressBar/ProgressBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ProgressBar/ProgressBar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/RecurringFilters/RecurringFilters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/RecurringFilters/RecurringFilters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/SectionHeader/SectionHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionHeader/SectionHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/SectionTitleBlock/SectionTitleBlock.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Sidebar/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Sidebar/Sidebar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/TransactionFilters/TransactionFilters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionFilters/TransactionFilters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useBudgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useBudgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/usePots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/usePots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/pots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/pots.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/types/DropdownType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/DropdownType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/formatDate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/formatDate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/types/IconType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/IconType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +55,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/mykhailonl/finance-app.git&quot;,
-    &quot;accountId&quot;: &quot;94922eb6-4392-4651-a9b8-bb0da689987e&quot;
+    &quot;accountId&quot;: &quot;e019cb65-0e80-4bcb-b738-8fcdde6b616b&quot;
   }
 }</component>
   <component name="OptimizeOnSaveOptions">
@@ -70,27 +80,33 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/ui-states",
-    "last_opened_file_path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "feature/modals",
+    "last_opened_file_path": "/Users/misha/WebstormProjects/finance-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/Users/mykhailolapchynskyi/.nvm/versions/node/v22.17.1/bin/node",
+    "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/Users/mykhailolapchynskyi/WebstormProjects/finance-app/node_modules/typescript/lib",
+    "prettierjs.PrettierConfiguration.Package": "/Users/misha/WebstormProjects/finance-app/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "ts.external.directory.path": "/Users/misha/WebstormProjects/finance-app/node_modules/typescript/lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.26927.40" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
       </set>
     </attachedChunks>
   </component>
@@ -109,6 +125,16 @@
       <workItem from="1755081164767" duration="823000" />
       <workItem from="1755254976069" duration="817000" />
       <workItem from="1755257804843" duration="737000" />
+      <workItem from="1755270410721" duration="61000" />
+      <workItem from="1755270472682" duration="6398000" />
+      <workItem from="1755432546803" duration="1764000" />
+      <workItem from="1755434330456" duration="499000" />
+      <workItem from="1755434838475" duration="654000" />
+      <workItem from="1755435502371" duration="18000" />
+      <workItem from="1755435521173" duration="23830000" />
+      <workItem from="1755591886003" duration="19881000" />
+      <workItem from="1755617496070" duration="13389000" />
+      <workItem from="1755691295526" duration="11866000" />
     </task>
     <task id="LOCAL-00001" summary="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
       <option name="closed" value="true" />
@@ -126,16 +152,36 @@
       <option name="project" value="LOCAL" />
       <updated>1754658418146</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add .env files to .gitignore&quot;">
+      <option name="closed" value="true" />
+      <created>1755770201294</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755770201294</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle." />
     <MESSAGE value="feat: budgetsPage&#10;&#10;  Add complete budgets page implementation with new components (BudgetHero, BudgetInfo, BudgetList, BudgetSection, BudgetsHeader, PageWrapper), custom hooks (useBudgets, useTransactions), budgets&#10;  route, utility functions, and updated existing components. Rename Budgets to WidgetBudgets and update icon assets." />
     <MESSAGE value="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: recurringPage         &#10;- Add recurring transactions page with filters and pagination                 &#10;- Create RecurringFilters, RecurringList, RecurringTransaction components                 &#10;- Add SummaryItem and SummaryItemList components &#10;- Implement useRecurringTransactions and useSearchParamValue hooks &#10;- Add utility functions for transaction processing and formatting                 &#10;- Update navigation, types, and existing components   &#10;- Remove unused SummaryCard component and getSearchWith utility                    &#10;- Update icons and data structure" />
+    <MESSAGE value="Add .env files to .gitignore&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add .env files to .gitignore&quot;" />
   </component>
 </project>

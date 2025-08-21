@@ -1,3 +1,5 @@
+import type { ThemeColor } from '~/constants/theme'
+
 export type SortOption =
   | 'latest'
   | 'oldest'
@@ -19,18 +21,9 @@ export type FilterOption =
   | 'shopping'
   | 'general'
 
-export type DropdownOptionType = SortOption | FilterOption
+export type DropdownOptionType = SortOption | FilterOption | ColorOption
 
 export type DropdownType = 'sort' | 'filter'
-
-export type DropdownProps<T extends DropdownOptionType> = {
-  type: DropdownType
-  value: T
-  currentLabel: string
-  onChange: (value: T) => void
-  options: DropdownOptions<T>
-  styles?: string
-}
 
 export interface DropdownOption<T> {
   value: T
@@ -62,6 +55,8 @@ export const FILTER_OPTIONS: DropdownOptions<FilterOption> = [
   { value: 'general', label: 'General' },
 ]
 
+export type ColorOption = ThemeColor
+
 export const FILTER_VALUE_TO_CATEGORY: Record<FilterOption, string> = {
   all: 'all',
   bills: 'Bills',
@@ -74,4 +69,27 @@ export const FILTER_VALUE_TO_CATEGORY: Record<FilterOption, string> = {
   lifestyle: 'Lifestyle',
   shopping: 'Shopping',
   general: 'General',
+}
+
+export type BudgetCategoryOption = Exclude<FilterOption, 'all'>
+
+export const BUDGET_CATEGORY_OPTIONS = FILTER_OPTIONS.filter(
+  (option) => option.value !== 'all'
+) as DropdownOptions<BudgetCategoryOption>
+
+export type DropdownProps<T extends DropdownOptionType> = {
+  styles?: string
+  label: {
+    showLabel?: boolean
+    labelText?: string
+    labelStyles?: string
+    bold?: boolean
+  }
+  value: T
+  onChange: (value: T) => void
+  options: DropdownOptions<T>
+  showColorTag?: boolean
+  showCaret?: boolean
+  mobileView?: boolean
+  usedColors?: ThemeColor[]
 }

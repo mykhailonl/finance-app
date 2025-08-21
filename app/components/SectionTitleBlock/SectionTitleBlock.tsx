@@ -24,7 +24,7 @@ export const SectionTitleBlock = ({ title, linkText, link, small }: Props) => {
         {title}
       </h2>
 
-      <Button variant="tertiary" onClick={() => navigate(link)}>
+      <Button variant="tertiary" onClick={() => navigate(link)} showCaret>
         {linkText}
       </Button>
     </div>

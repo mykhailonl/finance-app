@@ -6,7 +6,7 @@ export const Sidebar = () => {
   const LogoLarge = iconComponents['logoLarge']
 
   return (
-    <div className="bg-grey-900 rounded-t-lg lg:rounded-t-none lg:rounded-r-2xl lg:flex lg:flex-col lg:gap-6 lg:w-[300px] lg:h-screen">
+    <div className="bg-grey-900 rounded-t-lg lg:rounded-t-none lg:rounded-r-2xl lg:flex lg:flex-col lg:gap-6 lg:w-[300px] lg:h-screen absolute inset-x-0 bottom-0 lg:static">
       <div className="hidden px-8 py-10 lg:block">
         <LogoLarge />
       </div>

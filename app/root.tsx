@@ -12,6 +12,8 @@ import {
   ScrollRestoration,
 } from 'react-router'
 
+import { ModalContainer } from '~/components/ModalContainer'
+import { ModalProvider } from '~/context/ModalContext'
 import { DeviceProvider } from '~/context/ScreenContext'
 
 import type { Route } from './+types/root'
@@ -29,6 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body suppressHydrationWarning={true}>
         {children}
+        <div id="modal-root"></div>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -39,9 +42,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <DeviceProvider>
-        <Outlet />
-      </DeviceProvider>
+      <ModalProvider>
+        <DeviceProvider>
+          <ModalContainer />
+          <Outlet />
+        </DeviceProvider>
+      </ModalProvider>
     </QueryClientProvider>
   )
 }

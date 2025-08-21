@@ -4,13 +4,15 @@ import { PotsList } from '~/components/PotsList'
 import usePots from '~/hooks/usePots'
 
 export default function Pots() {
-  const { data } = usePots()
+  const {
+    data: { pots },
+  } = usePots()
 
   return (
     <PageWrapper>
       <PotsHeader />
 
-      <PotsList pots={data.pots} />
+      <PotsList pots={pots} />
     </PageWrapper>
   )
 }

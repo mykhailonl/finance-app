@@ -30,7 +30,7 @@ export const BudgetSection = ({
 
   return (
     <SectionWrapper>
-      <SectionHeader color={budget.theme} name={budget.category} />
+      <SectionHeader item={budget} />
 
       <div className="flex flex-col gap-4">
         <p className="text-preset-4 text-grey-500">Maximum of {formattedMax}</p>

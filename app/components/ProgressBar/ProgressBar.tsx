@@ -1,5 +1,4 @@
 import cn from 'classnames'
-import React from 'react'
 
 import { THEME_TO_TW_CLASS, type ThemeColor } from '~/constants/theme'
 
@@ -7,9 +6,10 @@ type Props = {
   color: ThemeColor
   percent: number
   small?: boolean
+  extraMoney?: number
 }
 
-export const ProgressBar = ({ color, percent, small }: Props) => {
+export const ProgressBar = ({ color, percent, small, extraMoney }: Props) => {
   const barColor = THEME_TO_TW_CLASS[color]
 
   return (
@@ -20,9 +20,23 @@ export const ProgressBar = ({ color, percent, small }: Props) => {
       )}
     >
       <div
-        className={cn(barColor, `h-full rounded-sm`)}
+        className={cn(
+          'h-full',
+          extraMoney ? 'rounded-l-sm' : 'rounded-sm',
+          extraMoney ? 'bg-grey-900' : barColor
+        )}
         style={{ width: `${percent}%` }}
       />
+
+      {!!extraMoney && (
+        <>
+          <div className="h-full w-[2px] bg-grey-100" />
+          <div
+            style={{ width: `${extraMoney}%` }}
+            className={cn('h-full rounded-r-sm', barColor)}
+          />
+        </>
+      )}
     </div>
   )
 }

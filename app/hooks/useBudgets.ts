@@ -2,6 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 
 import type { BudgetType } from '~/types/BudgetType'
 
+// todo do I need this hook? simplify hooks and wrap url call into reusable fn
 export default function useBudgets() {
   return useSuspenseQuery({
     queryKey: ['budgets'],
@@ -23,6 +24,7 @@ export default function useBudgets() {
           (sum: number, budget: BudgetType) => sum + budget.maximum,
           0
         ),
+        usedColors: data.budgets.map((budget: BudgetType) => budget.theme),
       }
     },
   })

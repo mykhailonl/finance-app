@@ -1,58 +1,59 @@
 import { Dropdown } from '~/components/Dropdown'
-import { InputField } from '~/components/InputField'
+import { Input } from '~/components/Input'
 import { useDevice } from '~/hooks/useDevice'
 import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 import { FILTER_OPTIONS, SORT_OPTIONS } from '~/types/DropdownType'
-import { iconComponents } from '~/types/IconType'
-import { getDropdownLabel } from '~/utils/getDropdownLabel'
 
 export const TransactionFilters = () => {
   const { isTablet } = useDevice()
 
+  //#region values
   const [sortBy, setSortBy] = useSearchParamValue('sortBy')
   const [filterBy, setFilterBy] = useSearchParamValue('filterBy')
   const [query, setQuery] = useSearchParamValue('query')
 
-  const SortIcon = iconComponents['sort']
-  const FilterIcon = iconComponents['filter']
-
   const inputPlaceholder = isTablet ? 'Search' : 'Search transaction'
+  //#endregion
 
   return (
     <div className="flex gap-6 items-center justify-between">
-      <InputField
-        name="Search"
-        showLabel={false}
-        placeholder={inputPlaceholder}
-        showMainIcon
-        iconName="search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+      <Input
+        label={{ showLabel: false }}
+        input={{
+          value: query,
+          onChange: setQuery,
+          placeholder: inputPlaceholder,
+        }}
+        helperText={{
+          showHelper: false,
+        }}
+        showSearchIcon
+        styles="max-w-[320px] grow"
       />
 
       <div className="flex gap-6">
         <Dropdown
-          type="sort"
+          label={{
+            showLabel: true,
+            labelText: 'Sort By',
+            bold: false,
+          }}
           value={sortBy}
-          currentLabel={getDropdownLabel({
-            value: sortBy,
-            options: SORT_OPTIONS,
-            type: 'sort',
-          })}
-          onChange={(value) => setSortBy(value)}
+          onChange={setSortBy}
           options={SORT_OPTIONS}
+          showCaret
+          styles="gap-2"
+          mobileView
         />
 
         <Dropdown
-          type="filter"
+          label={{ showLabel: true, labelText: 'Category', bold: false }}
           value={filterBy}
-          currentLabel={getDropdownLabel({
-            value: filterBy,
-            options: FILTER_OPTIONS,
-            type: 'filter',
-          })}
-          onChange={(value) => setFilterBy(value)}
+          onChange={setFilterBy}
           options={FILTER_OPTIONS}
+          showCaret
+          styles="gap-2"
+          mobileView
         />
       </div>
     </div>
