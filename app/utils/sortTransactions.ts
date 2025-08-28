@@ -1,8 +1,8 @@
 import type { SortOption } from '~/types/DropdownType'
-import type { TransactionType } from '~/types/TransactionType'
+import type { TransactionListType } from '~/types/TransactionType'
 
 export const sortTransactions = (
-  transactions: TransactionType[],
+  transactions: TransactionListType,
   sortBy: SortOption,
   ignoreMonth?: boolean
 ) => {
@@ -20,23 +20,35 @@ export const sortTransactions = (
     case 'latest':
       if (ignoreMonth) {
         return [...transactions].sort((a, b) => {
-          return new Date(b.date).getDate() - new Date(a.date).getDate()
+          return (
+            new Date(b.transaction_date).getDate() -
+            new Date(a.transaction_date).getDate()
+          )
         })
       }
 
       return [...transactions].sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime()
+        return (
+          new Date(b.transaction_date).getTime() -
+          new Date(a.transaction_date).getTime()
+        )
       })
 
     case 'oldest':
       if (ignoreMonth) {
         return [...transactions].sort((a, b) => {
-          return new Date(a.date).getDate() - new Date(b.date).getDate()
+          return (
+            new Date(a.transaction_date).getDate() -
+            new Date(b.transaction_date).getDate()
+          )
         })
       }
 
       return [...transactions].sort((a, b) => {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
+        return (
+          new Date(a.transaction_date).getTime() -
+          new Date(b.transaction_date).getTime()
+        )
       })
 
     case 'highest':

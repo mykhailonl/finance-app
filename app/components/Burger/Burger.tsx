@@ -3,12 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 
 import { Divider } from '~/components/Divider'
 import { useModal } from '~/hooks/useModal'
-import type { BudgetType } from '~/types/BudgetType'
+import type { Budget, Pot } from '~/types'
 import { iconComponents } from '~/types/IconType'
-import type { PotType } from '~/types/PotType'
 
 interface Props {
-  item: BudgetType | PotType
+  item: Budget | Pot
 }
 
 export const Burger = ({ item }: Props) => {

@@ -7,18 +7,52 @@ import {
   isRouteErrorResponse,
   Links,
   Meta,
+  Navigate,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from 'react-router'
 
 import { ModalContainer } from '~/components/ModalContainer'
+import { AuthProvider } from '~/context/AuthContext'
 import { ModalProvider } from '~/context/ModalContext'
 import { DeviceProvider } from '~/context/ScreenContext'
+import { useAuth } from '~/hooks/useAuth'
 
 import type { Route } from './+types/root'
 
 const queryClient = new QueryClient()
+
+function AppContent() {
+  const { user, loading } = useAuth()
+  const location = useLocation()
+
+  const publicRoutes = ['/login', '/register', '/forgot-password']
+  const isPublicRoute = publicRoutes.includes(location.pathname)
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div>Loading...</div>
+      </div>
+    )
+  }
+
+  if (!user) {
+    if (isPublicRoute) {
+      return <Outlet />
+    }
+
+    return <Navigate to="/auth" replace />
+  }
+
+  if (isPublicRoute) {
+    return <Navigate to="/" replace />
+  }
+
+  return <Outlet />
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,12 +76,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>
-        <DeviceProvider>
-          <ModalContainer />
-          <Outlet />
-        </DeviceProvider>
-      </ModalProvider>
+      <AuthProvider>
+        <ModalProvider>
+          <DeviceProvider>
+            <ModalContainer />
+            <AppContent />
+          </DeviceProvider>
+        </ModalProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

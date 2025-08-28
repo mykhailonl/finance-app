@@ -1,22 +1,22 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import type { PotType } from '~/types/PotType'
+import { potService } from '~/services/potService'
+import type { Pot, ThemeColor } from '~/types'
+
+interface UsePotsReturn {
+  pots: Pot[]
+  usedColors: ThemeColor[]
+}
 
 export default function usePots() {
-  return useSuspenseQuery({
+  return useSuspenseQuery<UsePotsReturn>({
     queryKey: ['pots'],
     queryFn: async () => {
-      const baseUrl =
-        typeof window !== 'undefined'
-          ? window.location.origin
-          : 'http://localhost:5173'
-
-      const res = await fetch(`${baseUrl}/data/data.json`)
-      const data = await res.json()
+      const pots = await potService.getAll()
 
       return {
-        pots: data.pots,
-        usedColors: data.pots.map((pot: PotType) => pot.theme),
+        pots: pots,
+        usedColors: pots.map((pot) => pot.theme),
       }
     },
   })

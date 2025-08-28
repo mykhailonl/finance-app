@@ -1,11 +1,11 @@
 import cn from 'classnames'
 
 import { ProgressBar } from '~/components/ProgressBar'
-import type { PotType } from '~/types/PotType'
+import type { PotModalData } from '~/types/ModalTypes'
 import { formatAmount } from '~/utils/formatAmount'
 
 interface ProgressSectionProps {
-  pot: PotType
+  pot: PotModalData
   extraMoney?: number
   smallBar?: boolean
 }

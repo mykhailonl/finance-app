@@ -1,30 +1,32 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
+import type { Transaction } from '~/types'
 import type { SortOption } from '~/types/DropdownType'
-import type { TransactionType } from '~/types/TransactionType'
+import type { TransactionListType } from '~/types/TransactionType'
 import { extractTransactionDay } from '~/utils/extractTransactionDay'
 import { filterByQuery } from '~/utils/filterByQuery'
 import { sortTransactions } from '~/utils/sortTransactions'
+import supabase from '~/utils/supabase'
 
 interface UseRecurringTransactionsReturn {
   transactions: {
-    transactions: TransactionType[]
+    transactions: TransactionListType
     amount: number
   }
   currentDay: number
   totalPages: number
   paidRecurring: {
-    transactions: TransactionType[]
+    transactions: TransactionListType
     amount: number
     numberOfTransactions: number
   }
   upcomingRecurring: {
-    transactions: TransactionType[]
+    transactions: TransactionListType
     amount: number
     numberOfTransactions: number
   }
   dueSoon: {
-    transactions: TransactionType[]
+    transactions: TransactionListType
     amount: number
     numberOfTransactions: number
   }
@@ -40,45 +42,46 @@ export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
   return useSuspenseQuery<UseRecurringTransactionsReturn>({
     queryKey: ['recurring', sortBy, page, query],
     queryFn: async () => {
-      const baseUrl =
-        typeof window !== 'undefined'
-          ? window.location.origin
-          : 'http://localhost:5173'
+      const { data: transactions, error } = await supabase
+        .from('transactions')
+        .select('*')
 
-      const res = await fetch(`${baseUrl}/data/data.json`)
-      const data = await res.json()
+      if (error) {
+        throw new Error(`Failed to fetch transactions: ${error.message}`)
+      }
 
-      const uniqueRecurring: TransactionType[] = data.transactions
-        .filter((transaction: TransactionType) => transaction.recurring)
-        .reduce((acc: TransactionType[], tr: TransactionType) => {
-          if (!acc.find((item: TransactionType) => item.name === tr.name)) {
+      const uniqueRecurring: TransactionListType = transactions
+        .filter((transaction: Transaction) => transaction.recurring)
+        .reduce((acc: TransactionListType, tr: Transaction) => {
+          if (!acc.find((item: Transaction) => item.name === tr.name)) {
             acc.push(tr)
           }
 
           return acc
         }, [])
 
-      const lastTransaction: TransactionType = data.transactions.sort(
-        (a: TransactionType, b: TransactionType) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
+      const lastTransaction: Transaction = transactions.sort(
+        (a: Transaction, b: Transaction) =>
+          new Date(b.transaction_date).getTime() -
+          new Date(a.transaction_date).getTime()
       )[0]
 
       const currentMonth = '2025-08'
-      const currentDay = new Date(lastTransaction.date).getDate()
+      const currentDay = new Date(lastTransaction.transaction_date).getDate()
 
       const alreadyPaidThisMonth = {
-        transactions: uniqueRecurring.filter((transaction: TransactionType) => {
-          return data.transactions.some(
-            (tr: TransactionType) =>
+        transactions: uniqueRecurring.filter((transaction: Transaction) => {
+          return transactions.some(
+            (tr: Transaction) =>
               tr.name === transaction.name &&
               tr.recurring &&
-              tr.date.startsWith(currentMonth)
+              tr.transaction_date.startsWith(currentMonth)
           )
         }),
       }
 
       const upcomingRecurring = {
-        transactions: uniqueRecurring.filter((transaction: TransactionType) => {
+        transactions: uniqueRecurring.filter((transaction: Transaction) => {
           const isPaid = alreadyPaidThisMonth.transactions.find(
             (tr) => transaction.name === tr.name
           )
@@ -89,7 +92,7 @@ export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
 
       const dueSoon = {
         transactions: upcomingRecurring.transactions.filter(
-          (transaction: TransactionType) => {
+          (transaction: Transaction) => {
             const transactionDayOfTheMonth = extractTransactionDay(transaction)
 
             return (

@@ -1,13 +1,10 @@
 import { SummaryCard } from '~/components/SummaryCard'
+import { useBalance } from '~/hooks/useBalance'
 
-type SummaryProps = {
-  current: number
-  income: number
-  expenses: number
-}
-
-export const Summary = ({ balanceData }: { balanceData: SummaryProps }) => {
-  const { current, income, expenses } = balanceData
+export const Summary = () => {
+  const {
+    data: { current, income, expenses },
+  } = useBalance()
 
   return (
     <div className="flex flex-col gap-3 md:flex-row md:gap-6">

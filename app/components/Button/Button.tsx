@@ -7,9 +7,10 @@ type ButtonProps = {
   variant: 'primary' | 'secondary' | 'tertiary' | 'danger'
   disabled?: boolean
   children: React.ReactNode
-  onClick: () => void
+  onClick?: () => void
   styles?: string
   showCaret?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 // todo hover for danger state?
@@ -21,6 +22,7 @@ export const Button = ({
   onClick,
   styles,
   showCaret,
+  type = 'button',
 }: ButtonProps) => {
   const CaretDown = iconComponents['caretDown']
   const baseStyles = 'flex items-center cursor-custom border border-transparent'
@@ -46,6 +48,7 @@ export const Button = ({
       className={cn(baseStyles, variantStyles[variant], styles)}
       onClick={onClick}
       disabled={disabled}
+      type={type}
     >
       <p
         className={cn(

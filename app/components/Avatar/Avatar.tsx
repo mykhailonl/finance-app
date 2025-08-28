@@ -1,12 +1,12 @@
 import cn from 'classnames'
 
 type AvatarProps = {
-  src: string
+  src: string | null
   alt: string
   styles?: string
 }
 
-export const Avatar = ({ src, alt, styles }: AvatarProps) => {
+export const Avatar = ({ src = '', alt, styles }: AvatarProps) => {
   return (
     <div
       className={cn(

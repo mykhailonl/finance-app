@@ -1,10 +1,5 @@
-export interface TransactionType {
-  avatar: string
-  name: string
-  category: string
-  date: string
-  amount: number
-  recurring: boolean
-}
+import type { Transaction } from '~/types/index'
+
+export type TransactionListType = Transaction[]
 
 export type TransactionStatus = 'paid' | 'due' | 'upcoming'

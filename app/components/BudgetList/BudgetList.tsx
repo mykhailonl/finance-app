@@ -1,33 +1,22 @@
 import { BudgetSection } from '~/components/BudgetSection'
-import { useTransactions } from '~/hooks/useTransactions'
-import type { BudgetType } from '~/types/BudgetType'
-import { filterByCategory } from '~/utils/filterByCategory'
+import useBudgets from '~/hooks/useBudgets'
+import type { Budget } from '~/types'
 
-type Props = {
-  budgets: BudgetType[]
-}
-
-export const BudgetList = ({ budgets }: Props) => {
-  const { data } = useTransactions()
+export const BudgetList = () => {
+  const {
+    data: { budgets, latestTransactionsByCategory, spentByCategory },
+  } = useBudgets()
 
   return (
     <div className="flex flex-col gap-6 grow">
-      {budgets.map((budget) => {
-        const { transactions: latestTransactions, spent } = filterByCategory({
-          transactions: data.transactions,
-          category: budget.category,
-          latest: true,
-        })
-
-        return (
-          <BudgetSection
-            budget={budget}
-            key={budget.category}
-            transactions={latestTransactions}
-            spentThisMonth={spent}
-          />
-        )
-      })}
+      {budgets.map((budget: Budget) => (
+        <BudgetSection
+          budget={budget}
+          key={budget.category}
+          transactions={latestTransactionsByCategory[budget.category] || []}
+          spentThisMonth={spentByCategory[budget.category] || 0}
+        />
+      ))}
     </div>
   )
 }

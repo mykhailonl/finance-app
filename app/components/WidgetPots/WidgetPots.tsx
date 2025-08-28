@@ -2,14 +2,13 @@ import { InfoCard } from '~/components/InfoCard'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { SummaryCard } from '~/components/SummaryCard'
-import type { ThemeColor } from '~/constants/theme'
-import type { PotType } from '~/types/PotType'
+import usePots from '~/hooks/usePots'
 
-type PotsProps = {
-  pots: PotType[]
-}
+export const WidgetPots = () => {
+  const {
+    data: { pots },
+  } = usePots()
 
-export const WidgetPots = ({ pots }: PotsProps) => {
   const totalSaved = pots.reduce((acc, curr) => acc + curr.total, 0)
 
   return (
@@ -24,12 +23,12 @@ export const WidgetPots = ({ pots }: PotsProps) => {
         />
 
         <div className="grid grid-cols-2 gap-4 grow">
-          {pots.slice(0, 4).map((pot, index) => (
+          {pots.slice(0, 4).map((pot) => (
             <InfoCard
-              key={index}
+              key={pot.id}
               name={pot.name}
               amount={pot.total}
-              color={pot.theme as ThemeColor}
+              color={pot.theme}
             />
           ))}
         </div>

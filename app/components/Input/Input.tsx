@@ -6,7 +6,7 @@ import type { InputProps } from '~/types/InputType'
 // helperText style based on input type, different preset
 
 // todo fix case when input is a number, rn cant make 123.40, . is not going through regex within onChange
-// todo should I
+// todo AddPotModal helper text bug, double number chars left
 
 export const Input = <T extends string | number>({
   styles,

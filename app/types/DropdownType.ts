@@ -1,4 +1,4 @@
-import type { ThemeColor } from '~/constants/theme'
+import type { ThemeColor, TransactionCategory } from '~/types'
 
 export type SortOption =
   | 'latest'
@@ -8,21 +8,11 @@ export type SortOption =
   | 'highest'
   | 'lowest'
 
-export type FilterOption =
-  | 'all'
-  | 'bills'
-  | 'groceries'
-  | 'dining'
-  | 'entertainment'
-  | 'transportation'
-  | 'selfcare'
-  | 'education'
-  | 'lifestyle'
-  | 'shopping'
-  | 'general'
+export type FilterOption = 'all' | TransactionCategory
+export type BudgetCategoryOption = TransactionCategory
+export type ColorOption = ThemeColor
 
 export type DropdownOptionType = SortOption | FilterOption | ColorOption
-
 export type DropdownType = 'sort' | 'filter'
 
 export interface DropdownOption<T> {
@@ -32,6 +22,20 @@ export interface DropdownOption<T> {
 
 export type DropdownOptions<T> = DropdownOption<T>[]
 
+export const FILTER_OPTIONS: DropdownOptions<FilterOption> = [
+  { value: 'all', label: 'All transactions' },
+  { value: 'Bills', label: 'Bills' },
+  { value: 'Groceries', label: 'Groceries' },
+  { value: 'Dining Out', label: 'Dining Out' },
+  { value: 'Entertainment', label: 'Entertainment' },
+  { value: 'Transportation', label: 'Transportation' },
+  { value: 'Personal Care', label: 'Personal Care' },
+  { value: 'Education', label: 'Education' },
+  { value: 'Lifestyle', label: 'Lifestyle' },
+  { value: 'Shopping', label: 'Shopping' },
+  { value: 'General', label: 'General' },
+]
+
 export const SORT_OPTIONS: DropdownOptions<SortOption> = [
   { value: 'latest', label: 'Latest' },
   { value: 'oldest', label: 'Oldest' },
@@ -40,38 +44,6 @@ export const SORT_OPTIONS: DropdownOptions<SortOption> = [
   { value: 'highest', label: 'Highest' },
   { value: 'lowest', label: 'Lowest' },
 ]
-
-export const FILTER_OPTIONS: DropdownOptions<FilterOption> = [
-  { value: 'all', label: 'All transactions' },
-  { value: 'entertainment', label: 'Entertainment' },
-  { value: 'bills', label: 'Bills' },
-  { value: 'groceries', label: 'Groceries' },
-  { value: 'dining', label: 'Dining Out' },
-  { value: 'transportation', label: 'Transportation' },
-  { value: 'selfcare', label: 'Personal Care' },
-  { value: 'education', label: 'Education' },
-  { value: 'lifestyle', label: 'Lifestyle' },
-  { value: 'shopping', label: 'Shopping' },
-  { value: 'general', label: 'General' },
-]
-
-export type ColorOption = ThemeColor
-
-export const FILTER_VALUE_TO_CATEGORY: Record<FilterOption, string> = {
-  all: 'all',
-  bills: 'Bills',
-  groceries: 'Groceries',
-  dining: 'Dining Out',
-  entertainment: 'Entertainment',
-  transportation: 'Transportation',
-  selfcare: 'Personal Care',
-  education: 'Education',
-  lifestyle: 'Lifestyle',
-  shopping: 'Shopping',
-  general: 'General',
-}
-
-export type BudgetCategoryOption = Exclude<FilterOption, 'all'>
 
 export const BUDGET_CATEGORY_OPTIONS = FILTER_OPTIONS.filter(
   (option) => option.value !== 'all'

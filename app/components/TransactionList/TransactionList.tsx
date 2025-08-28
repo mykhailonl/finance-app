@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Divider } from '~/components/Divider'
 import { Transaction } from '~/components/Transaction'
-import type { TransactionType } from '~/types/TransactionType'
+import type { TransactionListType } from '~/types/TransactionType'
 
 type Props = {
-  transactions: TransactionType[]
+  transactions: TransactionListType
 }
 
 export const TransactionList = ({ transactions }: Props) => {
@@ -22,7 +22,7 @@ export const TransactionList = ({ transactions }: Props) => {
       </div>
 
       {transactions.map((el, index) => (
-        <React.Fragment key={el.date}>
+        <React.Fragment key={el.transaction_date}>
           <Transaction transaction={el} />
 
           {index < transactions.length - 1 && <Divider />}

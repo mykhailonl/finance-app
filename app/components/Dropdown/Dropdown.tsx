@@ -2,7 +2,7 @@ import cn from 'classnames'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 
 import { Divider } from '~/components/Divider'
-import type { ThemeColor } from '~/constants/theme'
+import type { ThemeColor } from '~/types'
 import type { DropdownOptionType, DropdownProps } from '~/types/DropdownType'
 import { iconComponents } from '~/types/IconType'
 import { getColorTextClass } from '~/utils/getColorTextClass'
@@ -83,7 +83,8 @@ export const Dropdown = <T extends DropdownOptionType>({
         <div
           className={cn(
             'text-nowrap md:flex items-center px-5 py-3 gap-4 rounded-lg bg-white cursor-custom border border-beige-500 hover:border-grey-500 active:border-grey-900',
-            !mobileView ? 'flex' : 'hidden'
+            !mobileView ? 'flex' : 'hidden',
+            isSortDropdown ? 'min-w-[114px]' : 'min-w-[177px]'
           )}
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -108,8 +109,8 @@ export const Dropdown = <T extends DropdownOptionType>({
             )}
           >
             {options.map((option, index) => {
-              const isSelected =
-                value === option.value || value === option.label
+              const isSelected = value === option.value
+
               const optionColorClass =
                 showColorTag && isColorOption(option.value)
                   ? getColorTextClass(option.value)

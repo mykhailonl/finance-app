@@ -4,10 +4,14 @@ import { ProgressSection } from '~/components/ProgressSection'
 import { SectionHeader } from '~/components/SectionHeader'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { useModal } from '~/hooks/useModal'
-import type { PotType } from '~/types/PotType'
+import type { Pot as PotType } from '~/types'
 import { formatAmount } from '~/utils/formatAmount'
 
-export const Pot = ({ pot }: { pot: PotType }) => {
+type Props = {
+  pot: PotType
+}
+
+export const Pot = ({ pot }: Props) => {
   const { openModal } = useModal()
 
   const formattedSaved = formatAmount(pot.total)

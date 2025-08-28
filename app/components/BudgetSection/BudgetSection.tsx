@@ -7,16 +7,16 @@ import { SectionHeader } from '~/components/SectionHeader'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { WidgetTransaction } from '~/components/WidgetTransaction'
-import type { BudgetType } from '~/types/BudgetType'
-import type { TransactionType } from '~/types/TransactionType'
+import type { Budget, Transaction } from '~/types'
 import { formatAmount } from '~/utils/formatAmount'
 
 type Props = {
-  budget: BudgetType
-  transactions: TransactionType[]
+  budget: Budget
+  transactions: Transaction[]
   spentThisMonth: number
 }
 
+// todo should i move calculations to hook?
 export const BudgetSection = ({
   budget,
   transactions,
@@ -54,7 +54,7 @@ export const BudgetSection = ({
 
         <div className="flex flex-col gap-3">
           {transactions.map((transaction, index) => (
-            <React.Fragment key={transaction.date}>
+            <React.Fragment key={transaction.transaction_date}>
               <WidgetTransaction
                 transaction={transaction}
                 hideAvatarOnMobile

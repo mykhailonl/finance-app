@@ -2,14 +2,12 @@ import React from 'react'
 
 import { Divider } from '~/components/Divider'
 import { RecurringTransaction } from '~/components/RecurringTransaction'
-import type {
-  TransactionStatus,
-  TransactionType,
-} from '~/types/TransactionType'
+import type { Transaction } from '~/types'
+import type { TransactionStatus } from '~/types/TransactionType'
 import { getTransactionStatus } from '~/utils/getTransactionStatus'
 
 type RecurringListProps = {
-  transactions: TransactionType[]
+  transactions: Transaction[]
   currentDay: number
 }
 
@@ -32,7 +30,7 @@ export const RecurringList = ({
           const transactionStatus = getTransactionStatus(tr, currentDay)
 
           return (
-            <React.Fragment key={tr.date}>
+            <React.Fragment key={tr.transaction_date}>
               <RecurringTransaction
                 transaction={tr}
                 status={transactionStatus as TransactionStatus}

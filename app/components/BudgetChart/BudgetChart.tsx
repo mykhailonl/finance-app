@@ -1,10 +1,10 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
-import { THEME_TO_HEX, type ThemeColor } from '~/constants/theme'
-import type { BudgetType } from '~/types/BudgetType'
+import { THEME_TO_HEX } from '~/constants/theme'
+import type { Budget } from '~/types'
 
 interface BudgetChartProps {
-  budgets: BudgetType[]
+  budgets: Budget[]
   limit: number
   spent: number
 }
@@ -23,10 +23,7 @@ export const BudgetChart = ({ budgets, limit, spent }: BudgetChartProps) => {
             stroke="none"
           >
             {budgets.map((budget, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={THEME_TO_HEX[budget.theme as ThemeColor]}
-              />
+              <Cell key={`cell-${index}`} fill={THEME_TO_HEX[budget.theme]} />
             ))}
           </Pie>
 
@@ -39,7 +36,7 @@ export const BudgetChart = ({ budgets, limit, spent }: BudgetChartProps) => {
             stroke="none"
           >
             {budgets.map((budget, index) => {
-              const baseColor = THEME_TO_HEX[budget.theme as ThemeColor]
+              const baseColor = THEME_TO_HEX[budget.theme]
               const transparentColor = `${baseColor}75`
 
               return <Cell key={`inner-${index}`} fill={transparentColor} />

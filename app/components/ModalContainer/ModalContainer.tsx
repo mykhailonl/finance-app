@@ -1,106 +1,171 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { BudgetModal } from '~/components/BudgetModal'
-import { PotModal } from '~/components/PotModal'
+import {
+  AddBudgetModal,
+  AddPotModal,
+  AddToPotModal,
+  DeleteBudgetModal,
+  DeletePotModal,
+  EditBudgetModal,
+  EditPotModal,
+  WithdrawFromPotModal,
+} from '~/components/modals'
+import { useBudgetMutations } from '~/hooks/useBudgetMutations'
 import { useModal } from '~/hooks/useModal'
+import { usePotMutations } from '~/hooks/usePotMutations'
 import { Overlays } from '~/overlays/Overlays'
-import { getBudgetValues } from '~/utils/getBudgetValues'
-import { getPotValues } from '~/utils/getPotValues'
+import type { BudgetInsert, BudgetUpdate, PotInsert, PotUpdate } from '~/types'
 
 export const ModalContainer = () => {
   const { modalType, closeModal, modalData } = useModal()
 
+  const budgetMutations = useBudgetMutations()
+  const potMutations = usePotMutations()
+
+  const handleAddBudget = (data: BudgetInsert) => {
+    budgetMutations.createBudget.mutate(data, {
+      onSuccess: () => closeModal(),
+    })
+  }
+
+  const handleEditBudget = (data: BudgetUpdate) => {
+    if (modalData?.budget?.id) {
+      budgetMutations.updateBudget.mutate(
+        { id: modalData.budget.id, updates: data },
+        { onSuccess: () => closeModal() }
+      )
+    }
+  }
+
+  const handleDeleteBudget = () => {
+    if (modalData?.budget?.id) {
+      budgetMutations.deleteBudget.mutate(modalData.budget.id, {
+        onSuccess: () => closeModal(),
+      })
+    }
+  }
+
+  const handleAddPot = (data: PotInsert) => {
+    potMutations.createPot.mutate(data, {
+      onSuccess: () => closeModal(),
+    })
+  }
+
+  const handleEditPot = (data: PotUpdate) => {
+    if (modalData?.pot?.id) {
+      potMutations.updatePot.mutate(
+        { id: modalData.pot.id, updates: data },
+        { onSuccess: () => closeModal() }
+      )
+    }
+  }
+
+  const handleDeletePot = () => {
+    if (modalData?.pot?.id) {
+      potMutations.deletePot.mutate(modalData.pot.id, {
+        onSuccess: () => closeModal(),
+      })
+    }
+  }
+
+  const handleAddMoneyToPot = (amount: number) => {
+    if (modalData?.pot?.id) {
+      potMutations.addMoneyToPot.mutate(
+        {
+          id: modalData.pot.id,
+          amount,
+          currentTotal: modalData.pot.total,
+        },
+        { onSuccess: () => closeModal() }
+      )
+    }
+  }
+
+  const handleWithdrawMoneyFromPot = (amount: number) => {
+    if (modalData?.pot?.id) {
+      potMutations.withdrawMoneyFromPot.mutate(
+        {
+          id: modalData.pot.id,
+          amount,
+          currentTotal: modalData.pot.total,
+        },
+        { onSuccess: () => closeModal() }
+      )
+    }
+  }
+
   const renderModal = () => {
     switch (modalType) {
       case 'budget-add':
-        return (
-          <BudgetModal
-            type="add"
-            title="Add New Budget"
-            description="Choose a category to set a spending budget. These categories can help you monitor spending."
-            buttons={{
-              mainButtonText: 'Add Budget',
-              mainButtonFn: () => console.log('Add Budget form clicked'),
-            }}
-          />
-        )
+        return <AddBudgetModal onSubmit={handleAddBudget} />
       case 'budget-edit':
         return (
-          <BudgetModal
-            type="edit"
-            title="Edit Budget"
-            description="As your budgets change, feel free to update your spending limits."
-            buttons={{
-              mainButtonFn: () => console.log('Edit Budget form clicked'),
-              mainButtonText: 'Save Changes',
+          <EditBudgetModal
+            initialValues={{
+              id: modalData?.budget?.id || 0,
+              category: modalData?.budget?.category || 'Entertainment',
+              maximum: modalData?.budget?.maximum || 0,
+              theme: modalData?.budget?.theme || 'green',
             }}
-            initialValues={getBudgetValues(modalData?.budget)}
+            onSubmit={handleEditBudget}
           />
         )
       case 'budget-delete':
         return (
-          <BudgetModal
-            type="delete"
-            title={`Delete '${modalData?.budget?.category}'?`}
-            description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever."
-            buttons={{
-              mainButtonText: 'Yes, Confirm Deletion',
-              mainButtonFn: () => console.log('Delete Budget form clicked'),
-            }}
+          <DeleteBudgetModal
+            budgetCategory={modalData?.budget?.category || ''}
+            onDelete={handleDeleteBudget}
+            onClose={closeModal}
           />
         )
       case 'pot-add':
-        return (
-          <PotModal
-            type="add"
-            title="Add New Pot"
-            description="Create a pot to set savings targets. These can help keep you on track as you save for special purchases."
-            buttons={{
-              mainButtonText: 'Add Pot',
-              mainButtonFn: () => console.log('Add Pot form clicked'),
-            }}
-          />
-        )
+        return <AddPotModal onSubmit={handleAddPot} />
       case 'pot-edit':
         return (
-          <PotModal
-            type="edit"
-            title="Edit Pot"
-            description="If your saving targets change, feel free to update your pots."
-            buttons={{
-              mainButtonText: 'Save Changes',
-              mainButtonFn: () => console.log('Edit Pot form clicked'),
+          <EditPotModal
+            initialValues={{
+              id: modalData?.pot?.id || 0,
+              name: modalData?.pot?.name || '',
+              target: modalData?.pot?.target || 0,
+              theme: modalData?.pot?.theme || 'green',
             }}
-            initialValues={getPotValues(modalData?.pot)}
+            onSubmit={handleEditPot}
           />
         )
       case 'pot-delete':
         return (
-          <PotModal
-            type="delete"
-            title={`Delete '${modalData?.pot?.name}'?`}
-            description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
-            buttons={{
-              mainButtonText: 'Yes, Confirm Deletion',
-              mainButtonFn: () => console.log('Delete Pot form clicked'),
-            }}
+          <DeletePotModal
+            potName={modalData?.pot?.name || ''}
+            onDelete={handleDeletePot}
+            onClose={closeModal}
           />
         )
       case 'pot-add-money':
         return (
-          <PotModal
-            type="add-money"
-            title={`Add to '${modalData?.pot?.name}'`}
-            description="Add money to your pot to keep it separate from your main balance. As soon as you add this money, it will be deducted from your current balance."
-            buttons={{
-              mainButtonText: 'Confirm Addition',
-              mainButtonFn: () => console.log('Add money Pot form clicked'),
+          <AddToPotModal
+            pot={{
+              id: modalData?.pot?.id || 0,
+              name: modalData?.pot?.name || '',
+              target: modalData?.pot?.target || 0,
+              total: modalData?.pot?.total || 0,
+              theme: modalData?.pot?.theme || 'green',
             }}
-            initialValues={getPotValues(modalData?.pot)}
+            onAddMoney={handleAddMoneyToPot}
           />
         )
-      // case 'pot-withdraw-money':
-      //   return (<PotModal />)
+      case 'pot-withdraw-money':
+        return (
+          <WithdrawFromPotModal
+            pot={{
+              id: modalData?.pot?.id || 0,
+              name: modalData?.pot?.name || '',
+              target: modalData?.pot?.target || 0,
+              total: modalData?.pot?.total || 0,
+              theme: modalData?.pot?.theme || 'green',
+            }}
+            onWithdrawMoney={handleWithdrawMoneyFromPot}
+          />
+        )
       default:
         return null
     }

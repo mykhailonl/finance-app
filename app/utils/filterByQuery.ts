@@ -1,7 +1,7 @@
-import type { TransactionType } from '~/types/TransactionType'
+import type { TransactionListType } from '~/types/TransactionType'
 
 export const filterByQuery = (
-  transactions: TransactionType[],
+  transactions: TransactionListType,
   query: string
 ) => {
   return transactions.filter((tr) =>

@@ -5,7 +5,11 @@ import {
   useState,
 } from 'react'
 
-import type { ModalContextType, ModalData, ModalType } from '~/types/ModalType'
+import type {
+  ModalContextType,
+  ModalData,
+  ModalTypes,
+} from '~/types/ModalTypes'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ModalContext = createContext<ModalContextType | undefined>(
@@ -13,16 +17,10 @@ export const ModalContext = createContext<ModalContextType | undefined>(
 )
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
-  const [modalType, setModalType] = useState<ModalType | null>(null)
+  const [modalType, setModalType] = useState<ModalTypes | null>(null)
   const [modalData, setModalData] = useState<ModalData | null>(null)
 
-  // useEffect(() => {
-  //   return () => {
-  //     document.body.style.overflow = ''
-  //   }
-  // }, [])
-
-  const openModal = useCallback((type: ModalType, data?: ModalData) => {
+  const openModal = useCallback((type: ModalTypes, data?: ModalData) => {
     if (data) {
       setModalData(data)
     }

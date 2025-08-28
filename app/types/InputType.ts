@@ -16,7 +16,7 @@ export interface InputProps<T> {
     helperText?: string
     helperStyles?: string
   }
-  error?: InputErrorType | null // ?
+  error?: string | null
   showSearchIcon?: boolean
   styles?: string
 }

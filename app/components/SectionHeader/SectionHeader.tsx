@@ -2,12 +2,11 @@ import cn from 'classnames'
 
 import { Burger } from '~/components/Burger'
 import { THEME_TO_TW_TEXT } from '~/constants/theme'
-import type { BudgetType } from '~/types/BudgetType'
+import type { Budget, Pot } from '~/types'
 import { iconComponents } from '~/types/IconType'
-import type { PotType } from '~/types/PotType'
 
 interface SectionHeaderProps {
-  item: BudgetType | PotType
+  item: Budget | Pot
 }
 
 export const SectionHeader = ({ item }: SectionHeaderProps) => {

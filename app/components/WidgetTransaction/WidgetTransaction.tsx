@@ -1,12 +1,12 @@
 import cn from 'classnames'
 
 import { Avatar } from '~/components/Avatar'
-import type { TransactionType } from '~/types/TransactionType'
+import type { Transaction } from '~/types'
 import { formatAmountToString } from '~/utils/formatAmountToString'
 import { formatDate } from '~/utils/formatDate'
 
 type Props = {
-  transaction: TransactionType
+  transaction: Transaction
   hideAvatarOnMobile?: boolean
   small?: boolean
 }
@@ -17,7 +17,7 @@ export const WidgetTransaction = ({
   small = false,
 }: Props) => {
   const formattedAmount = formatAmountToString(transaction.amount)
-  const formattedDate = formatDate(transaction.date)
+  const formattedDate = formatDate(transaction.transaction_date)
 
   return (
     <div className="flex items-center">

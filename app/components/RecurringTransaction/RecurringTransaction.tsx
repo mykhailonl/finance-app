@@ -1,17 +1,15 @@
 import cn from 'classnames'
 
 import { Avatar } from '~/components/Avatar'
+import type { Transaction } from '~/types'
 import { iconComponents } from '~/types/IconType'
-import type {
-  TransactionStatus,
-  TransactionType,
-} from '~/types/TransactionType'
+import type { TransactionStatus } from '~/types/TransactionType'
 import { extractTransactionDay } from '~/utils/extractTransactionDay'
 import { formatAmount } from '~/utils/formatAmount'
 import { getDaySuffix } from '~/utils/getDaySuffix'
 
 type RecurringTransactionProps = {
-  transaction: TransactionType
+  transaction: Transaction
   status: TransactionStatus
 }
 

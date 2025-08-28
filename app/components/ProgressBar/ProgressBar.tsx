@@ -1,6 +1,7 @@
 import cn from 'classnames'
 
-import { THEME_TO_TW_CLASS, type ThemeColor } from '~/constants/theme'
+import { THEME_TO_TW_CLASS } from '~/constants/theme'
+import type { ThemeColor } from '~/types'
 
 type Props = {
   color: ThemeColor

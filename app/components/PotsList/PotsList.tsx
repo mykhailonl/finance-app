@@ -1,5 +1,5 @@
 import { Pot } from '~/components/Pot'
-import type { PotType } from '~/types/PotType'
+import type { Pot as PotType } from '~/types'
 
 type Props = {
   pots: PotType[]

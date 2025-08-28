@@ -1,8 +1,8 @@
-import type { TransactionType } from '~/types/TransactionType'
+import type { Transaction } from '~/types'
 import { extractTransactionDay } from '~/utils/extractTransactionDay'
 
 export const getTransactionStatus = (
-  transaction: TransactionType,
+  transaction: Transaction,
   currentDay: number
 ) => {
   let status = 'upcoming'

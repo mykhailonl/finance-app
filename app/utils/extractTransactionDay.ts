@@ -1,5 +1,5 @@
-import type { TransactionType } from '~/types/TransactionType'
+import type { Transaction } from '~/types'
 
-export const extractTransactionDay = (transaction: TransactionType) => {
-  return new Date(transaction.date).getDate()
+export const extractTransactionDay = (transaction: Transaction) => {
+  return new Date(transaction.transaction_date).getDate()
 }

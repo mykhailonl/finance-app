@@ -35,7 +35,7 @@ export default tseslint.config([
 
       // Добавленные правила для синтаксических ошибок
       'no-undef': 'error',
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'off',
       'no-extra-semi': 'error',
       'no-unreachable': 'error',
       'no-dupe-keys': 'error',
@@ -45,7 +45,14 @@ export default tseslint.config([
       'no-irregular-whitespace': 'error',
 
       // TypeScript специфичные правила
-      '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
 
