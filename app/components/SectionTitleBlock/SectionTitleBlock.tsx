@@ -8,9 +8,16 @@ type Props = {
   linkText: string
   link: string
   small?: boolean
+  disabled?: boolean
 }
 
-export const SectionTitleBlock = ({ title, linkText, link, small }: Props) => {
+export const SectionTitleBlock = ({
+  title,
+  linkText,
+  link,
+  small,
+  disabled,
+}: Props) => {
   const navigate = useNavigate()
 
   return (
@@ -24,7 +31,12 @@ export const SectionTitleBlock = ({ title, linkText, link, small }: Props) => {
         {title}
       </h2>
 
-      <Button variant="tertiary" onClick={() => navigate(link)} showCaret>
+      <Button
+        variant="tertiary"
+        onClick={() => navigate(link)}
+        showCaret
+        disabled={disabled}
+      >
         {linkText}
       </Button>
     </div>

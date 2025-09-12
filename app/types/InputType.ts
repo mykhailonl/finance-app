@@ -8,7 +8,7 @@ export interface InputProps<T> {
     placeholder: string
     value: T
     onChange: (value: T) => void
-    onBlur?: () => void // ?
+    onBlur?: () => void
     inputStyles?: string
   }
   helperText: {
@@ -18,8 +18,24 @@ export interface InputProps<T> {
   }
   error?: string | null
   showSearchIcon?: boolean
+  showPassIcon?: boolean
   styles?: string
+  type?: string
 }
 
-// todo Im not allowing to fill more than 30 chars, so there is no possible error can occur, should I delete this option?
-export type InputErrorType = 'Insufficient funds' | 'Maximum 30 characters'
+export interface DateTimeInputProps {
+  label: {
+    showLabel?: boolean
+    labelText?: string
+    labelStyles?: string
+  }
+  input: {
+    value: string
+    onChange: (value: string) => void
+    onBlur?: () => void
+    inputStyles?: string
+  }
+  styles?: string
+  error?: string | null
+  type: 'date' | 'time' | 'datetime-local'
+}

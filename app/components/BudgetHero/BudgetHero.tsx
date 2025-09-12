@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 
 import { BudgetInfo } from '~/components/BudgetInfo'
 import { Divider } from '~/components/Divider'
@@ -13,14 +13,14 @@ export const BudgetHero = ({ budgets }: { budgets: Budget[] }) => {
   return (
     <div className="flex flex-col gap-4">
       {budgets.map((budget, index) => (
-        <React.Fragment key={budget.category}>
+        <Fragment key={budget.category}>
           <BudgetInfo
             budget={budget}
             spent={spentByCategory[budget.category]}
           />
 
           {index < budgets.length - 1 && <Divider />}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   )

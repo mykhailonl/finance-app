@@ -13,6 +13,10 @@ export default [
     route('budgets', './routes/budgets.tsx'),
     route('pots', './routes/pots.tsx'),
     route('recurring', './routes/recurring.tsx'),
-    route('auth', './routes/auth.tsx'),
+  ]),
+
+  layout('./routes/authLayout.tsx', [
+    route('signup', './routes/signup.tsx'),
+    route('login', './routes/login.tsx'),
   ]),
 ] satisfies RouteConfig

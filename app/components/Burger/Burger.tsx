@@ -38,21 +38,21 @@ export const Burger = ({ item }: Props) => {
 
   const handleEdit = () => {
     if (isBudget) {
-      openModal('budget-edit', { budget: item })
+      openModal({ type: 'budget-edit', budget: item })
     }
 
     if (isPot) {
-      openModal('pot-edit', { pot: item })
+      openModal({ type: 'pot-edit', pot: item })
     }
   }
 
   const handleDelete = () => {
     if (isBudget) {
-      openModal('budget-delete', { budget: item })
+      openModal({ type: 'budget-delete', budget: item })
     }
 
     if (isPot) {
-      openModal('pot-delete', { pot: item })
+      openModal({ type: 'pot-delete', pot: item })
     }
   }
 

@@ -29,7 +29,7 @@ export const Pot = ({ pot }: Props) => {
       <div className="flex gap-4 mb-4 md:mb-0">
         <Button
           variant="secondary"
-          onClick={() => openModal('pot-add-money', { pot: pot })}
+          onClick={() => openModal({ type: 'pot-add-money', pot })}
           styles="p-4 grow"
         >
           Add Money
@@ -37,7 +37,7 @@ export const Pot = ({ pot }: Props) => {
 
         <Button
           variant="secondary"
-          onClick={() => openModal('pot-withdraw-money', { pot: pot })}
+          onClick={() => openModal({ type: 'pot-withdraw-money', pot })}
           styles="p-4 grow"
         >
           Withdraw

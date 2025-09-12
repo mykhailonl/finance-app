@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { AmountDisplay } from '~/components/AmountDisplay'
 import { Button } from '~/components/Button'
@@ -9,7 +9,7 @@ import { ProgressSection } from '~/components/ProgressSection'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { useBalance } from '~/hooks/useBalance'
 import { useForm } from '~/hooks/useForm'
-import type { AddToPotModalProps } from '~/types/ModalTypes'
+import type { AddToPotModalProps } from '~/types/PotModalTypes'
 import { canPerformAmountAction } from '~/utils/canPerformAmountAction'
 import { formatAmount } from '~/utils/formatAmount'
 
@@ -27,15 +27,17 @@ export const AddToPotModal = ({ pot, onAddMoney }: AddToPotModalProps) => {
         if (value <= 0) {
           return 'Amount must be positive'
         }
+
         if (!canPerformAmountAction(availableFunds, value)) {
           return 'Insufficient funds'
         }
+
         return null
       },
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const amountError = validateField('amountToAdd')

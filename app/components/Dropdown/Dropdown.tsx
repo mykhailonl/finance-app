@@ -71,7 +71,11 @@ export const Dropdown = <T extends DropdownOptionType>({
       <div className="relative w-full" ref={dropdownRef}>
         {/* icon only */}
         <div
-          className={cn('md:hidden cursor-custom', mobileView && 'flex')}
+          className={cn(
+            'md:hidden cursor-custom',
+            mobileView ? 'flex' : 'hidden'
+          )}
+          // className={cn('md:hidden cursor-custom', mobileView && 'flex')}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isSortDropdown && <SortIcon />}

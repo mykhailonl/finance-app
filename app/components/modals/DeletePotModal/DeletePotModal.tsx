@@ -1,10 +1,8 @@
-import React from 'react'
-
 import { Button } from '~/components/Button'
 import { ModalDescription } from '~/components/ModalDescription'
 import { ModalTitle } from '~/components/ModalTitle'
 import { SectionWrapper } from '~/components/SectionWrapper'
-import type { DeletePotModalProps } from '~/types/ModalTypes'
+import type { DeletePotModalProps } from '~/types/PotModalTypes'
 
 export const DeletePotModal = ({
   potName,

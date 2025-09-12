@@ -28,7 +28,7 @@ function AppContent() {
   const { user, loading } = useAuth()
   const location = useLocation()
 
-  const publicRoutes = ['/login', '/register', '/forgot-password']
+  const publicRoutes = ['/signup', '/forgot-password', '/login']
   const isPublicRoute = publicRoutes.includes(location.pathname)
 
   if (loading) {
@@ -44,7 +44,7 @@ function AppContent() {
       return <Outlet />
     }
 
-    return <Navigate to="/auth" replace />
+    return <Navigate to="/login" replace />
   }
 
   if (isPublicRoute) {
@@ -77,12 +77,15 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        {/*<ModalProvider>*/}
         <ModalProvider>
           <DeviceProvider>
+            {/*<ModalContainer />*/}
             <ModalContainer />
             <AppContent />
           </DeviceProvider>
         </ModalProvider>
+        {/*</ModalProvider>*/}
       </AuthProvider>
     </QueryClientProvider>
   )

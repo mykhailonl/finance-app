@@ -1,5 +1,7 @@
 import type { AuthError, User } from '@supabase/supabase-js'
 
+export type AuthModalTypes = { type: 'logout' }
+
 export interface AuthContextType {
   user: User | null
   loading: boolean

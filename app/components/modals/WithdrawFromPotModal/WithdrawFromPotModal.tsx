@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { AmountDisplay } from '~/components/AmountDisplay'
 import { Button } from '~/components/Button'
@@ -8,7 +8,7 @@ import { ModalTitle } from '~/components/ModalTitle'
 import { ProgressSection } from '~/components/ProgressSection'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { useForm } from '~/hooks/useForm'
-import type { WithdrawFromPotModalProps } from '~/types/ModalTypes'
+import type { WithdrawFromPotModalProps } from '~/types/PotModalTypes'
 import { formatAmount } from '~/utils/formatAmount'
 
 export const WithdrawFromPotModal = ({
@@ -21,18 +21,20 @@ export const WithdrawFromPotModal = ({
     },
     validators: {
       amountToWithdraw: (value) => {
-        if (value <= 0) {
-          return 'Amount must be positive'
+        if (!value) {
+          return 'Please fill in the field'
         }
+
         if (value > pot.total) {
           return 'Cannot withdraw more than pot contains'
         }
+
         return null
       },
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const amountError = validateField('amountToWithdraw')
@@ -43,6 +45,7 @@ export const WithdrawFromPotModal = ({
   }
 
   const totalAmount = pot.total - values.amountToWithdraw
+  const amountToShow = totalAmount <= 0 ? 0 : totalAmount
 
   return (
     <SectionWrapper styles="min-w-[335px] md:w-[560px]">
@@ -53,13 +56,14 @@ export const WithdrawFromPotModal = ({
         <div className="flex flex-col gap-4">
           <AmountDisplay
             fieldName="New Amount"
-            fieldValue={formatAmount(totalAmount)}
+            fieldValue={formatAmount(amountToShow)}
           />
 
           <ProgressSection
             pot={pot}
             smallBar
             extraMoney={-values.amountToWithdraw}
+            withDrawView
           />
         </div>
 

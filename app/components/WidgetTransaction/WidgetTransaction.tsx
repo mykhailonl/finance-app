@@ -1,6 +1,6 @@
 import cn from 'classnames'
 
-import { Avatar } from '~/components/Avatar'
+import { TransactionAvatar } from '~/components/TransactionAvatar'
 import type { Transaction } from '~/types'
 import { formatAmountToString } from '~/utils/formatAmountToString'
 import { formatDate } from '~/utils/formatDate'
@@ -22,9 +22,8 @@ export const WidgetTransaction = ({
   return (
     <div className="flex items-center">
       <div className="flex self-stretch gap-4 items-center grow">
-        <Avatar
-          src={transaction.avatar}
-          alt={transaction.name}
+        <TransactionAvatar
+          transaction={transaction}
           styles={hideAvatarOnMobile ? 'hidden md:flex' : ''}
         />
 

@@ -1,12 +1,10 @@
 import cn from 'classnames'
+import { useState } from 'react'
 
 import { iconComponents } from '~/types/IconType'
 import type { InputProps } from '~/types/InputType'
 
-// helperText style based on input type, different preset
-
 // todo fix case when input is a number, rn cant make 123.40, . is not going through regex within onChange
-// todo AddPotModal helper text bug, double number chars left
 
 export const Input = <T extends string | number>({
   styles,
@@ -14,17 +12,23 @@ export const Input = <T extends string | number>({
   helperText,
   input,
   showSearchIcon,
+  showPassIcon = false,
   error,
+  type,
 }: InputProps<T>) => {
+  //#region icons
   const SearchIcon = iconComponents['search']
+  const ShowPassIcon = iconComponents['showPassword']
+  const HidePassIcon = iconComponents['hidePassword']
+  //#endregion
+
+  const [showPass, setShowPass] = useState(false)
+
   const isNumberInput = typeof input.value === 'number'
 
   //#region inputLimitations
   const numberPattern = /^\d*\.?\d{0,2}$/
-  const maxLength = 30
   //#endregion
-
-  const charsLeft = maxLength - String(input.value).length
 
   return (
     <div className={cn('flex gap-1 items-start self-stretch', styles)}>
@@ -40,8 +44,7 @@ export const Input = <T extends string | number>({
       <div
         className={cn(
           'flex items-center rounded-lg py-3 px-5 border border-beige-500 hover:border-grey-500 active:border-grey-900 w-full',
-          isNumberInput ? 'gap-3' : 'gap-4',
-          input.inputStyles
+          isNumberInput ? 'gap-3' : 'gap-4'
         )}
       >
         {isNumberInput && (
@@ -49,9 +52,13 @@ export const Input = <T extends string | number>({
         )}
 
         <input
-          type="text"
+          type={type ? type : showPassIcon && !showPass ? 'password' : 'text'}
           id={label.labelText}
-          className="bg-white flex text-preset-4 w-full rounded-lg outline-hidden cursor-custom"
+          className={cn(
+            'bg-white text-preset-4 w-full outline-hidden cursor-custom',
+            input.inputStyles,
+            !type && 'flex'
+          )}
           placeholder={input.placeholder}
           value={isNumberInput && input.value === 0 ? '' : input.value}
           onChange={(e) => {
@@ -74,10 +81,6 @@ export const Input = <T extends string | number>({
                 return
               }
 
-              if (rawValue.length > maxLength) {
-                return
-              }
-
               input.onChange(rawValue as T)
             }
           }}
@@ -85,13 +88,23 @@ export const Input = <T extends string | number>({
         />
 
         {showSearchIcon && <SearchIcon className="w-4 h-4" />}
+
+        {showPassIcon &&
+          (showPass ? (
+            <HidePassIcon
+              className="w-4 h-4"
+              onClick={() => setShowPass(!showPass)}
+            />
+          ) : (
+            <ShowPassIcon
+              className="w-4 h-4"
+              onClick={() => setShowPass(!showPass)}
+            />
+          ))}
       </div>
 
       {helperText.showHelper && !error && (
         <div className={cn('flex text-preset-5', helperText.helperStyles)}>
-          <p className={charsLeft ? 'text-grey-500' : 'text-red'}>
-            {`${charsLeft}`}&nbsp;
-          </p>
           <p className={cn(' text-grey-500')}>{helperText.helperText}</p>
         </div>
       )}

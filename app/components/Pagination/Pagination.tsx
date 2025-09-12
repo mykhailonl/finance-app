@@ -8,14 +8,13 @@ import { useVisiblePages } from '~/hooks/useVisiblePages'
 
 type Props = {
   totalPages: number
+  hasNext: boolean
+  hasPrev: boolean
 }
 
-export const Pagination = ({ totalPages }: Props) => {
+export const Pagination = ({ totalPages, hasNext, hasPrev }: Props) => {
   const [page, setPage] = useSearchParamValue('page')
   const visiblePages = useVisiblePages(page, totalPages)
-
-  const isFirstPage = page === 1
-  const isLastPage = page === totalPages
 
   const showPagination = totalPages > 1
 
@@ -28,7 +27,7 @@ export const Pagination = ({ totalPages }: Props) => {
     >
       <PaginationButton
         role="prev"
-        disabled={isFirstPage}
+        disabled={!hasPrev}
         onClick={() => setPage(page - 1)}
       />
 
@@ -48,7 +47,7 @@ export const Pagination = ({ totalPages }: Props) => {
 
       <PaginationButton
         role="next"
-        disabled={isLastPage}
+        disabled={!hasNext}
         onClick={() => setPage(page + 1)}
       />
     </div>

@@ -11,7 +11,7 @@ export const PotsHeader = () => {
 
       <Button
         variant="primary"
-        onClick={() => openModal('pot-add')}
+        onClick={() => openModal({ type: 'pot-add' })}
         styles="p-4"
       >
         Add New Pot

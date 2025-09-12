@@ -7,20 +7,22 @@ interface UseFormOptions<T> {
 }
 
 interface UseFormReturn<T> {
-  // Состояние
+  // State
   values: T
   errors: Partial<Record<keyof T, string | null>>
+  generalError: string | null
 
-  // Методы управления
+  // Handlers
   setFieldValue: (field: keyof T, value: any) => void
   setFieldError: (field: keyof T, error: string | null) => void
+  setGeneralError: (error: string | null) => void
   clearFieldError: (field: keyof T) => void
 
-  // Валидация
+  // Validation
   validateField: (field: keyof T, value?: any) => string | null
   validateAll: () => boolean
 
-  // Утилиты
+  // Utils
   reset: () => void
   isValid: boolean
 }
@@ -32,18 +34,28 @@ export const useForm = <T extends Record<string, any>>(
   const [errors, setErrors] = useState<Partial<Record<keyof T, string | null>>>(
     {}
   )
+  const [genError, setGenError] = useState<string | null>(null)
 
   const setFieldValue = (field: keyof T, value: any) => {
     setValues((prev) => ({ ...prev, [field]: value }))
 
-    // Автоматически очищаем ошибку при изменении значения
+    // Reset error on field value change
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: null }))
+    }
+
+    // reset on any field change
+    if (genError) {
+      setGeneralError(null)
     }
   }
 
   const setFieldError = (field: keyof T, error: string | null) => {
     setErrors((prev) => ({ ...prev, [field]: error }))
+  }
+
+  const setGeneralError = (error: string | null) => {
+    setGenError(error)
   }
 
   const clearFieldError = (field: keyof T) => {
@@ -56,7 +68,7 @@ export const useForm = <T extends Record<string, any>>(
       return null
     }
 
-    // Используем переданное значение или текущее из состояния
+    // Using passed or current value from state
     const valueToValidate = value !== undefined ? value : values[field]
     const error = validator(valueToValidate)
 
@@ -72,7 +84,7 @@ export const useForm = <T extends Record<string, any>>(
     let isFormValid = true
     const newErrors: Partial<Record<keyof T, string | null>> = {}
 
-    // Проходим по всем валидаторам
+    // Mapping all validators
     Object.keys(options.validators).forEach((fieldKey) => {
       const field = fieldKey as keyof T
       const validator = options.validators![field]
@@ -101,8 +113,10 @@ export const useForm = <T extends Record<string, any>>(
   return {
     values,
     errors,
+    generalError: genError,
     setFieldValue,
     setFieldError,
+    setGeneralError,
     clearFieldError,
     validateField,
     validateAll,

@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
 import { Dropdown } from '~/components/Dropdown'
@@ -9,11 +9,13 @@ import { SectionWrapper } from '~/components/SectionWrapper'
 import { COLOR_OPTIONS } from '~/constants/theme'
 import useBudgets from '~/hooks/useBudgets'
 import { useForm } from '~/hooks/useForm'
+import type { EditBudgetModalProps } from '~/types/BudgetModalTypes'
 import {
-  BUDGET_CATEGORY_OPTIONS,
-  type BudgetCategoryOption,
+  EXPENSE_CATEGORY_OPTIONS,
+  type ExpenseCategory,
 } from '~/types/DropdownType'
-import type { EditBudgetModalProps } from '~/types/ModalTypes'
+
+// todo handle case when fields didnt change, so I will not send an extra request, same with Pots
 
 export const EditBudgetModal = ({
   initialValues,
@@ -23,25 +25,30 @@ export const EditBudgetModal = ({
     data: { usedColors },
   } = useBudgets()
 
-  const { values, setFieldValue, errors, validateField } = useForm({
-    initialValues: {
-      category: initialValues.category,
-      maximum: initialValues.maximum,
-      theme: initialValues.theme,
-    },
-    validators: {
-      category: (value) => (!value ? 'Category is required' : null),
-      maximum: (value) => (value <= 0 ? 'Maximum must be positive' : null),
-    },
-  })
+  const { values, setFieldValue, errors, validateField, validateAll } = useForm(
+    {
+      initialValues: {
+        category: initialValues.category,
+        maximum: initialValues.maximum,
+        theme: initialValues.theme,
+      },
+      validators: {
+        category: (value) => (!value ? 'Category is required' : null),
+        maximum: (value) => (value <= 0 ? 'Maximum must be positive' : null),
+      },
+    }
+  )
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    const categoryError = validateField('category')
-    const maximumError = validateField('maximum')
+    const allFieldValid = validateAll()
 
-    if (!categoryError && !maximumError) {
+    if (!allFieldValid) {
+      return
+    }
+
+    if (allFieldValid) {
       onSubmit({
         category: values.category,
         maximum: values.maximum,
@@ -61,9 +68,9 @@ export const EditBudgetModal = ({
             showLabel: true,
             labelText: 'Budget Category',
           }}
-          value={values.category as BudgetCategoryOption}
+          value={values.category as ExpenseCategory}
           onChange={(value) => setFieldValue('category', value)}
-          options={BUDGET_CATEGORY_OPTIONS}
+          options={EXPENSE_CATEGORY_OPTIONS}
           showCaret
           styles="flex-col items-start"
         />

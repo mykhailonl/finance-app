@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
 import { Dropdown } from '~/components/Dropdown'
@@ -10,18 +10,11 @@ import { COLOR_OPTIONS } from '~/constants/theme'
 import useBudgets from '~/hooks/useBudgets'
 import { useForm } from '~/hooks/useForm'
 import type { ThemeColor, TransactionCategory } from '~/types'
+import type { AddBudgetModalProps } from '~/types/BudgetModalTypes'
 import {
-  BUDGET_CATEGORY_OPTIONS,
-  type BudgetCategoryOption,
+  EXPENSE_CATEGORY_OPTIONS,
+  type ExpenseCategory,
 } from '~/types/DropdownType'
-
-interface AddBudgetModalProps {
-  onSubmit: (data: {
-    category: TransactionCategory
-    maximum: number
-    theme: ThemeColor
-  }) => void
-}
 
 // todo handle case with used categories, colors
 
@@ -32,7 +25,7 @@ export const AddBudgetModal = ({ onSubmit }: AddBudgetModalProps) => {
 
   const { values, setFieldValue, errors, validateField } = useForm({
     initialValues: {
-      category: 'Entertainment' as TransactionCategory,
+      category: 'General' as TransactionCategory,
       maximum: 0,
       theme: 'green' as ThemeColor,
     },
@@ -42,7 +35,7 @@ export const AddBudgetModal = ({ onSubmit }: AddBudgetModalProps) => {
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const categoryError = validateField('category')
@@ -68,9 +61,9 @@ export const AddBudgetModal = ({ onSubmit }: AddBudgetModalProps) => {
             showLabel: true,
             labelText: 'Budget Category',
           }}
-          value={values.category as BudgetCategoryOption}
+          value={values.category as ExpenseCategory}
           onChange={(value) => setFieldValue('category', value)}
-          options={BUDGET_CATEGORY_OPTIONS}
+          options={EXPENSE_CATEGORY_OPTIONS}
           showCaret
           styles="flex-col items-start"
         />

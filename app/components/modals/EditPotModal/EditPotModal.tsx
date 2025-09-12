@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
 import { Dropdown } from '~/components/Dropdown'
@@ -9,7 +9,7 @@ import { SectionWrapper } from '~/components/SectionWrapper'
 import { COLOR_OPTIONS } from '~/constants/theme'
 import { useForm } from '~/hooks/useForm'
 import usePots from '~/hooks/usePots'
-import type { EditPotModalProps } from '~/types/ModalTypes'
+import type { EditPotModalProps } from '~/types/PotModalTypes'
 
 export const EditPotModal = ({
   initialValues,
@@ -31,7 +31,7 @@ export const EditPotModal = ({
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const nameError = validateField('potName')
@@ -49,6 +49,7 @@ export const EditPotModal = ({
   return (
     <SectionWrapper styles="min-w-[335px] md:w-[560px]">
       <ModalTitle title="Edit Pot" />
+
       <ModalDescription text="If your saving targets change, feel free to update your pots." />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

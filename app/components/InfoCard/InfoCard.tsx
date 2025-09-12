@@ -12,12 +12,11 @@ type InfoCardProps = {
   styles?: string
 }
 
-//todo rewrite props to use BudgetType?
-
 export const InfoCard = ({ name, amount, color, styles }: InfoCardProps) => {
   const formattedAmount = formatAmount(amount)
 
   const colorStyle = THEME_TO_TW_CLASS[color as ThemeColor] || 'bg-beige-100'
+
   return (
     <div
       className={cn(

@@ -1,5 +1,5 @@
 import type { SortOption } from '~/types/DropdownType'
-import type { TransactionListType } from '~/types/TransactionType'
+import type { TransactionListType } from '~/types/TransactionTypes'
 
 export const sortTransactions = (
   transactions: TransactionListType,

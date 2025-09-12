@@ -13,8 +13,8 @@ export const BudgetList = () => {
         <BudgetSection
           budget={budget}
           key={budget.category}
-          transactions={latestTransactionsByCategory[budget.category] || []}
-          spentThisMonth={spentByCategory[budget.category] || 0}
+          transactions={latestTransactionsByCategory[budget.category]}
+          spentThisMonth={spentByCategory[budget.category]}
         />
       ))}
     </div>

@@ -1,8 +1,8 @@
 import cn from 'classnames'
-import React from 'react'
+import { type ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   styles?: string
   smallPadding?: boolean
   largerGap?: boolean

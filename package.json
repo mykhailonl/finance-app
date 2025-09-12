@@ -14,6 +14,7 @@
     "types": "npx supabase gen types typescript --project-id crtvhhtvyrbrqrwryhkq > app/types/database.ts"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "@react-router/node": "^7.7.0",
     "@react-router/serve": "^7.7.0",
     "@supabase/supabase-js": "^2.55.0",

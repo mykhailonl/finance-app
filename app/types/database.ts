@@ -80,35 +80,38 @@ export type Database = {
       transactions: {
         Row: {
           amount: number
-          avatar: string | null
+          avatar_person: Database['public']['Enums']['person_name'] | null
           category: Database['public']['Enums']['transaction_category']
           created_at: string
           id: number
           name: string
           recurring: boolean
           transaction_date: string
+          transaction_type: Database['public']['Enums']['transaction_type']
           user_id: string | null
         }
         Insert: {
           amount: number
-          avatar?: string | null
+          avatar_person?: Database['public']['Enums']['person_name'] | null
           category: Database['public']['Enums']['transaction_category']
           created_at?: string
           id?: number
           name: string
           recurring?: boolean
           transaction_date: string
+          transaction_type: Database['public']['Enums']['transaction_type']
           user_id?: string | null
         }
         Update: {
           amount?: number
-          avatar?: string | null
+          avatar_person?: Database['public']['Enums']['person_name'] | null
           category?: Database['public']['Enums']['transaction_category']
           created_at?: string
           id?: number
           name?: string
           recurring?: boolean
           transaction_date?: string
+          transaction_type?: Database['public']['Enums']['transaction_type']
           user_id?: string | null
         }
         Relationships: []
@@ -153,6 +156,22 @@ export type Database = {
       }
     }
     Enums: {
+      person_name:
+        | 'Emma'
+        | 'Daniel'
+        | 'Ella'
+        | 'Ethan'
+        | 'Harper'
+        | 'James'
+        | 'Liam'
+        | 'Lily'
+        | 'Mason'
+        | 'Rina'
+        | 'Sebastian'
+        | 'Sofia'
+        | 'Sun'
+        | 'William'
+        | 'Yuna'
       theme_color:
         | 'green'
         | 'yellow'
@@ -180,6 +199,12 @@ export type Database = {
         | 'Lifestyle'
         | 'Shopping'
         | 'General'
+        | 'Gift'
+        | 'Interest'
+        | 'Other'
+        | 'Salary'
+        | 'Sales'
+      transaction_type: 'income' | 'expense'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -307,6 +332,23 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      person_name: [
+        'Emma',
+        'Daniel',
+        'Ella',
+        'Ethan',
+        'Harper',
+        'James',
+        'Liam',
+        'Lily',
+        'Mason',
+        'Rina',
+        'Sebastian',
+        'Sofia',
+        'Sun',
+        'William',
+        'Yuna',
+      ],
       theme_color: [
         'green',
         'yellow',
@@ -335,7 +377,13 @@ export const Constants = {
         'Lifestyle',
         'Shopping',
         'General',
+        'Gift',
+        'Interest',
+        'Other',
+        'Salary',
+        'Sales',
       ],
+      transaction_type: ['income', 'expense'],
     },
   },
 } as const

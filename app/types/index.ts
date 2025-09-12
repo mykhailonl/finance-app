@@ -3,6 +3,8 @@ import type { Database } from '~/types/database'
 export type ThemeColor = Database['public']['Enums']['theme_color']
 export type TransactionCategory =
   Database['public']['Enums']['transaction_category']
+export type TransactionType = Database['public']['Enums']['transaction_type']
+export type PersonName = Database['public']['Enums']['person_name']
 
 export type StrictUserBalance = {
   user_id: string

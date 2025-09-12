@@ -2,12 +2,7 @@ import { Button } from '~/components/Button'
 import { ModalDescription } from '~/components/ModalDescription'
 import { ModalTitle } from '~/components/ModalTitle'
 import { SectionWrapper } from '~/components/SectionWrapper'
-
-interface DeleteBudgetModalProps {
-  budgetCategory: string
-  onDelete: () => void
-  onClose: () => void
-}
+import type { DeleteBudgetModalProps } from '~/types/BudgetModalTypes'
 
 export const DeleteBudgetModal = ({
   budgetCategory,

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 
 import { Divider } from '~/components/Divider'
 import { InfoCard } from '~/components/InfoCard'
@@ -16,7 +16,6 @@ type Props = {
   spentThisMonth: number
 }
 
-// todo should i move calculations to hook?
 export const BudgetSection = ({
   budget,
   transactions,
@@ -27,6 +26,7 @@ export const BudgetSection = ({
   const availableBudgetLeft =
     budget.maximum - spentThisMonth > 0 ? budget.maximum - spentThisMonth : 0
   const spentPercent = Math.round((spentThisMonth / budget.maximum) * 100)
+  const noTransactionsYet = !transactions.length
 
   return (
     <SectionWrapper>
@@ -48,25 +48,32 @@ export const BudgetSection = ({
         <SectionTitleBlock
           title="Latest Spending"
           linkText="See All"
-          link={'/'}
+          link={`/transactions?page=1&filterBy=${budget.category}`}
           small
+          disabled={noTransactionsYet}
         />
 
-        <div className="flex flex-col gap-3">
-          {transactions.map((transaction, index) => (
-            <React.Fragment key={transaction.transaction_date}>
-              <WidgetTransaction
-                transaction={transaction}
-                hideAvatarOnMobile
-                small
-              />
+        {noTransactionsYet ? (
+          <p className="text-preset-4 text-grey-500 self-center">
+            No transactions for this budget yet
+          </p>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {transactions.map((transaction, index) => (
+              <Fragment key={transaction.transaction_date}>
+                <WidgetTransaction
+                  transaction={transaction}
+                  hideAvatarOnMobile
+                  small
+                />
 
-              {index < transactions.length - 1 && (
-                <Divider styles="bg-grey-500 opacity-15" />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
+                {index < transactions.length - 1 && (
+                  <Divider styles="bg-grey-500 opacity-15" />
+                )}
+              </Fragment>
+            ))}
+          </div>
+        )}
       </div>
     </SectionWrapper>
   )

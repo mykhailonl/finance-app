@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
 import { Dropdown } from '~/components/Dropdown'
@@ -10,32 +10,45 @@ import { COLOR_OPTIONS } from '~/constants/theme'
 import { useForm } from '~/hooks/useForm'
 import usePots from '~/hooks/usePots'
 import type { ThemeColor } from '~/types'
-import type { AddPotModalProps } from '~/types/ModalTypes'
+import type { AddPotModalProps } from '~/types/PotModalTypes'
 
 export const AddPotModal = ({ onSubmit }: AddPotModalProps) => {
   const {
     data: { usedColors },
   } = usePots()
 
-  const { values, setFieldValue, errors, validateField } = useForm({
-    initialValues: {
-      potName: '',
-      target: 0,
-      theme: 'green' as ThemeColor,
-    },
-    validators: {
-      potName: (value) => (!value.trim() ? 'Name is required' : null),
-      target: (value) => (value <= 0 ? 'Target must be positive' : null),
-    },
-  })
+  const { values, setFieldValue, errors, validateField, validateAll } = useForm(
+    {
+      initialValues: {
+        potName: '',
+        target: 0,
+        theme: 'green' as ThemeColor,
+      },
+      validators: {
+        potName: (value) => {
+          const trimmed = value.trim()
 
-  const handleSubmit = (e: React.FormEvent) => {
+          if (!trimmed) {
+            return 'Pot name is required'
+          }
+
+          return null
+        },
+        target: (value) => (value <= 0 ? 'Target must be positive' : null),
+      },
+    }
+  )
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    const nameError = validateField('potName')
-    const targetError = validateField('target')
+    const allFieldsValid = validateAll()
 
-    if (!nameError && !targetError) {
+    if (!allFieldsValid) {
+      return
+    }
+
+    if (allFieldsValid) {
       onSubmit({
         name: values.potName.trim(),
         target: values.target,

@@ -11,7 +11,7 @@ export const BudgetsHeader = () => {
 
       <Button
         variant="primary"
-        onClick={() => openModal('budget-add')}
+        onClick={() => openModal({ type: 'budget-add' })}
         styles="p-4"
       >
         Add New Budget

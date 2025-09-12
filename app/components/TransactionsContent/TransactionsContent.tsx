@@ -6,20 +6,22 @@ import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 import { useTransactionFilters } from '~/hooks/useTransactionFilters'
 
 export const TransactionsContent = () => {
-  const { transactions, totalPages } = useTransactionFilters({
+  const { transactions, totalPages, hasNext, hasPrev } = useTransactionFilters({
     page: useSearchParamValue('page')[0],
     sortBy: useSearchParamValue('sortBy')[0],
     filterBy: useSearchParamValue('filterBy')[0],
     query: useSearchParamValue('query')[0],
   })
 
+  const sectionStyles = !transactions.length ? 'h-full' : ''
+
   return (
-    <SectionWrapper largerGap>
+    <SectionWrapper largerGap styles={sectionStyles}>
       <TransactionFilters />
 
       <TransactionList transactions={transactions} />
 
-      <Pagination totalPages={totalPages} />
+      <Pagination totalPages={totalPages} hasNext={hasNext} hasPrev={hasPrev} />
     </SectionWrapper>
   )
 }

@@ -1,27 +1,42 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 import {
   AddBudgetModal,
   AddPotModal,
   AddToPotModal,
+  AddTransactionModal,
   DeleteBudgetModal,
   DeletePotModal,
+  DeleteTransactionModal,
   EditBudgetModal,
   EditPotModal,
+  EditTransactionModal,
+  LogoutModal,
   WithdrawFromPotModal,
 } from '~/components/modals'
 import { useBudgetMutations } from '~/hooks/useBudgetMutations'
 import { useModal } from '~/hooks/useModal'
 import { usePotMutations } from '~/hooks/usePotMutations'
+import { useTransactionMutations } from '~/hooks/useTransactionMutations'
 import { Overlays } from '~/overlays/Overlays'
-import type { BudgetInsert, BudgetUpdate, PotInsert, PotUpdate } from '~/types'
+import type {
+  BudgetInsert,
+  BudgetUpdate,
+  PotInsert,
+  PotUpdate,
+  TransactionInsert,
+  TransactionUpdate,
+} from '~/types'
 
 export const ModalContainer = () => {
-  const { modalType, closeModal, modalData } = useModal()
+  const { modalState, closeModal } = useModal()
 
   const budgetMutations = useBudgetMutations()
   const potMutations = usePotMutations()
+  const transactionMutations = useTransactionMutations()
 
+  //#region budget handlers
   const handleAddBudget = (data: BudgetInsert) => {
     budgetMutations.createBudget.mutate(data, {
       onSuccess: () => closeModal(),
@@ -29,22 +44,24 @@ export const ModalContainer = () => {
   }
 
   const handleEditBudget = (data: BudgetUpdate) => {
-    if (modalData?.budget?.id) {
+    if (modalState?.type === 'budget-edit') {
       budgetMutations.updateBudget.mutate(
-        { id: modalData.budget.id, updates: data },
+        { id: modalState.budget.id, updates: data },
         { onSuccess: () => closeModal() }
       )
     }
   }
 
   const handleDeleteBudget = () => {
-    if (modalData?.budget?.id) {
-      budgetMutations.deleteBudget.mutate(modalData.budget.id, {
+    if (modalState?.type === 'budget-delete') {
+      budgetMutations.deleteBudget.mutate(modalState.budget.id, {
         onSuccess: () => closeModal(),
       })
     }
   }
+  //#endregion
 
+  //#region pot handlers
   const handleAddPot = (data: PotInsert) => {
     potMutations.createPot.mutate(data, {
       onSuccess: () => closeModal(),
@@ -52,29 +69,29 @@ export const ModalContainer = () => {
   }
 
   const handleEditPot = (data: PotUpdate) => {
-    if (modalData?.pot?.id) {
+    if (modalState?.type === 'pot-edit') {
       potMutations.updatePot.mutate(
-        { id: modalData.pot.id, updates: data },
+        { id: modalState.pot.id, updates: data },
         { onSuccess: () => closeModal() }
       )
     }
   }
 
   const handleDeletePot = () => {
-    if (modalData?.pot?.id) {
-      potMutations.deletePot.mutate(modalData.pot.id, {
+    if (modalState?.type === 'pot-delete') {
+      potMutations.deletePot.mutate(modalState.pot.id, {
         onSuccess: () => closeModal(),
       })
     }
   }
 
   const handleAddMoneyToPot = (amount: number) => {
-    if (modalData?.pot?.id) {
+    if (modalState?.type === 'pot-add-money') {
       potMutations.addMoneyToPot.mutate(
         {
-          id: modalData.pot.id,
+          id: modalState.pot.id,
           amount,
-          currentTotal: modalData.pot.total,
+          currentTotal: modalState.pot.total,
         },
         { onSuccess: () => closeModal() }
       )
@@ -82,90 +99,170 @@ export const ModalContainer = () => {
   }
 
   const handleWithdrawMoneyFromPot = (amount: number) => {
-    if (modalData?.pot?.id) {
+    if (modalState?.type === 'pot-withdraw-money') {
       potMutations.withdrawMoneyFromPot.mutate(
         {
-          id: modalData.pot.id,
+          id: modalState.pot.id,
           amount,
-          currentTotal: modalData.pot.total,
+          currentTotal: modalState.pot.total,
+        },
+        { onSuccess: () => closeModal() }
+      )
+    }
+  }
+  //#endregion
+
+  //#region transaction handlers
+  const handleAddTransaction = (transaction: TransactionInsert) => {
+    transactionMutations.createTransaction.mutate(transaction, {
+      onSuccess: () => closeModal(),
+    })
+  }
+
+  const handleUpdateTransaction = (data: TransactionUpdate) => {
+    if (modalState?.type === 'transaction-edit') {
+      transactionMutations.updateTransaction.mutate(
+        {
+          id: modalState.transaction.id,
+          updates: data,
         },
         { onSuccess: () => closeModal() }
       )
     }
   }
 
-  const renderModal = () => {
-    switch (modalType) {
+  const handleDeleteTransaction = () => {
+    if (modalState?.type === 'transaction-delete') {
+      transactionMutations.deleteTransaction.mutate(modalState.transaction.id, {
+        onSuccess: () => closeModal(),
+      })
+    }
+  }
+  //#endregion
+
+  const renderModal = (): ReactNode => {
+    if (!modalState) {
+      return null
+    }
+
+    switch (modalState.type) {
+      //#region budget modals
       case 'budget-add':
         return <AddBudgetModal onSubmit={handleAddBudget} />
+
       case 'budget-edit':
         return (
           <EditBudgetModal
             initialValues={{
-              id: modalData?.budget?.id || 0,
-              category: modalData?.budget?.category || 'Entertainment',
-              maximum: modalData?.budget?.maximum || 0,
-              theme: modalData?.budget?.theme || 'green',
+              id: modalState.budget.id,
+              category: modalState.budget.category,
+              maximum: modalState.budget.maximum,
+              theme: modalState.budget.theme,
             }}
             onSubmit={handleEditBudget}
           />
         )
+
       case 'budget-delete':
         return (
           <DeleteBudgetModal
-            budgetCategory={modalData?.budget?.category || ''}
+            budgetCategory={modalState.budget.category}
             onDelete={handleDeleteBudget}
             onClose={closeModal}
           />
         )
+      //#endregion
+
+      //#region pot modals
       case 'pot-add':
         return <AddPotModal onSubmit={handleAddPot} />
+
       case 'pot-edit':
         return (
           <EditPotModal
             initialValues={{
-              id: modalData?.pot?.id || 0,
-              name: modalData?.pot?.name || '',
-              target: modalData?.pot?.target || 0,
-              theme: modalData?.pot?.theme || 'green',
+              id: modalState.pot.id,
+              name: modalState.pot.name,
+              target: modalState.pot.target,
+              theme: modalState.pot.theme,
             }}
             onSubmit={handleEditPot}
           />
         )
+
       case 'pot-delete':
         return (
           <DeletePotModal
-            potName={modalData?.pot?.name || ''}
+            potName={modalState.pot.name}
             onDelete={handleDeletePot}
             onClose={closeModal}
           />
         )
+
       case 'pot-add-money':
         return (
           <AddToPotModal
             pot={{
-              id: modalData?.pot?.id || 0,
-              name: modalData?.pot?.name || '',
-              target: modalData?.pot?.target || 0,
-              total: modalData?.pot?.total || 0,
-              theme: modalData?.pot?.theme || 'green',
+              id: modalState.pot.id,
+              name: modalState.pot.name,
+              target: modalState.pot.target,
+              total: modalState.pot.total,
+              theme: modalState.pot.theme,
             }}
             onAddMoney={handleAddMoneyToPot}
           />
         )
+
       case 'pot-withdraw-money':
         return (
           <WithdrawFromPotModal
             pot={{
-              id: modalData?.pot?.id || 0,
-              name: modalData?.pot?.name || '',
-              target: modalData?.pot?.target || 0,
-              total: modalData?.pot?.total || 0,
-              theme: modalData?.pot?.theme || 'green',
+              id: modalState.pot.id,
+              name: modalState.pot.name,
+              target: modalState.pot.target,
+              total: modalState.pot.total,
+              theme: modalState.pot.theme,
             }}
             onWithdrawMoney={handleWithdrawMoneyFromPot}
           />
         )
+      //#endregion
+
+      //#region transaction modals
+      case 'transaction-add':
+        return <AddTransactionModal onSubmit={handleAddTransaction} />
+
+      case 'transaction-edit':
+        return (
+          <EditTransactionModal
+            initialValues={{
+              id: modalState.transaction.id,
+              name: modalState.transaction.name,
+              category: modalState.transaction.category,
+              transaction_date: modalState.transaction.transaction_date,
+              transaction_type: modalState.transaction.transaction_type,
+              amount: modalState.transaction.amount,
+              recurring: modalState.transaction.recurring,
+            }}
+            onSubmit={handleUpdateTransaction}
+          />
+        )
+
+      case 'transaction-delete':
+        return (
+          <DeleteTransactionModal
+            transactionName={modalState.transaction.name}
+            onDelete={handleDeleteTransaction}
+            onClose={closeModal}
+          />
+        )
+      //#endregion
+
+      //#region auth modals
+      case 'logout':
+        return <LogoutModal />
+      //#endregion
+
       default:
         return null
     }
@@ -174,7 +271,7 @@ export const ModalContainer = () => {
   return (
     <Overlays>
       <AnimatePresence>
-        {modalType && (
+        {modalState && (
           <motion.div
             className="fixed inset-0 z-50 bg-black/50 px-4"
             initial={{ opacity: 0 }}

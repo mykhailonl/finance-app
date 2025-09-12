@@ -113,7 +113,7 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
     if (paramName !== 'page') {
       newSearchParams.set('page', '1')
     }
-    
+
     if (
       paramName === 'query' &&
       (!newValue || (newValue as string).trim() === '')

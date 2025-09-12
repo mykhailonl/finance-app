@@ -1,8 +1,14 @@
 import type { NavItems } from '~/types/IconType'
 
-// TODO type hrefs too
+export type MainPageType =
+  | '/'
+  | '/transactions'
+  | '/budgets'
+  | '/pots'
+  | '/recurring'
+
 export interface NavLink {
-  href: string
+  href: MainPageType
   iconName: NavItems
 }
 

@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { useTransactions } from '~/hooks/useTransactions'
 import type { FilterOption, SortOption } from '~/types/DropdownType'
 import { filterByQuery } from '~/utils/filterByQuery'
+import { paginate } from '~/utils/paginate'
 import { sortTransactions } from '~/utils/sortTransactions'
 
 type PaginationParams = {
@@ -12,12 +13,11 @@ type PaginationParams = {
   query: string
 }
 
-// todo finish Dropdown transformation, new Budget modals
 export const useTransactionFilters = ({
-  page,
-  sortBy,
-  filterBy,
-  query,
+  page = 1,
+  sortBy = 'latest',
+  filterBy = 'all',
+  query = '',
 }: PaginationParams) => {
   const { data: allTransactions } = useTransactions()
 
@@ -33,14 +33,15 @@ export const useTransactionFilters = ({
     }
 
     const sorted = sortTransactions(filtered, sortBy)
-
-    const startIndex = (page - 1) * 10
-    const endIndex = page * 10
+    const paginationResult = paginate(sorted, page, 10)
 
     return {
-      transactions: sorted.slice(startIndex, endIndex),
-      totalPages: Math.ceil(sorted.length / 10),
-      totalCount: sorted.length,
+      transactions: paginationResult.items,
+      totalPages: paginationResult.totalPages,
+      totalCount: paginationResult.totalCount,
+      currentPage: paginationResult.currentPage,
+      hasNext: paginationResult.hasNext,
+      hasPrev: paginationResult.hasPrev,
       allFiltered: sorted,
     }
   }, [allTransactions, page, sortBy, filterBy, query])

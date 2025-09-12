@@ -1,22 +1,20 @@
 import cn from 'classnames'
 
-import { Avatar } from '~/components/Avatar'
+import { TransactionAvatar } from '~/components/TransactionAvatar'
 import type { Transaction } from '~/types'
 import { iconComponents } from '~/types/IconType'
-import type { TransactionStatus } from '~/types/TransactionType'
+import type { TransactionStatus } from '~/types/TransactionTypes'
 import { extractTransactionDay } from '~/utils/extractTransactionDay'
 import { formatAmount } from '~/utils/formatAmount'
 import { getDaySuffix } from '~/utils/getDaySuffix'
 
-type RecurringTransactionProps = {
-  transaction: Transaction
-  status: TransactionStatus
-}
-
 export const RecurringTransaction = ({
   transaction,
   status,
-}: RecurringTransactionProps) => {
+}: {
+  transaction: Transaction
+  status: TransactionStatus
+}) => {
   const Icon = status !== 'upcoming' && iconComponents[status]
   const formattedAmount = formatAmount(transaction.amount, true)
   const transactionDay = extractTransactionDay(transaction)
@@ -25,7 +23,7 @@ export const RecurringTransaction = ({
   return (
     <div className="flex flex-col gap-2 md:grid grid-cols-[1fr_120px_100px] md:items-center md:gap-8 lg:px-4">
       <div className="flex gap-4 items-center">
-        <Avatar src={transaction.avatar} alt={transaction.name} />
+        <TransactionAvatar transaction={transaction} />
 
         <h4 className="text-preset-4-bold text-grey-900">{transaction.name}</h4>
       </div>

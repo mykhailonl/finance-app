@@ -5,11 +5,13 @@ import {
   useState,
 } from 'react'
 
-import type {
-  ModalContextType,
-  ModalData,
-  ModalTypes,
-} from '~/types/ModalTypes'
+import type { ModalState } from '~/types/ModalTypes'
+
+export interface ModalContextType {
+  modalState: ModalState
+  openModal: (state: ModalState) => void
+  closeModal: () => void
+}
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ModalContext = createContext<ModalContextType | undefined>(
@@ -17,32 +19,21 @@ export const ModalContext = createContext<ModalContextType | undefined>(
 )
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
-  const [modalType, setModalType] = useState<ModalTypes | null>(null)
-  const [modalData, setModalData] = useState<ModalData | null>(null)
+  const [modalState, setModalState] = useState<ModalState>(null)
 
-  const openModal = useCallback((type: ModalTypes, data?: ModalData) => {
-    if (data) {
-      setModalData(data)
-    }
-
-    setModalType(type)
-
+  const openModal = useCallback((state: ModalState) => {
+    setModalState(state)
     document.body.style.overflow = 'hidden'
   }, [])
 
   const closeModal = useCallback(() => {
-    setModalType(null)
-    setModalData(null)
-
+    setModalState(null)
     document.body.style.overflow = ''
   }, [])
 
-  const value = {
-    modalType,
-    modalData,
-    openModal,
-    closeModal,
-  }
-
-  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+  return (
+    <ModalContext.Provider value={{ modalState, openModal, closeModal }}>
+      {children}
+    </ModalContext.Provider>
+  )
 }

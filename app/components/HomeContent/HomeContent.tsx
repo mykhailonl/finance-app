@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { WidgetBudgets } from '~/components/WidgetBudgets'
 import { WidgetPots } from '~/components/WidgetPots'
 import { WidgetRecurring } from '~/components/WidgetRecurring'
