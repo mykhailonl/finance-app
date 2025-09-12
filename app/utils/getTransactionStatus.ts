@@ -1,20 +1,20 @@
 import type { Transaction } from '~/types'
+import type { TransactionStatus } from '~/types/TransactionTypes'
 import { extractTransactionDay } from '~/utils/extractTransactionDay'
 
 export const getTransactionStatus = (
   transaction: Transaction,
   currentDay: number
-) => {
-  let status = 'upcoming'
+): TransactionStatus => {
   const dayToBePaid = extractTransactionDay(transaction)
 
   if (dayToBePaid <= currentDay) {
-    status = 'paid'
+    return 'paid'
   }
 
   if (dayToBePaid > currentDay && dayToBePaid <= currentDay + 5) {
-    status = 'due'
+    return 'due'
   }
 
-  return status
+  return 'upcoming'
 }

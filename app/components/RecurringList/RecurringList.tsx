@@ -3,7 +3,6 @@ import { Fragment } from 'react'
 import { Divider } from '~/components/Divider'
 import { RecurringTransaction } from '~/components/RecurringTransaction'
 import type { Transaction } from '~/types'
-import type { TransactionStatus } from '~/types/TransactionTypes'
 import { getTransactionStatus } from '~/utils/getTransactionStatus'
 
 export const RecurringList = ({
@@ -31,7 +30,7 @@ export const RecurringList = ({
             <Fragment key={tr.transaction_date}>
               <RecurringTransaction
                 transaction={tr}
-                status={transactionStatus as TransactionStatus}
+                status={transactionStatus}
               />
 
               {index < transactions.length - 1 && <Divider />}
