@@ -1,4 +1,3 @@
-import { id } from '@rolldown/pluginutils'
 import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
@@ -25,16 +24,11 @@ export const EditTransactionModal = ({
   onSubmit,
   initialValues,
 }: EditTransactionModalProps) => {
-  const { openModal, modalState } = useModal()
+  const { openModal } = useModal()
   const { dateISO, timeISO } = parseTransactionDateTime(
     initialValues.transaction_date
   )
 
-  /*
-   * todo
-   *  implement delete modal, maybe secondary button inside EditModal, which will lead to deleteModal,asking if you really wanna delete transaction and
-   *  that action is irreversible
-   * */
   const { values, setFieldValue, errors, validateField, validateAll } = useForm(
     {
       initialValues: {
@@ -195,22 +189,24 @@ export const EditTransactionModal = ({
           onClick={() => setFieldValue('recurring', !values.recurring)}
         />
 
-        <Button type="submit" variant="primary" styles="p-4">
-          Save Changes
-        </Button>
+        <div className="flex gap-5">
+          <Button type="submit" variant="primary" styles="p-4 grow">
+            Save Changes
+          </Button>
 
-        <Button
-          variant="secondary"
-          styles="p-4"
-          onClick={() =>
-            openModal({
-              type: 'transaction-delete',
-              transaction: { id: initialValues.id, name: initialValues.name },
-            })
-          }
-        >
-          Delete Transaction
-        </Button>
+          <Button
+            variant="danger"
+            styles="p-4 grow"
+            onClick={() =>
+              openModal({
+                type: 'transaction-delete',
+                transaction: { id: initialValues.id, name: initialValues.name },
+              })
+            }
+          >
+            Delete Transaction
+          </Button>
+        </div>
       </form>
     </SectionWrapper>
   )

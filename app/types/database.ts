@@ -85,6 +85,7 @@ export type Database = {
           created_at: string
           id: number
           name: string
+          pot_id: number | null
           recurring: boolean
           transaction_date: string
           transaction_type: Database['public']['Enums']['transaction_type']
@@ -97,6 +98,7 @@ export type Database = {
           created_at?: string
           id?: number
           name: string
+          pot_id?: number | null
           recurring?: boolean
           transaction_date: string
           transaction_type: Database['public']['Enums']['transaction_type']
@@ -109,12 +111,21 @@ export type Database = {
           created_at?: string
           id?: number
           name?: string
+          pot_id?: number | null
           recurring?: boolean
           transaction_date?: string
           transaction_type?: Database['public']['Enums']['transaction_type']
           user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'transactions_pot_id_fkey'
+            columns: ['pot_id']
+            isOneToOne: false
+            referencedRelation: 'pots'
+            referencedColumns: ['id']
+          },
+        ]
       }
       users: {
         Row: {
@@ -204,7 +215,8 @@ export type Database = {
         | 'Other'
         | 'Salary'
         | 'Sales'
-      transaction_type: 'income' | 'expense'
+        | 'Transfer'
+      transaction_type: 'income' | 'expense' | 'transfer'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -382,8 +394,9 @@ export const Constants = {
         'Other',
         'Salary',
         'Sales',
+        'Transfer',
       ],
-      transaction_type: ['income', 'expense'],
+      transaction_type: ['income', 'expense', 'transfer'],
     },
   },
 } as const

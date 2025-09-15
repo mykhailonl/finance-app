@@ -12,14 +12,15 @@ export const DeletePotModal = ({
   return (
     <SectionWrapper styles="min-w-[335px] md:w-[560px]">
       <ModalTitle title={`Delete '${potName}'?`} />
+
       <ModalDescription text="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
 
-      <div className="flex flex-col gap-5">
-        <Button variant="danger" onClick={onDelete} styles="p-4">
+      <div className="flex gap-5">
+        <Button variant="danger" onClick={onDelete} styles="p-4 grow">
           Yes, Confirm Deletion
         </Button>
 
-        <Button variant="tertiary" onClick={onClose} styles="self-center">
+        <Button variant="secondary" onClick={onClose} styles="p-4 grow">
           No, Go Back
         </Button>
       </div>

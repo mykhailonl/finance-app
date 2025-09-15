@@ -13,6 +13,7 @@ import {
   EditPotModal,
   EditTransactionModal,
   LogoutModal,
+  RestrictionTransactionModal,
   WithdrawFromPotModal,
 } from '~/components/modals'
 import { useBudgetMutations } from '~/hooks/useBudgetMutations'
@@ -92,6 +93,7 @@ export const ModalContainer = () => {
           id: modalState.pot.id,
           amount,
           currentTotal: modalState.pot.total,
+          potName: modalState.pot.name,
         },
         { onSuccess: () => closeModal() }
       )
@@ -105,6 +107,7 @@ export const ModalContainer = () => {
           id: modalState.pot.id,
           amount,
           currentTotal: modalState.pot.total,
+          potName: modalState.pot.name,
         },
         { onSuccess: () => closeModal() }
       )
@@ -256,6 +259,9 @@ export const ModalContainer = () => {
             onClose={closeModal}
           />
         )
+
+      case 'transaction-restriction':
+        return <RestrictionTransactionModal onClose={closeModal} />
       //#endregion
 
       //#region auth modals

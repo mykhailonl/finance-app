@@ -6,12 +6,20 @@ import type { Transaction as TransactionType } from '~/types'
 import { formatAmountToString } from '~/utils/formatAmountToString'
 import { formatDate } from '~/utils/formatDate'
 
-type Props = {
+export const Transaction = ({
+  transaction,
+}: {
   transaction: TransactionType
-}
-
-export const Transaction = ({ transaction }: Props) => {
+}) => {
   const { openModal } = useModal()
+
+  const handleTransactionClick = () => {
+    if (transaction.transaction_type === 'transfer') {
+      openModal({ type: 'transaction-restriction' })
+    } else {
+      openModal({ type: 'transaction-edit', transaction })
+    }
+  }
 
   const formattedAmount = formatAmountToString(transaction.amount)
   const formattedDate = formatDate(transaction.transaction_date)
@@ -19,7 +27,7 @@ export const Transaction = ({ transaction }: Props) => {
   return (
     <div
       className="flex items-center gap-3 md:grid md:grid-cols-[1fr_80px_88px_88px] lg:grid-cols-[1fr_120px_120px_200px] md:gap-8 md:px-0 lg:px-4"
-      onClick={() => openModal({ type: 'transaction-edit', transaction })}
+      onClick={handleTransactionClick}
     >
       <div className="flex items-center gap-3 md:gap-4 flex-1 md:flex-initial">
         <TransactionAvatar transaction={transaction} />

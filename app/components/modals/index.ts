@@ -14,6 +14,7 @@ export { WithdrawFromPotModal } from './WithdrawFromPotModal'
 export { AddTransactionModal } from './AddTransactionModal'
 export { DeleteTransactionModal } from './DeleteTransactionModal'
 export { EditTransactionModal } from './EditTransactionModal'
+export { RestrictionTransactionModal } from './RestrictionTransactionModal'
 
 // Auth modals
 export { LoginModal } from './LoginModal'

@@ -3,7 +3,10 @@ import supabase from '~/utils/supabase'
 
 export const transactionService = {
   async getAll(): Promise<Transaction[]> {
-    const { data, error } = await supabase.from('transactions').select('*')
+    const { data, error } = await supabase
+      .from('transactions')
+      .select('*')
+      .order('transaction_date', { ascending: false })
 
     if (error) {
       throw error
@@ -22,6 +25,7 @@ export const transactionService = {
     if (error) {
       throw error
     }
+
     return data
   },
 
@@ -36,6 +40,7 @@ export const transactionService = {
     if (error) {
       throw error
     }
+
     return data
   },
 

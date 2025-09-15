@@ -11,6 +11,9 @@ export type TransactionModalTypes =
       type: 'transaction-delete'
       transaction: Pick<Transaction, 'id' | 'name'>
     }
+  | {
+      type: 'transaction-restriction'
+    }
 
 export type AddTransactionModalProps = {
   onSubmit: (data: TransactionInsert) => void
@@ -33,5 +36,9 @@ export type EditTransactionModalProps = {
 export type DeleteTransactionModalProps = {
   transactionName: string
   onDelete: () => void
+  onClose: () => void
+}
+
+export type RestrictionTransactionModalProps = {
   onClose: () => void
 }

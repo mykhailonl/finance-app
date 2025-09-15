@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { potService } from '~/services/potService'
+import { transactionService } from '~/services/transactionService'
 import type { PotUpdate } from '~/types'
 
-// todo optimistic updates? invalidate user balance?
+// todo optimistic updates?
 
 export function usePotMutations() {
   const queryClient = useQueryClient()
@@ -46,19 +47,36 @@ export function usePotMutations() {
   })
 
   const addMoneyToPot = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       id,
       amount,
       currentTotal,
+      potName,
     }: {
       id: number
       amount: number
       currentTotal: number
-    }) => potService.update(id, { total: currentTotal + amount }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['pots'] })
-      // TODO: Возможно нужно инвалидировать баланс пользователя
-      // queryClient.invalidateQueries({ queryKey: ['user-balance-function'] })
+      potName: string
+    }) => {
+      await transactionService.create({
+        name: `Transfer to ${potName}`,
+        amount: -amount,
+        category: 'Transfer',
+        transaction_type: 'transfer',
+        transaction_date: new Date().toISOString(),
+        pot_id: id,
+      })
+
+      await potService.update(id, { total: currentTotal + amount })
+    },
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['pots'] }),
+        queryClient.invalidateQueries({
+          queryKey: ['user-balance-function'],
+        }),
+        queryClient.invalidateQueries({ queryKey: ['transactions'] }),
+      ])
       // TODO: toast.success('Money added to pot!')
     },
     onError: (error) => {
@@ -68,19 +86,36 @@ export function usePotMutations() {
   })
 
   const withdrawMoneyFromPot = useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       id,
       amount,
       currentTotal,
+      potName,
     }: {
       id: number
       amount: number
       currentTotal: number
-    }) => potService.update(id, { total: currentTotal - amount }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['pots'] })
-      // TODO: Возможно нужно инвалидировать баланс пользователя
-      // queryClient.invalidateQueries({ queryKey: ['user-balance-function'] })
+      potName: string
+    }) => {
+      await transactionService.create({
+        name: `Withdraw from ${potName}`,
+        amount: amount,
+        category: 'Transfer',
+        transaction_type: 'transfer',
+        transaction_date: new Date().toISOString(),
+        pot_id: id,
+      })
+
+      await potService.update(id, { total: currentTotal - amount })
+    },
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['pots'] }),
+        queryClient.invalidateQueries({
+          queryKey: ['user-balance-function'],
+        }),
+        queryClient.invalidateQueries({ queryKey: ['transactions'] }),
+      ])
       // TODO: toast.success('Money withdrawn from pot!')
     },
     onError: (error) => {

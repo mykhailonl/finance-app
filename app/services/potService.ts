@@ -5,29 +5,20 @@ export const potService = {
   async getAll(): Promise<Pot[]> {
     const { data, error } = await supabase.from('pots').select('*')
 
-    if (error) {
-      throw error
-    }
+    const sorted = data
+      ? data.sort((a, b) => {
+          const percentA = a.target / a.total
+          const percentB = b.target / b.total
 
-    return data || []
-  },
-
-  async getById(id: number): Promise<Pot> {
-    const { data, error } = await supabase
-      .from('pots')
-      .select('*')
-      .eq('id', id)
-      .single()
+          return percentA - percentB
+        })
+      : []
 
     if (error) {
       throw error
     }
 
-    if (!data) {
-      throw new Error(`Pot with id ${id} not found`)
-    }
-
-    return data
+    return sorted
   },
 
   async create(pot: PotInsert): Promise<Pot> {
@@ -55,6 +46,7 @@ export const potService = {
     if (error) {
       throw error
     }
+
     return data
   },
 

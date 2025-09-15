@@ -13,6 +13,7 @@ import {
   SparkleIcon,
   StackIcon,
   StudentIcon,
+  SwapIcon,
   TrendUpIcon,
   WineIcon,
 } from '@phosphor-icons/react'
@@ -75,9 +76,6 @@ export const INCOME_CATEGORY_OPTIONS: DropdownOptions<IncomeCategory> = [
   { value: 'Sales', label: 'Sales' },
 ]
 
-// TODO continue rewriting frontend to use transaction_type, check budgets, use TransactionType from index.ts,
-//  check DropdownOptionType if there should be that option etc
-
 export type DropdownOptionType =
   | SortOption
   | FilterOption
@@ -118,6 +116,7 @@ export const FILTER_OPTIONS: DropdownOptions<FilterOption> = [
 export const TRANSACTION_TYPE_OPTIONS: DropdownOptions<TransactionType> = [
   { value: 'expense', label: 'Expense' },
   { value: 'income', label: 'Income' },
+  { value: 'transfer', label: 'Transfer' },
 ]
 
 export const SORT_OPTIONS: DropdownOptions<SortOption> = [
@@ -189,6 +188,10 @@ export const CATEGORY_ICON_OPTIONS: IconOptions<TransactionCategory> = [
   {
     name: 'Sales',
     options: { icon: TrendUpIcon, bg: '#597C7C' },
+  },
+  {
+    name: 'Transfer',
+    options: { icon: SwapIcon, bg: '#00BCFF' },
   },
 ]
 
