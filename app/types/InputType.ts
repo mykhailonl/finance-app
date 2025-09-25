@@ -9,6 +9,7 @@ export interface InputProps<T> {
     value: T
     onChange: (value: T) => void
     onBlur?: () => void
+    maxLength?: number
     inputStyles?: string
   }
   helperText: {
@@ -16,6 +17,7 @@ export interface InputProps<T> {
     helperText?: string
     helperStyles?: string
   }
+  isNumberInput?: boolean
   error?: string | null
   showSearchIcon?: boolean
   showPassIcon?: boolean

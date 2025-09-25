@@ -1,7 +1,7 @@
 export interface PaginationResult<T> {
   items: T[]
   totalPages: number
-  totalCount: number
+  totalFilteredCount: number
   currentPage: number
   hasNext: boolean
   hasPrev: boolean
@@ -22,7 +22,7 @@ export const paginate = <T>(
   return {
     items: items.slice(start, end),
     totalPages,
-    totalCount,
+    totalFilteredCount: totalCount,
     currentPage,
     hasNext: currentPage < totalPages,
     hasPrev: currentPage > 1,

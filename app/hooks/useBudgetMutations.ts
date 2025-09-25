@@ -8,38 +8,26 @@ export function useBudgetMutations() {
 
   const createBudget = useMutation({
     mutationFn: budgetService.create,
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
-      // toast.success('Budget created!')
-    },
-    onError: (error) => {
-      console.error('Failed to create budget:', error)
-      // toast.error('Failed to create budget')
     },
   })
 
   const updateBudget = useMutation({
     mutationFn: ({ id, updates }: { id: number; updates: BudgetUpdate }) =>
       budgetService.update(id, updates),
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
-      // toast.success('Budget updated!')
-    },
-    onError: (error) => {
-      console.error('Failed to update budget:', error)
-      // toast.error('Failed to update budget')
     },
   })
 
   const deleteBudget = useMutation({
     mutationFn: budgetService.delete,
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
-      // toast.success('Budget deleted!')
-    },
-    onError: (error) => {
-      console.error('Failed to delete budget:', error)
-      // toast.error('Failed to delete budget')
     },
   })
 

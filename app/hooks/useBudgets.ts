@@ -12,7 +12,7 @@ import type {
 
 interface UseBudgetsReturn {
   budgets: Budget[]
-  budgetCategories: TransactionCategory[]
+  usedCategories: TransactionCategory[]
   spentWithinBudgets: number
   spentByCategory: Record<string, number>
   totalLimit: number
@@ -68,7 +68,7 @@ export default function useBudgets() {
 
       const latestTransactionsByCategory = budgetCategories.reduce(
         (acc, category) => {
-          acc[category] = transactionsByCategory[category].slice(0, 3) // убрали ?.
+          acc[category] = transactionsByCategory[category].slice(0, 3)
           return acc
         },
         {} as Record<string, Transaction[]>
@@ -76,7 +76,7 @@ export default function useBudgets() {
 
       return {
         budgets,
-        budgetCategories,
+        usedCategories: budgetCategories,
         spentWithinBudgets,
         spentByCategory,
         totalLimit: budgets.reduce((sum, budget) => sum + budget.maximum, 0),

@@ -6,8 +6,7 @@ import type { StrictUserBalance } from '~/types'
 export const useBalance = () => {
   return useSuspenseQuery<StrictUserBalance>({
     queryKey: ['user-balance-function'],
-    queryFn: async () => {
-      return await userBalanceService.getDetails()
-    },
+    staleTime: 5 * 60 * 1000,
+    queryFn: userBalanceService.getDetails,
   })
 }

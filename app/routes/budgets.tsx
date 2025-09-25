@@ -3,6 +3,7 @@ import { BudgetHero } from '~/components/BudgetHero'
 import { BudgetList } from '~/components/BudgetList'
 import { BudgetsHeader } from '~/components/BudgetsHeader'
 import { Button } from '~/components/Button'
+import { NoContentFound } from '~/components/NoContentFound'
 import { PageWrapper } from '~/components/PageWrapper'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import useBudgets from '~/hooks/useBudgets'
@@ -21,11 +22,7 @@ export default function Budgets() {
       <BudgetsHeader />
 
       {noBudgetsYet ? (
-        <div className="flex flex-col gap-6 justify-center items-center grow">
-          <p className="text-preset-4 text-grey-500 self-center">
-            Set spending limits and monitor your progress with budgets
-          </p>
-
+        <NoContentFound text="Set spending limits and monitor your progress with budgets.">
           <Button
             variant="primary"
             onClick={() => openModal({ type: 'budget-add' })}
@@ -33,7 +30,7 @@ export default function Budgets() {
           >
             Add Budget
           </Button>
-        </div>
+        </NoContentFound>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row">
           <SectionWrapper styles="gap-8 md:flex-row lg:flex-col lg:w-[428px] md:items-center lg:max-h-fit">

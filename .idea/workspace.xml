@@ -4,21 +4,91 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="added page title and favicon to root.tsx">
+    <list default="true" id="54a11a09-86fd-456c-8629-92b65f67e91b" name="Changes" comment="feat: &#10;&#10;- fixed CategoryIcon.tsx not hiding properly on mobile view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/AvatarDropdown/AvatarDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/AvatarDropdown/AvatarDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/BudgetSection/BudgetSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Button/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/CategoryIcon/CategoryIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/CategoryIcon/CategoryIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Dropdown/Dropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/HomeContent/HomeContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Input/Input.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/ModalContainer/ModalContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ModalContainer/ModalContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/ModalTitle/ModalTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ModalTitle/ModalTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/RecurringList/RecurringList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/RecurringList/RecurringList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/RecurringTransaction/RecurringTransaction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/RecurringTransaction/RecurringTransaction.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Transaction/Transaction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Transaction/Transaction.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteBudgetModal/DeleteBudgetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/modals/DeleteBudgetModal/DeleteBudgetModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/modals/DeletePotModal/DeletePotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/modals/DeletePotModal/DeletePotModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteTransactionModal/DeleteTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/modals/DeleteTransactionModal/DeleteTransactionModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/modals/EditTransactionModal/EditTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/modals/EditTransactionModal/EditTransactionModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/modals/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/modals/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/TransactionList/TransactionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionList/TransactionList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/TransactionsContent/TransactionsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TransactionsContent/TransactionsContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetBudgets/WidgetBudgets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetPots/WidgetPots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetPots/WidgetPots.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetRecurring/WidgetRecurring.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetRecurring/WidgetRecurring.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetTransaction/WidgetTransaction.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/WidgetTransactions/WidgetTransactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/WidgetTransactions/WidgetTransactions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddBudgetModal/AddBudgetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddBudgetModal/AddBudgetModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddBudgetModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddBudgetModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddPotModal/AddPotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddPotModal/AddPotModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddPotModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddPotModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddToPotModal/AddToPotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddToPotModal/AddToPotModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddToPotModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddToPotModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddTransactionModal/AddTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddTransactionModal/AddTransactionModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/AddTransactionModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/AddTransactionModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteBudgetModal/DeleteBudgetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeleteBudgetModal/DeleteBudgetModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteBudgetModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeleteBudgetModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeletePotModal/DeletePotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeletePotModal/DeletePotModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeletePotModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeletePotModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteTransactionModal/DeleteTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeleteTransactionModal/DeleteTransactionModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/DeleteTransactionModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/DeleteTransactionModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditBudgetModal/EditBudgetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditBudgetModal/EditBudgetModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditBudgetModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditBudgetModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditPotModal/EditPotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditPotModal/EditPotModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditPotModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditPotModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditTransactionModal/EditTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditTransactionModal/EditTransactionModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/EditTransactionModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/EditTransactionModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/LoginModal/LoginModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/LoginModal/LoginModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/LoginModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/LoginModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/LogoutModal/LogoutModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/LogoutModal/LogoutModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/LogoutModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/LogoutModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/RestrictionTransactionModal/RestrictionTransactionModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/RestrictionTransactionModal/RestrictionTransactionModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/RestrictionTransactionModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/RestrictionTransactionModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/SignupModal/SignupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/SignupModal/SignupModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/SignupModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/SignupModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/WithdrawFromPotModal/WithdrawFromPotModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/WithdrawFromPotModal/WithdrawFromPotModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/WithdrawFromPotModal/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/WithdrawFromPotModal/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/modals/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/modals/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useBalance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useBalance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useBudgetMutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useBudgetMutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useBudgets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useBudgets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useForm.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/hooks/usePotMutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/usePotMutations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/potService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/potService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/transactionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/transactionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/usePots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/usePots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useRecurringTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useRecurringTransactions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useTransactionFilters.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useTransactionFilters.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useTransactionMutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useTransactionMutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hooks/useTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/hooks/useTransactions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/budgets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/budgets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/pots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/pots.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/recurring.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/recurring.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/transactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/transactions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/authService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/authService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/types/DropdownType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/DropdownType.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/TransactionModalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/TransactionModalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/types/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/types/InputType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/types/InputType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/getColorTextClass.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/getDisplayValue.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/isColorOption.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/paginate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/paginate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validateEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/auth/validateEmail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validatePassword.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/auth/validatePassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validateTransactionAmount.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validateTransactionCategory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/transactions/validateTransactionCategory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validateTransactionName.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/transactions/validateTransactionName.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/validateUsername.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/auth/validateUsername.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +118,15 @@
     &quot;accountId&quot;: &quot;e019cb65-0e80-4bcb-b738-8fcdde6b616b&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/notesbook/1.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/notesbook/7.md" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -65,54 +139,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/pot-operations&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/misha/WebstormProjects/finance-app/public&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/misha/WebstormProjects/finance-app/node_modules/prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/misha/WebstormProjects/finance-app/node_modules/typescript/lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "feature/validators",
+    "last_opened_file_path": "/Users/misha/WebstormProjects/finance-app/public",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/misha/WebstormProjects/finance-app/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/misha/WebstormProjects/finance-app/node_modules/typescript/lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Markdown&quot;,
-      &quot;GitIgnore&quot;
+  "keyToStringList": {
+    "beansoft.intellij.ide.scratch.LRUPopupBuilderEx$3/New Note": [
+      "md.id"
+    ],
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Markdown",
+      "GitIgnore"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/validators/transactions" />
+      <recent name="$PROJECT_DIR$/app/validators/auth" />
+      <recent name="$PROJECT_DIR$/app/validators/pots" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/validators" />
-      <recent name="$PROJECT_DIR$/app/components/modals" />
-      <recent name="$PROJECT_DIR$/app/routes" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
       </set>
     </attachedChunks>
   </component>
@@ -150,6 +229,9 @@
       <workItem from="1757597490967" duration="8615000" />
       <workItem from="1757669340905" duration="2994000" />
       <workItem from="1757926423075" duration="11086000" />
+      <workItem from="1758012429775" duration="17760000" />
+      <workItem from="1758106229787" duration="10032000" />
+      <workItem from="1758188122256" duration="45064000" />
     </task>
     <task id="LOCAL-00001" summary="feature/HomePage&#10;&#10; Move assets to app directory and add homepage features&#10;&#10;  Relocate fonts, images, and icons from public/assets to app/assets.&#10;  Add homepage components including Summary, HomeContent, and PageTitle.">
       <option name="closed" value="true" />

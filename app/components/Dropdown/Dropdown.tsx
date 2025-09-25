@@ -1,24 +1,24 @@
 import cn from 'classnames'
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 
 import { Divider } from '~/components/Divider'
+import { THEME_TO_TW_TEXT } from '~/constants/theme'
 import type { ThemeColor } from '~/types'
 import type { DropdownOptionType, DropdownProps } from '~/types/DropdownType'
 import { iconComponents } from '~/types/IconType'
-import { getColorTextClass } from '~/utils/getColorTextClass'
-import { getDisplayValue } from '~/utils/getDisplayValue'
-import { isColorOption } from '~/utils/isColorOption'
 
 export const Dropdown = <T extends DropdownOptionType>({
   label,
   value,
   onChange,
+  onBlur,
+  error,
   options,
   styles,
   showColorTag,
   showCaret,
   mobileView,
-  usedColors,
+  usedValues,
 }: DropdownProps<T>) => {
   //#region states
   const [isOpen, setIsOpen] = useState(false)
@@ -50,8 +50,10 @@ export const Dropdown = <T extends DropdownOptionType>({
   const isSortDropdown = label.labelText === 'Sort By'
   const isFilterDropdown = label.labelText === 'Category'
 
+  const selectedLabel = options.find((opt) => opt.value === value)
+
   const currentColorClass =
-    showColorTag && isColorOption(value) ? getColorTextClass(value) : 'text-red'
+    showColorTag && THEME_TO_TW_TEXT[value as ThemeColor]
 
   return (
     <div className={cn('flex gap-1 items-center self-stretch', styles)}>
@@ -75,7 +77,6 @@ export const Dropdown = <T extends DropdownOptionType>({
             'md:hidden cursor-custom',
             mobileView ? 'flex' : 'hidden'
           )}
-          // className={cn('md:hidden cursor-custom', mobileView && 'flex')}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isSortDropdown && <SortIcon />}
@@ -91,19 +92,20 @@ export const Dropdown = <T extends DropdownOptionType>({
             isSortDropdown ? 'min-w-[114px]' : 'min-w-[177px]'
           )}
           onClick={() => setIsOpen(!isOpen)}
+          onBlur={onBlur}
         >
           {showColorTag && (
             <TagIcon className={cn('w-4 h-4', currentColorClass)} />
           )}
 
           <p className="text-preset-4 text-grey-900 grow">
-            {getDisplayValue(value, options)}
+            {selectedLabel?.label}
           </p>
 
           {showCaret && <CaretIcon className="w-2 h-2" />}
         </div>
 
-        {/* options */}
+        {/*#region options */}
         {isOpen && (
           <div
             className={cn(
@@ -116,18 +118,16 @@ export const Dropdown = <T extends DropdownOptionType>({
               const isSelected = value === option.value
 
               const optionColorClass =
-                showColorTag && isColorOption(option.value)
-                  ? getColorTextClass(option.value)
-                  : 'text-red'
-              const colorAlreadyUsed =
-                usedColors && usedColors.includes(option.value as ThemeColor)
+                showColorTag && THEME_TO_TW_TEXT[option.value as ThemeColor]
+              const valueAlreadyUsed =
+                usedValues && usedValues.includes(option.value as T)
 
               return (
                 <Fragment key={option.value}>
                   <div
                     className={cn(
                       'flex gap-3 items-center',
-                      colorAlreadyUsed
+                      valueAlreadyUsed
                         ? 'cursor-not-allowed'
                         : 'cursor-custom hover:text-grey-900',
                       isSelected
@@ -135,12 +135,13 @@ export const Dropdown = <T extends DropdownOptionType>({
                         : 'text-preset-4 text-beige-500'
                     )}
                     onClick={(e) => {
-                      if (colorAlreadyUsed) {
+                      if (valueAlreadyUsed) {
                         return
                       }
 
                       e.stopPropagation()
                       onChange(option.value)
+                      onBlur?.()
                       setIsOpen(false)
                     }}
                   >
@@ -154,18 +155,22 @@ export const Dropdown = <T extends DropdownOptionType>({
                       <SelectedIcon className="w-4 h-4" />
                     )}
 
-                    {colorAlreadyUsed && !isSelected && (
+                    {valueAlreadyUsed && !isSelected && (
                       <p className="text-preset-5 text-grey-500">
                         Already used
                       </p>
                     )}
                   </div>
+
                   {index < options.length - 1 && <Divider styles="shrink-0" />}
                 </Fragment>
               )
             })}
           </div>
         )}
+        {/*#endregion*/}
+
+        {error && <p className="text-preset-5 text-red text-end">{error}</p>}
       </div>
     </div>
   )

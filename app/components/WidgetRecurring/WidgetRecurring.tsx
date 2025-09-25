@@ -1,3 +1,4 @@
+import { NoContentFound } from '~/components/NoContentFound'
 import { RecurringBillItem } from '~/components/RecurringBillItem'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
@@ -24,11 +25,7 @@ export const WidgetRecurring = () => {
       />
 
       {noTransactionsYet ? (
-        <div className="flex items-center justify-center">
-          <p className="text-preset-4 text-grey-500">
-            You haven&#39;t added any recurring transactions.
-          </p>
-        </div>
+        <NoContentFound text="You haven&#39;t added any recurring transactions." />
       ) : (
         <>
           <div className="flex flex-col gap-3">

@@ -1,4 +1,5 @@
 import { Button } from '~/components/Button'
+import { NoContentFound } from '~/components/NoContentFound'
 import { PageWrapper } from '~/components/PageWrapper'
 import { PotsHeader } from '~/components/PotsHeader'
 import { PotsList } from '~/components/PotsList'
@@ -18,11 +19,7 @@ export default function Pots() {
       <PotsHeader />
 
       {noPotsYet ? (
-        <div className="flex flex-col gap-6 justify-center items-center grow">
-          <p className="text-preset-4 text-grey-500 self-center">
-            Create your first pot to start saving!
-          </p>
-
+        <NoContentFound text="Create your first pot to start saving">
           <Button
             variant="primary"
             onClick={() => openModal({ type: 'pot-add' })}
@@ -30,7 +27,7 @@ export default function Pots() {
           >
             Add Pot
           </Button>
-        </div>
+        </NoContentFound>
       ) : (
         <PotsList pots={pots} />
       )}

@@ -205,9 +205,11 @@ export type DropdownProps<T extends DropdownOptionType> = {
   }
   value: T
   onChange: (value: T) => void
+  onBlur?: () => void
+  error?: string | null
   options: DropdownOptions<T>
   showColorTag?: boolean
   showCaret?: boolean
   mobileView?: boolean
-  usedColors?: ThemeColor[]
+  usedValues?: T[]
 }

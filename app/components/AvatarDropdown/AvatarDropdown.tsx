@@ -7,10 +7,6 @@ import { CategoryIcon } from '~/components/CategoryIcon'
 import type { TransactionCategory } from '~/types'
 import { CATEGORY_ICON_OPTIONS } from '~/types/DropdownType'
 
-// todo extend avatar_person with categories in case ifi would like to assign
-// todo different icon without changing a category
-// todo add description on hover, actual onChange
-
 type Props = {
   value: TransactionCategory //| PersonName
   onChange: (value: TransactionCategory) => void

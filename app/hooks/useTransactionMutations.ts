@@ -8,38 +8,26 @@ export function useTransactionMutations() {
 
   const createTransaction = useMutation({
     mutationFn: transactionService.create,
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
-      // toast.success('Transaction created!')
-    },
-    onError: (error) => {
-      console.error('Failed to create transaction:', error)
-      // toast.error('Failed to create transaction')
     },
   })
 
   const updateTransaction = useMutation({
     mutationFn: ({ id, updates }: { id: number; updates: TransactionUpdate }) =>
       transactionService.update(id, updates),
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
-      // TODO: toast.success('Transaction updated!')
-    },
-    onError: (error) => {
-      console.error('Failed to update transaction:', error)
-      // TODO: toast.error('Failed to update transaction')
     },
   })
 
   const deleteTransaction = useMutation({
     mutationFn: (id: number) => transactionService.delete(id),
+    networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
-      // TODO: toast.success('Transaction deleted!')
-    },
-    onError: (error) => {
-      console.error('Failed to delete transaction:', error)
-      // TODO: toast.error('Failed to delete transaction')
     },
   })
 

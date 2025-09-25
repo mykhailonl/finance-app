@@ -1,4 +1,5 @@
 import { InfoCard } from '~/components/InfoCard'
+import { NoContentFound } from '~/components/NoContentFound'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { SummaryCard } from '~/components/SummaryCard'
@@ -17,11 +18,7 @@ export const WidgetPots = () => {
       <SectionTitleBlock title="Pots" linkText="See Details" link="/pots" />
 
       {noPotsYet ? (
-        <div className="flex items-center justify-center">
-          <p className="text-preset-4 text-grey-500">
-            Create your first pot to start saving!
-          </p>
-        </div>
+        <NoContentFound text="Create your first pot to start saving" />
       ) : (
         <>
           <div className="flex flex-col gap-5 md:flex-row md:items-center">

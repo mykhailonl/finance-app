@@ -1,5 +1,5 @@
 import { AuthPageWrapper } from '~/components/AuthPageWrapper'
-import { SignupModal } from '~/components/modals'
+import { SignupModal } from '~/modals'
 
 export default function SignUp() {
   return (

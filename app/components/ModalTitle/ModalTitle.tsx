@@ -1,11 +1,7 @@
 import { useModal } from '~/hooks/useModal'
 import { iconComponents } from '~/types/IconType'
 
-type ModalTitleProps = {
-  title: string
-}
-
-export const ModalTitle = ({ title }: ModalTitleProps) => {
+export const ModalTitle = ({ title }: { title: string }) => {
   const { closeModal } = useModal()
   const IconClose = iconComponents['closeModal']
 

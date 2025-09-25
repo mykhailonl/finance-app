@@ -14,6 +14,7 @@ interface UseRecurringTransactionsReturn {
   transactions: {
     transactions: TransactionListType
     amount: number
+    totalFilteredCount: number
   }
   currentDay: number
   currentPage: number
@@ -116,6 +117,7 @@ export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
             (acc, tr) => acc + Math.abs(tr.amount),
             0
           ),
+          totalFilteredCount: paginationResult.items.length,
         },
         currentDay,
         currentPage: paginationResult.currentPage,

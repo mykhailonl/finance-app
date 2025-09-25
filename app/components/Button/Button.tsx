@@ -14,8 +14,6 @@ type ButtonProps = {
   form?: string
 }
 
-// todo hover for danger state?
-
 export const Button = ({
   variant,
   disabled = false,

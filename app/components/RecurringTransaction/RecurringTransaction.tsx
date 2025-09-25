@@ -23,7 +23,7 @@ export const RecurringTransaction = ({
   return (
     <div className="flex flex-col gap-2 md:grid grid-cols-[1fr_120px_100px] md:items-center md:gap-8 lg:px-4">
       <div className="flex gap-4 items-center">
-        <TransactionAvatar transaction={transaction} />
+        <TransactionAvatar transaction={transaction} styles="inline-flex" />
 
         <h4 className="text-preset-4-bold text-grey-900">{transaction.name}</h4>
       </div>

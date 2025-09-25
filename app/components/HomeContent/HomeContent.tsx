@@ -9,7 +9,7 @@ export const HomeContent = () => {
       <div className="flex flex-col gap-4 items-start self-stretch grow md:gap-6">
         <WidgetPots />
 
-        <WidgetTransactions />
+        <WidgetTransactions showCategory />
       </div>
 
       <div className="flex flex-col gap-4 items-start self-stretch md:gap-6">

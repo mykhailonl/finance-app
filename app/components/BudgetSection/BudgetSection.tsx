@@ -2,25 +2,20 @@ import { Fragment } from 'react'
 
 import { Divider } from '~/components/Divider'
 import { InfoCard } from '~/components/InfoCard'
+import { NoContentFound } from '~/components/NoContentFound'
 import { ProgressBar } from '~/components/ProgressBar'
 import { SectionHeader } from '~/components/SectionHeader'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { WidgetTransaction } from '~/components/WidgetTransaction'
-import type { Budget, Transaction } from '~/types'
+import type { BudgetSectionProps } from '~/types/BudgetTypes'
 import { formatAmount } from '~/utils/formatAmount'
-
-type Props = {
-  budget: Budget
-  transactions: Transaction[]
-  spentThisMonth: number
-}
 
 export const BudgetSection = ({
   budget,
   transactions,
   spentThisMonth,
-}: Props) => {
+}: BudgetSectionProps) => {
   const formattedMax = formatAmount(budget.maximum)
 
   const availableBudgetLeft =
@@ -54,9 +49,10 @@ export const BudgetSection = ({
         />
 
         {noTransactionsYet ? (
-          <p className="text-preset-4 text-grey-500 self-center">
-            No transactions for this budget yet
-          </p>
+          <NoContentFound
+            text="No transactions for this budget yet"
+            styles={{ containerStyles: 'py-4' }}
+          />
         ) : (
           <div className="flex flex-col gap-3">
             {transactions.map((transaction, index) => (

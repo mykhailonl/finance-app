@@ -38,7 +38,8 @@ export const useTransactionFilters = ({
     return {
       transactions: paginationResult.items,
       totalPages: paginationResult.totalPages,
-      totalCount: paginationResult.totalCount,
+      totalCount: allTransactions.length,
+      totalFilteredCount: paginationResult.totalFilteredCount,
       currentPage: paginationResult.currentPage,
       hasNext: paginationResult.hasNext,
       hasPrev: paginationResult.hasPrev,

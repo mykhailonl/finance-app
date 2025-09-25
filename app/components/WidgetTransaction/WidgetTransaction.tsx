@@ -9,32 +9,42 @@ type Props = {
   transaction: Transaction
   hideAvatarOnMobile?: boolean
   small?: boolean
+  showCategory?: boolean
 }
 
 export const WidgetTransaction = ({
   transaction,
   hideAvatarOnMobile = false,
   small = false,
+  showCategory = false,
 }: Props) => {
   const formattedAmount = formatAmountToString(transaction.amount)
   const formattedDate = formatDate(transaction.transaction_date)
 
   return (
-    <div className="flex items-center">
-      <div className="flex self-stretch gap-4 items-center grow">
+    <div className="flex items-center gap-3">
+      <div className="flex self-stretch gap-3 items-center grow">
         <TransactionAvatar
           transaction={transaction}
-          styles={hideAvatarOnMobile ? 'hidden md:flex' : ''}
+          styles={hideAvatarOnMobile ? 'hidden md:flex' : 'inline-flex'}
         />
 
-        <p
-          className={cn(
-            'text-grey-900',
-            small ? 'text-preset-5-bold' : 'text-preset-4-bold'
+        <div className="flex flex-col">
+          <p
+            className={cn(
+              'text-grey-900 flex w-full',
+              small ? 'text-preset-5-bold' : 'text-preset-4-bold'
+            )}
+          >
+            {transaction.name}
+          </p>
+
+          {showCategory && (
+            <p className="text-preset-5 text-grey-500">
+              {transaction.category}
+            </p>
           )}
-        >
-          {transaction.name}
-        </p>
+        </div>
       </div>
 
       <div className={cn('flex flex-col items-end', small ? 'gap-1' : 'gap-2')}>
@@ -47,7 +57,9 @@ export const WidgetTransaction = ({
           {formattedAmount.amount}
         </p>
 
-        <p className="text-preset-5 text-grey-500">{formattedDate}</p>
+        <p className="text-preset-5 text-grey-500 text-nowrap">
+          {formattedDate}
+        </p>
       </div>
     </div>
   )

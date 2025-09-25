@@ -11,6 +11,7 @@ interface UsePotsReturn {
 export default function usePots() {
   return useSuspenseQuery<UsePotsReturn>({
     queryKey: ['pots'],
+    staleTime: 5 * 60 * 1000,
     queryFn: async () => {
       const pots = await potService.getAll()
 

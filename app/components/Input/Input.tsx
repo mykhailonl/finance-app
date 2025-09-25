@@ -1,10 +1,8 @@
 import cn from 'classnames'
-import { useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 
 import { iconComponents } from '~/types/IconType'
 import type { InputProps } from '~/types/InputType'
-
-// todo fix case when input is a number, rn cant make 123.40, . is not going through regex within onChange
 
 export const Input = <T extends string | number>({
   styles,
@@ -15,6 +13,7 @@ export const Input = <T extends string | number>({
   showPassIcon = false,
   error,
   type,
+  isNumberInput,
 }: InputProps<T>) => {
   //#region icons
   const SearchIcon = iconComponents['search']
@@ -23,23 +22,29 @@ export const Input = <T extends string | number>({
   //#endregion
 
   const [showPass, setShowPass] = useState(false)
+  const [valueToDisplay, setValueToDisplay] = useState(
+    isNumberInput && input.value === 0 ? '' : input.value
+  )
 
-  const isNumberInput = typeof input.value === 'number'
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value
+    setValueToDisplay(newValue)
 
-  //#region inputLimitations
-  const numberPattern = /^\d*\.?\d{0,2}$/
-  //#endregion
+    input.onChange(e.target.value as T)
+  }
 
   return (
     <div className={cn('flex gap-1 items-start self-stretch', styles)}>
+      {/*#region label*/}
       {label.showLabel && (
         <label
           htmlFor={label.labelText}
-          className={cn('text-preset-5-bold text-grey-500', label.labelStyles)}
+          className={cn('text-preset-4 text-grey-500', label.labelStyles)}
         >
           {label.labelText}
         </label>
       )}
+      {/*#endregion*/}
 
       <div
         className={cn(
@@ -47,9 +52,11 @@ export const Input = <T extends string | number>({
           isNumberInput ? 'gap-3' : 'gap-4'
         )}
       >
+        {/*#region $ symbol*/}
         {isNumberInput && (
           <span className="text-preset-5 text-grey-500">$</span>
         )}
+        {/*#endregion*/}
 
         <input
           type={type ? type : showPassIcon && !showPass ? 'password' : 'text'}
@@ -60,35 +67,15 @@ export const Input = <T extends string | number>({
             !type && 'flex'
           )}
           placeholder={input.placeholder}
-          value={isNumberInput && input.value === 0 ? '' : input.value}
-          onChange={(e) => {
-            const rawValue = e.target.value
-
-            if (isNumberInput) {
-              if (rawValue === '') {
-                input.onChange(0 as T)
-                return
-              }
-
-              if (!numberPattern.test(rawValue)) {
-                return
-              }
-
-              input.onChange(+rawValue as T)
-            } else {
-              if (rawValue === '') {
-                input.onChange('' as T)
-                return
-              }
-
-              input.onChange(rawValue as T)
-            }
-          }}
+          value={valueToDisplay}
+          onChange={handleInputChange}
           onBlur={input.onBlur}
+          maxLength={input.maxLength}
         />
 
         {showSearchIcon && <SearchIcon className="w-4 h-4" />}
 
+        {/*#region passIcon*/}
         {showPassIcon &&
           (showPass ? (
             <HidePassIcon
@@ -101,13 +88,16 @@ export const Input = <T extends string | number>({
               onClick={() => setShowPass(!showPass)}
             />
           ))}
+        {/*#endregion */}
       </div>
 
+      {/*#region helper text*/}
       {helperText.showHelper && !error && (
         <div className={cn('flex text-preset-5', helperText.helperStyles)}>
           <p className={cn(' text-grey-500')}>{helperText.helperText}</p>
         </div>
       )}
+      {/*#endregion*/}
 
       {error && <p className="text-preset-5 text-red self-end">{error}</p>}
     </div>

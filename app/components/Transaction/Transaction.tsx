@@ -30,7 +30,7 @@ export const Transaction = ({
       onClick={handleTransactionClick}
     >
       <div className="flex items-center gap-3 md:gap-4 flex-1 md:flex-initial">
-        <TransactionAvatar transaction={transaction} />
+        <TransactionAvatar transaction={transaction} styles="inline-flex" />
 
         <div className="flex flex-col md:block">
           <p className="text-preset-4-bold text-grey-900">{transaction.name}</p>
@@ -46,7 +46,9 @@ export const Transaction = ({
       </div>
 
       <div className="hidden md:block">
-        <p className="text-preset-5 text-grey-500">{formattedDate}</p>
+        <p className="text-preset-5 text-grey-500 text-nowrap">
+          {formattedDate}
+        </p>
       </div>
 
       <div className="flex flex-col items-end gap-1 md:block">

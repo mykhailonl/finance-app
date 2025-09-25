@@ -25,6 +25,7 @@ interface UseFormReturn<T> {
   // Utils
   reset: () => void
   isValid: boolean
+  isTouched: boolean
 }
 
 export const useForm = <T extends Record<string, any>>(
@@ -64,6 +65,7 @@ export const useForm = <T extends Record<string, any>>(
 
   const validateField = (field: keyof T, value?: any) => {
     const validator = options.validators?.[field]
+
     if (!validator) {
       return null
     }
@@ -103,6 +105,23 @@ export const useForm = <T extends Record<string, any>>(
     return isFormValid
   }
 
+  const compareValues = <T>(currentValue: T, initialValue: T): boolean => {
+    if (typeof currentValue === 'string' && typeof initialValue === 'string') {
+      return currentValue.trim() !== initialValue.trim()
+    }
+
+    if (typeof currentValue === 'string' && typeof initialValue === 'number') {
+      return Number(currentValue) !== initialValue
+    }
+
+    return currentValue !== initialValue
+  }
+
+  // Check if any field changed to prevent extra DB calls
+  const isTouched = Object.entries(values).some(([key, value]) =>
+    compareValues(value, options.initialValues[key])
+  )
+
   const reset = () => {
     setValues(options.initialValues)
     setErrors({})
@@ -122,5 +141,6 @@ export const useForm = <T extends Record<string, any>>(
     validateAll,
     reset,
     isValid,
+    isTouched,
   }
 }

@@ -13,6 +13,7 @@ import {
   ScrollRestoration,
   useLocation,
 } from 'react-router'
+import { Toaster } from 'sonner'
 
 import { ModalContainer } from '~/components/ModalContainer'
 import { AuthProvider } from '~/context/AuthContext'
@@ -83,6 +84,10 @@ export default function App() {
           <DeviceProvider>
             <ModalContainer />
             <AppContent />
+            <Toaster
+              mobileOffset={{ bottom: '68px' }}
+              offset={{ bottom: '98px' }}
+            />
           </DeviceProvider>
         </ModalProvider>
       </AuthProvider>

@@ -1,6 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { toast } from 'sonner'
 
+import { useBudgetMutations } from '~/hooks/useBudgetMutations'
+import { useModal } from '~/hooks/useModal'
+import { usePotMutations } from '~/hooks/usePotMutations'
+import { useTransactionMutations } from '~/hooks/useTransactionMutations'
+import { useTransactions } from '~/hooks/useTransactions'
+import { useUndoableDelete } from '~/hooks/useUndoableDelete'
 import {
   AddBudgetModal,
   AddPotModal,
@@ -15,11 +22,7 @@ import {
   LogoutModal,
   RestrictionTransactionModal,
   WithdrawFromPotModal,
-} from '~/components/modals'
-import { useBudgetMutations } from '~/hooks/useBudgetMutations'
-import { useModal } from '~/hooks/useModal'
-import { usePotMutations } from '~/hooks/usePotMutations'
-import { useTransactionMutations } from '~/hooks/useTransactionMutations'
+} from '~/modals'
 import { Overlays } from '~/overlays/Overlays'
 import type {
   BudgetInsert,
@@ -32,6 +35,8 @@ import type {
 
 export const ModalContainer = () => {
   const { modalState, closeModal } = useModal()
+  const { deleteWithUndo } = useUndoableDelete()
+  const { data: allTransactions } = useTransactions()
 
   const budgetMutations = useBudgetMutations()
   const potMutations = usePotMutations()
@@ -40,7 +45,12 @@ export const ModalContainer = () => {
   //#region budget handlers
   const handleAddBudget = (data: BudgetInsert) => {
     budgetMutations.createBudget.mutate(data, {
-      onSuccess: () => closeModal(),
+      onSuccess: () => {
+        closeModal()
+
+        toast.success(`${data.category} budget created`)
+      },
+      onError: () => toast.error('Failed to create budget.'),
     })
   }
 
@@ -48,15 +58,29 @@ export const ModalContainer = () => {
     if (modalState?.type === 'budget-edit') {
       budgetMutations.updateBudget.mutate(
         { id: modalState.budget.id, updates: data },
-        { onSuccess: () => closeModal() }
+        {
+          onSuccess: () => {
+            closeModal()
+
+            toast.success(`${data.category} budget updated.`)
+          },
+          onError: () => toast.error('Failed to update budget.'),
+        }
       )
     }
   }
 
   const handleDeleteBudget = () => {
     if (modalState?.type === 'budget-delete') {
-      budgetMutations.deleteBudget.mutate(modalState.budget.id, {
-        onSuccess: () => closeModal(),
+      closeModal()
+
+      deleteWithUndo({
+        queryKey: ['budgets', allTransactions?.length],
+        idToDelete: modalState.budget.id,
+        actualDelete: () =>
+          budgetMutations.deleteBudget.mutateAsync(modalState.budget.id),
+        message: `${modalState.budget.category} deleted.`,
+        errorMessage: 'Failed to delete budget.',
       })
     }
   }
@@ -65,7 +89,12 @@ export const ModalContainer = () => {
   //#region pot handlers
   const handleAddPot = (data: PotInsert) => {
     potMutations.createPot.mutate(data, {
-      onSuccess: () => closeModal(),
+      onSuccess: () => {
+        closeModal()
+
+        toast.success(`Pot ${data.name} created.`)
+      },
+      onError: () => toast.error('Failed to create pot.'),
     })
   }
 
@@ -73,15 +102,29 @@ export const ModalContainer = () => {
     if (modalState?.type === 'pot-edit') {
       potMutations.updatePot.mutate(
         { id: modalState.pot.id, updates: data },
-        { onSuccess: () => closeModal() }
+        {
+          onSuccess: () => {
+            closeModal()
+
+            toast.success(`Pot ${data.name} updated.`)
+          },
+          onError: () => toast.error('Failed to update pot.'),
+        }
       )
     }
   }
 
   const handleDeletePot = () => {
     if (modalState?.type === 'pot-delete') {
-      potMutations.deletePot.mutate(modalState.pot.id, {
-        onSuccess: () => closeModal(),
+      closeModal()
+
+      deleteWithUndo({
+        queryKey: ['pots'],
+        idToDelete: modalState.pot.id,
+        actualDelete: () =>
+          potMutations.deletePot.mutateAsync(modalState.pot.id),
+        message: `Pot ${modalState.pot.name} deleted.`,
+        errorMessage: 'Failed to delete pot.',
       })
     }
   }
@@ -95,7 +138,14 @@ export const ModalContainer = () => {
           currentTotal: modalState.pot.total,
           potName: modalState.pot.name,
         },
-        { onSuccess: () => closeModal() }
+        {
+          onSuccess: () => {
+            closeModal()
+
+            toast.success(`Money added to ${modalState.pot.name}.`)
+          },
+          onError: () => toast.error('Failed to add money to pot.'),
+        }
       )
     }
   }
@@ -109,7 +159,14 @@ export const ModalContainer = () => {
           currentTotal: modalState.pot.total,
           potName: modalState.pot.name,
         },
-        { onSuccess: () => closeModal() }
+        {
+          onSuccess: () => {
+            closeModal()
+
+            toast.success(`Money withdrawn from ${modalState.pot.name}.`)
+          },
+          onError: () => toast.error('Failed to withdraw money from pot.'),
+        }
       )
     }
   }
@@ -118,7 +175,12 @@ export const ModalContainer = () => {
   //#region transaction handlers
   const handleAddTransaction = (transaction: TransactionInsert) => {
     transactionMutations.createTransaction.mutate(transaction, {
-      onSuccess: () => closeModal(),
+      onSuccess: () => {
+        closeModal()
+
+        toast.success('Transaction created.')
+      },
+      onError: () => toast.error('Failed to create transaction.'),
     })
   }
 
@@ -129,15 +191,31 @@ export const ModalContainer = () => {
           id: modalState.transaction.id,
           updates: data,
         },
-        { onSuccess: () => closeModal() }
+        {
+          onSuccess: () => {
+            closeModal()
+
+            toast.success('Transaction updated.')
+          },
+          onError: () => toast.error('Failed to update transaction.'),
+        }
       )
     }
   }
 
   const handleDeleteTransaction = () => {
     if (modalState?.type === 'transaction-delete') {
-      transactionMutations.deleteTransaction.mutate(modalState.transaction.id, {
-        onSuccess: () => closeModal(),
+      closeModal()
+
+      deleteWithUndo({
+        queryKey: ['transactions'],
+        idToDelete: modalState.transaction.id,
+        actualDelete: () =>
+          transactionMutations.deleteTransaction.mutateAsync(
+            modalState.transaction.id
+          ),
+        message: 'Transaction deleted.',
+        errorMessage: 'Failed to delete transaction.',
       })
     }
   }

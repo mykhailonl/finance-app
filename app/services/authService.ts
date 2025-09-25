@@ -1,7 +1,5 @@
 import supabase from '~/utils/supabase'
 
-// todo clean logs
-
 export const authService = {
   async login(email: string, password: string) {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -21,12 +19,11 @@ export const authService = {
       throw new Error(error.message || 'Authentication failed')
     }
 
-    console.log('Logged in successfully')
     return data
   },
 
   async signup(email: string, password: string, name: string) {
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -37,9 +34,6 @@ export const authService = {
     if (error) {
       throw error
     }
-
-    console.log('Registration successful, check email')
-    console.log('User', data.user)
   },
 
   async logout() {
@@ -48,7 +42,5 @@ export const authService = {
     if (error) {
       throw error
     }
-
-    console.log('Successfully logged out')
   },
 }

@@ -1,12 +1,17 @@
 import { Fragment } from 'react'
 
 import { Divider } from '~/components/Divider'
+import { NoContentFound } from '~/components/NoContentFound'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { WidgetTransaction } from '~/components/WidgetTransaction'
 import { useTransactions } from '~/hooks/useTransactions'
 
-export const WidgetTransactions = () => {
+export const WidgetTransactions = ({
+  showCategory = false,
+}: {
+  showCategory?: boolean
+}) => {
   const { data: transactions } = useTransactions()
   const slicedTransactions = transactions.slice(0, 5)
 
@@ -21,21 +26,18 @@ export const WidgetTransactions = () => {
       />
 
       {noTransactionsYet ? (
-        <div className="flex items-center justify-center">
-          <p className="text-preset-4 text-grey-500">
-            You haven&#39;t added any transactions.
-          </p>
-        </div>
+        <NoContentFound text="You haven&#39;t added any transactions." />
       ) : (
         <div className="flex flex-col gap-5">
           {slicedTransactions.map((el, index) => {
-            const showDivider = index < slicedTransactions.length - 1
-
             return (
               <Fragment key={el.id}>
-                <WidgetTransaction transaction={el} />
+                <WidgetTransaction
+                  transaction={el}
+                  showCategory={showCategory}
+                />
 
-                {showDivider && <Divider />}
+                {index < slicedTransactions.length - 1 && <Divider />}
               </Fragment>
             )
           })}

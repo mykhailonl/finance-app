@@ -1,5 +1,6 @@
 import { BudgetChart } from '~/components/BudgetChart'
 import { InfoCard } from '~/components/InfoCard'
+import { NoContentFound } from '~/components/NoContentFound'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import useBudgets from '~/hooks/useBudgets'
@@ -20,11 +21,7 @@ export const WidgetBudgets = () => {
       />
 
       {noBudgetsYet ? (
-        <div className="flex items-center justify-center">
-          <p className="text-preset-4 text-grey-500">
-            You haven&#39;t added any budgets.
-          </p>
-        </div>
+        <NoContentFound text="You haven&#39;t added any budgets." />
       ) : (
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:py-2 lg:w-fit">
           <div className="flex items-center justify-center relative w-full h-[300px] md:h-[250px] md:w-[250px] lg:w-[250px] grow">
