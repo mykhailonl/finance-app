@@ -5,5 +5,7 @@ import {
 } from '~/types/DropdownType'
 
 export const getCategoryOptions = (type: TransactionType) => {
-  return type === 'expense' ? EXPENSE_CATEGORY_OPTIONS : INCOME_CATEGORY_OPTIONS
+  return type === 'expense'
+    ? EXPENSE_CATEGORY_OPTIONS.sort((a, b) => a.label.localeCompare(b.label))
+    : INCOME_CATEGORY_OPTIONS.sort((a, b) => a.label.localeCompare(b.label))
 }

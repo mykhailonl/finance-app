@@ -25,7 +25,12 @@ export const TransactionList = ({
         <NoContentFound text="You haven&#39;t added any transactions.">
           <Button
             variant="primary"
-            onClick={() => openModal({ type: 'transaction-add' })}
+            onClick={() =>
+              openModal({
+                type: 'transaction-add',
+                options: { recurring: false },
+              })
+            }
             styles="max-w-[150px] p-4"
           >
             Add Transaction

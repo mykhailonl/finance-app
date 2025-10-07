@@ -19,6 +19,7 @@ import { ReactComponent as IconShowPassword } from '@/assets/images/icon-show-pa
 import { ReactComponent as SortIcon } from '@/assets/images/icon-sort-mobile.svg'
 import { ReactComponent as LogoLarge } from '@/assets/images/logo-large.svg'
 import { ReactComponent as LogoutIcon } from '@/assets/images/logout-icon.svg'
+import { ReactComponent as XCircleIcon } from '@/assets/images/x-circle-icon.svg'
 import type { TransactionCategory } from '~/types/index'
 
 export const iconComponents = {
@@ -43,6 +44,7 @@ export const iconComponents = {
   showPassword: IconShowPassword,
   hidePassword: IconHidePassword,
   logout: LogoutIcon,
+  xcircle: XCircleIcon,
 }
 
 export type IconName = keyof typeof iconComponents

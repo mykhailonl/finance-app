@@ -7,10 +7,10 @@ import { paginate } from '~/utils/paginate'
 import { sortTransactions } from '~/utils/sortTransactions'
 
 type PaginationParams = {
-  page: number
-  sortBy: SortOption
-  filterBy: FilterOption
-  query: string
+  page?: number
+  sortBy?: SortOption
+  filterBy?: FilterOption
+  query?: string
 }
 
 export const useTransactionFilters = ({

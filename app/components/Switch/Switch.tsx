@@ -3,20 +3,25 @@ import { motion } from 'motion/react'
 
 type SwitchProps = {
   label: string
+  description: string
   value: boolean
-  onClick: () => void
+  onClick: (value: boolean) => void
   styles?: string
 }
 
-export const Switch = ({ label, value, onClick, styles }: SwitchProps) => {
+export const Switch = ({
+  label,
+  description,
+  value,
+  onClick,
+  styles,
+}: SwitchProps) => {
   return (
     <div className={cn('flex justify-between items-center', styles)}>
       <div>
         <label className="text-preset-3 text-grey-900">{label}</label>
 
-        <p className="text-preset-4 text-grey-500">
-          Mark as repeating transaction
-        </p>
+        <p className="text-preset-4 text-grey-500">{description}</p>
       </div>
 
       <div
@@ -27,7 +32,7 @@ export const Switch = ({ label, value, onClick, styles }: SwitchProps) => {
           'rounded-2xl',
           'cursor-custom'
         )}
-        onClick={onClick}
+        onClick={() => onClick(!value)}
       >
         <motion.div
           className={cn(

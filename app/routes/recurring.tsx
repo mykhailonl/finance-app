@@ -27,10 +27,18 @@ export default function Recurring() {
         <NoContentFound
           text="Create your first recurring transaction to keep track of your
             subscriptions"
+          styles={{
+            textStyles: 'text-center',
+          }}
         >
           <Button
             variant="primary"
-            onClick={() => openModal({ type: 'transaction-add' })}
+            onClick={() =>
+              openModal({
+                type: 'transaction-add',
+                options: { recurring: true },
+              })
+            }
             styles="max-w-[150px] p-4"
           >
             Add Transaction

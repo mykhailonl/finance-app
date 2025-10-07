@@ -212,4 +212,5 @@ export type DropdownProps<T extends DropdownOptionType> = {
   showCaret?: boolean
   mobileView?: boolean
   usedValues?: T[]
+  small?: boolean
 }

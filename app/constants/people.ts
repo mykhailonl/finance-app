@@ -17,3 +17,13 @@ export const peopleAvatars: Record<PersonName, string> = {
   William: '/app/assets/images/avatars/william-harris.jpg',
   Yuna: '/app/assets/images/avatars/yuna-kim.jpg',
 }
+
+export type AvatarType = {
+  name: PersonName
+  src: string
+}
+export type AvatarListType = AvatarType[]
+
+export const AVATAR_ICON_OPTIONS: AvatarListType = (
+  Object.entries(peopleAvatars) as [PersonName, string][]
+).map(([name, src]) => ({ name, src }))

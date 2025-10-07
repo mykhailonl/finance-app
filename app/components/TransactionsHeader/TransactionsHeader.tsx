@@ -3,7 +3,11 @@ import { PageTitle } from '~/components/PageTitle'
 import { useDevice } from '~/hooks/useDevice'
 import { useModal } from '~/hooks/useModal'
 
-export const TransactionsHeader = () => {
+export const TransactionsHeader = ({
+  showButton = false,
+}: {
+  showButton?: boolean
+}) => {
   const { openModal } = useModal()
   const { isMobile } = useDevice()
 
@@ -13,13 +17,20 @@ export const TransactionsHeader = () => {
     <div className="flex items-center justify-between">
       <PageTitle title="Transactions" />
 
-      <Button
-        variant="primary"
-        onClick={() => openModal({ type: 'transaction-add' })}
-        styles="p-4"
-      >
-        {buttonText}
-      </Button>
+      {showButton && (
+        <Button
+          variant="primary"
+          onClick={() =>
+            openModal({
+              type: 'transaction-add',
+              options: { recurring: false },
+            })
+          }
+          styles="p-4"
+        >
+          {buttonText}
+        </Button>
+      )}
     </div>
   )
 }

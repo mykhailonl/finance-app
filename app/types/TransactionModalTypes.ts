@@ -4,8 +4,15 @@ import type {
   TransactionUpdate,
 } from '~/types/index'
 
+export type DrawerTabType = 'basic' | 'advanced'
+
 export type TransactionModalTypes =
-  | { type: 'transaction-add' }
+  | {
+      type: 'transaction-add'
+      options: {
+        recurring: boolean
+      }
+    }
   | { type: 'transaction-edit'; transaction: Transaction }
   | {
       type: 'transaction-delete'
@@ -17,6 +24,9 @@ export type TransactionModalTypes =
 
 export type AddTransactionModalProps = {
   onSubmit: (data: TransactionInsert) => void
+  options: {
+    recurring: boolean
+  }
 }
 
 export type EditTransactionModalProps = {
@@ -29,6 +39,7 @@ export type EditTransactionModalProps = {
     | 'category'
     | 'recurring'
     | 'name'
+    | 'avatar_person'
   >
   onSubmit: (data: TransactionUpdate) => void
 }

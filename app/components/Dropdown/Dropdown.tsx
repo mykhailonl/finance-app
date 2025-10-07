@@ -19,6 +19,7 @@ export const Dropdown = <T extends DropdownOptionType>({
   showCaret,
   mobileView,
   usedValues,
+  small,
 }: DropdownProps<T>) => {
   //#region states
   const [isOpen, setIsOpen] = useState(false)
@@ -89,7 +90,8 @@ export const Dropdown = <T extends DropdownOptionType>({
           className={cn(
             'text-nowrap md:flex items-center px-5 py-3 gap-4 rounded-lg bg-white cursor-custom border border-beige-500 hover:border-grey-500 active:border-grey-900',
             !mobileView ? 'flex' : 'hidden',
-            isSortDropdown ? 'min-w-[114px]' : 'min-w-[177px]'
+            isSortDropdown ? 'min-w-[114px]' : 'min-w-[177px]',
+            small && 'min-w-fit md:min-w-[177px]' // !
           )}
           onClick={() => setIsOpen(!isOpen)}
           onBlur={onBlur}

@@ -1,22 +1,20 @@
 import type { FormEvent } from 'react'
 
 import { Button } from '~/components/Button'
-import { DateTimeInput } from '~/components/DateTimeInput'
-import { Dropdown } from '~/components/Dropdown'
-import { Input } from '~/components/Input'
+import { DrawerTabs } from '~/components/DrawerTabs'
 import { ModalDescription } from '~/components/ModalDescription'
 import { ModalTitle } from '~/components/ModalTitle'
 import { SectionWrapper } from '~/components/SectionWrapper'
-import { Switch } from '~/components/Switch'
-import { MAX_LENGTH } from '~/constants'
+import { TransactionAdvancedFields } from '~/components/TransactionAdvancedFields'
+import { TransactionBasicFields } from '~/components/TransactionBasicFields'
 import { useForm } from '~/hooks/useForm'
 import { useModal } from '~/hooks/useModal'
-import type { TransactionCategory } from '~/types'
-import { TRANSACTION_TYPE_OPTIONS } from '~/types/DropdownType'
-import type { EditTransactionModalProps } from '~/types/TransactionModalTypes'
+import type {
+  DrawerTabType,
+  EditTransactionModalProps,
+} from '~/types/TransactionModalTypes'
 import { formatAmountBySign } from '~/utils/formatAmountBySign'
 import { formatTransactionDateTime } from '~/utils/formatTransactionDateTime'
-import { getCategoryOptions } from '~/utils/getCategoryOptions'
 import { parseTransactionDateTime } from '~/utils/parseTransactionDateTime'
 import { transactionValidators } from '~/validators'
 
@@ -43,29 +41,37 @@ export const EditTransactionModal = ({
       timeISO,
       transaction_type: initialValues.transaction_type,
       transaction_category: initialValues.category,
+      transaction_avatar: initialValues.avatar_person,
       name: initialValues.name,
       recurring: initialValues.recurring,
       id: initialValues.id,
+      tab: 'basic' as DrawerTabType,
     },
     validators: {
       amount: (amount: string) =>
         transactionValidators.validateTransactionAmount(amount),
       name: (name: string) =>
         transactionValidators.validateTransactionName(name),
-      transaction_category: (category: TransactionCategory): string | null =>
-        transactionValidators.validateTransactionCategory(
-          values.transaction_type,
-          category
-        ),
     },
   })
 
-  const categoryOptions = getCategoryOptions(values.transaction_type)
-
+  //#region handlers
+  const handleTransactionDelete = () => {
+    openModal({
+      type: 'transaction-delete',
+      transaction: { id: initialValues.id, name: initialValues.name },
+    })
+  }
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const allFieldsValid = validateAll()
+
+    if (!allFieldsValid) {
+      setFieldValue('tab', 'basic')
+
+      return
+    }
 
     const combinedDateTime = formatTransactionDateTime(
       values.dateISO,
@@ -81,6 +87,7 @@ export const EditTransactionModal = ({
         name: values.name.trim(),
         amount: formattedAmount,
         transaction_type: values.transaction_type,
+        avatar_person: values.transaction_avatar,
         category: values.transaction_category,
         transaction_date: combinedDateTime,
         recurring: values.recurring,
@@ -89,132 +96,93 @@ export const EditTransactionModal = ({
       closeModal()
     }
   }
+  //#endregion
 
-  const normalizeStringLength =
-    values.name.length <= MAX_LENGTH ? values.name.length : MAX_LENGTH
-  const symbolsLeft = MAX_LENGTH - normalizeStringLength
+  const isBasicTab = values.tab === 'basic'
 
   return (
-    <SectionWrapper styles="min-w-[335px] md:w-[560px]">
+    <SectionWrapper styles="min-w-[335px] md:w-[560px] min-h-[740px] md:h-full">
       <ModalTitle title="Edit Transaction" />
 
       <ModalDescription text="Update or change any information about current transaction." />
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <DateTimeInput
-            label={{ showLabel: true, labelText: 'Date' }}
-            input={{
-              value: values.dateISO,
-              onChange: (value) => setFieldValue('dateISO', value),
-            }}
-            type="date"
-            styles="grow flex-col"
-          />
-
-          <DateTimeInput
-            label={{ showLabel: true, labelText: 'Time' }}
-            input={{
-              value: values.timeISO,
-              onChange: (value) => setFieldValue('timeISO', value),
-            }}
-            type="time"
-            styles="grow flex-col"
-          />
-        </div>
-
-        <Input
-          label={{
-            showLabel: true,
-            labelText: 'Transaction Name',
-          }}
-          input={{
-            value: values.name,
-            onChange: (value) => setFieldValue('name', value),
-            placeholder: 'e.g., Coffee shop, Salary, Grocery store',
-            onBlur: () => validateField('name'),
-          }}
-          helperText={{
-            showHelper: true,
-            helperText: `${symbolsLeft} characters left`,
-            helperStyles: 'self-end',
-          }}
-          styles="flex-col"
-          error={errors.name}
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 grow"
+        id="edit-transaction-form"
+      >
+        <DrawerTabs
+          isBasic={isBasicTab}
+          setBasicTab={() => setFieldValue('tab', 'basic')}
+          setAdvancedTab={() => setFieldValue('tab', 'advanced')}
         />
 
-        <Dropdown
-          label={{
-            showLabel: true,
-            labelText: 'Transaction type',
-          }}
-          value={values.transaction_type}
-          onChange={(value) => {
-            setFieldValue('transaction_type', value)
-
-            const newCategoryOptions = getCategoryOptions(value)
-            setFieldValue('transaction_category', newCategoryOptions[0].value)
-          }}
-          options={TRANSACTION_TYPE_OPTIONS}
-          styles="flex-col items-start"
-          showCaret
-        />
-
-        <Dropdown
-          label={{
-            showLabel: true,
-            labelText: 'Category',
-          }}
-          value={values.transaction_category}
-          onChange={(value) => setFieldValue('transaction_category', value)}
-          onBlur={() => validateField('transaction_category')}
-          error={errors.transaction_category}
-          options={categoryOptions}
-          styles="flex-col items-start"
-          showCaret
-        />
-
-        <Input
-          label={{ showLabel: true, labelText: 'Amount' }}
-          input={{
-            value: values.amount,
-            onChange: (value) => setFieldValue('amount', value),
-            onBlur: () => validateField('amount'),
-            placeholder: 'e.g. 20.75',
-          }}
-          helperText={{
-            showHelper: false,
-          }}
-          styles="flex-col"
-          error={errors.amount}
-          isNumberInput
-        />
-
-        <Switch
-          label="Recurring"
-          value={values.recurring}
-          onClick={() => setFieldValue('recurring', !values.recurring)}
-        />
-
-        <div className="flex flex-col md:flex-row gap-5">
-          <Button type="submit" variant="primary" styles="p-4 grow">
-            Save Changes
-          </Button>
-
-          <Button
-            variant="danger"
-            styles="p-4 grow"
-            onClick={() =>
-              openModal({
-                type: 'transaction-delete',
-                transaction: { id: initialValues.id, name: initialValues.name },
-              })
-            }
-          >
-            Delete Transaction
-          </Button>
+        <div className="flex flex-col gap-4 grow">
+          {isBasicTab ? (
+            <TransactionBasicFields
+              date={{
+                value: values.dateISO,
+                onChange: (value) => setFieldValue('dateISO', value),
+              }}
+              time={{
+                value: values.timeISO,
+                onChange: (value) => setFieldValue('timeISO', value),
+              }}
+              name={{
+                value: values.name,
+                onChange: (value) => setFieldValue('name', value),
+                onBlur: () => validateField('name'),
+                error: errors.name,
+              }}
+              transactionCategory={{
+                value: values.transaction_category,
+                onChange: (value) =>
+                  setFieldValue('transaction_category', value),
+              }}
+              transactionType={{
+                value: values.transaction_type,
+                onChange: (value) => setFieldValue('transaction_type', value),
+              }}
+              amount={{
+                value: String(values.amount),
+                onChange: (value) => setFieldValue('amount', value),
+                onBlur: () => validateField('amount'),
+                error: errors.amount,
+              }}
+            />
+          ) : (
+            <TransactionAdvancedFields
+              recurring={{
+                value: values.recurring,
+                onChange: (value) => setFieldValue('recurring', value),
+              }}
+              selectedAvatar={{
+                value: values.transaction_avatar,
+                onChange: (value) => setFieldValue('transaction_avatar', value),
+              }}
+            />
+          )}
         </div>
       </form>
+
+      <div className="flex flex-col gap-4">
+        <Button
+          type="submit"
+          variant="primary"
+          styles="p-4 grow"
+          form="edit-transaction-form"
+        >
+          Save Changes
+        </Button>
+
+        <Button
+          variant="danger"
+          styles="p-4 grow"
+          onClick={handleTransactionDelete}
+        >
+          Delete Transaction
+        </Button>
+      </div>
     </SectionWrapper>
   )
 }

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { toast } from 'sonner'
 
 import { useBudgetMutations } from '~/hooks/useBudgetMutations'
+import { useDevice } from '~/hooks/useDevice'
 import { useModal } from '~/hooks/useModal'
 import { usePotMutations } from '~/hooks/usePotMutations'
 import { useTransactionMutations } from '~/hooks/useTransactionMutations'
@@ -34,6 +35,7 @@ import type {
 } from '~/types'
 
 export const ModalContainer = () => {
+  const { isMobile } = useDevice()
   const { modalState, closeModal } = useModal()
   const { deleteWithUndo } = useUndoableDelete()
   const { data: allTransactions } = useTransactions()
@@ -41,6 +43,10 @@ export const ModalContainer = () => {
   const budgetMutations = useBudgetMutations()
   const potMutations = usePotMutations()
   const transactionMutations = useTransactionMutations()
+
+  const isDrawer =
+    modalState?.type === 'transaction-add' ||
+    modalState?.type === 'transaction-edit'
 
   //#region budget handlers
   const handleAddBudget = (data: BudgetInsert) => {
@@ -311,7 +317,12 @@ export const ModalContainer = () => {
 
       //#region transaction modals
       case 'transaction-add':
-        return <AddTransactionModal onSubmit={handleAddTransaction} />
+        return (
+          <AddTransactionModal
+            onSubmit={handleAddTransaction}
+            options={modalState.options}
+          />
+        )
 
       case 'transaction-edit':
         return (
@@ -322,6 +333,7 @@ export const ModalContainer = () => {
               category: modalState.transaction.category,
               transaction_date: modalState.transaction.transaction_date,
               transaction_type: modalState.transaction.transaction_type,
+              avatar_person: modalState.transaction.avatar_person,
               amount: modalState.transaction.amount,
               recurring: modalState.transaction.recurring,
             }}
@@ -364,19 +376,72 @@ export const ModalContainer = () => {
             transition={{ duration: 0.2 }}
             onClick={closeModal}
           >
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2, delay: 0.05 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {renderModal()}
-            </motion.div>
+            {isDrawer && !isMobile ? (
+              // Desktop and tablet: Drawer
+              <motion.div
+                className="absolute right-0 top-0 h-full w-full max-w-[560px] bg-white overflow-y-auto rounded-l-xl"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {renderModal()}
+              </motion.div>
+            ) : isDrawer && isMobile ? (
+              // Mobile: Bottom sheet
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[90vh] overflow-y-auto"
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '100%' }}
+                transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {renderModal()}
+              </motion.div>
+            ) : (
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2, delay: 0.05 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {renderModal()}
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
     </Overlays>
   )
+  // return (
+  //   <Overlays>
+  //     <AnimatePresence>
+  //       {modalState && (
+  //         <motion.div
+  //           className="fixed inset-0 z-50 bg-black/50 px-4"
+  //           initial={{ opacity: 0 }}
+  //           animate={{ opacity: 1 }}
+  //           exit={{ opacity: 0 }}
+  //           transition={{ duration: 0.2 }}
+  //           onClick={closeModal}
+  //         >
+  //           <motion.div
+  //             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+  //             initial={{ opacity: 0, scale: 0.95 }}
+  //             animate={{ opacity: 1, scale: 1 }}
+  //             exit={{ opacity: 0, scale: 0.95 }}
+  //             transition={{ duration: 0.2, delay: 0.05 }}
+  //             onClick={(e) => e.stopPropagation()}
+  //           >
+  //             {renderModal()}
+  //           </motion.div>
+  //         </motion.div>
+  //       )}
+  //     </AnimatePresence>
+  //   </Overlays>
+  // )
 }
