@@ -1,40 +1,45 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { CURRENT_MONTH } from '~/constants/dates'
+import { useAuth } from '~/hooks/useAuth'
 import { useTransactions } from '~/hooks/useTransactions'
 import { budgetService } from '~/services/budgetService'
-import type {
-  Budget,
-  ThemeColor,
-  Transaction,
-  TransactionCategory,
-} from '~/types'
+import type { Budget, ThemeColor, TransactionCategory } from '~/types'
+import type { BudgetSpending } from '~/types/BudgetTypes'
+import type { TransactionsByBudget } from '~/types/TransactionTypes'
 
 interface UseBudgetsReturn {
   budgets: Budget[]
   usedCategories: TransactionCategory[]
   spentWithinBudgets: number
-  spentByCategory: Record<string, number>
+  spentByCategory: BudgetSpending
   totalLimit: number
   usedColors: ThemeColor[]
-  transactionsByCategory: Record<string, Transaction[]>
-  latestTransactionsByCategory: Record<string, Transaction[]>
+  transactionsByCategory: TransactionsByBudget
+  latestTransactionsByCategory: TransactionsByBudget
 }
 
-export default function useBudgets() {
+export default function useBudgets(period: string = '2025-08') {
+  const { user } = useAuth()
   const { data: allTransactions } = useTransactions()
 
   return useSuspenseQuery<UseBudgetsReturn>({
-    queryKey: ['budgets', allTransactions?.length],
+    queryKey: ['budgets', period, user?.id],
     queryFn: async () => {
       const budgets = await budgetService.getAll()
+
+      const totalLimit = budgets.reduce(
+        (sum, budget) => sum + budget.maximum,
+        0
+      )
+
+      const usedColors = budgets.map((budget) => budget.theme)
 
       const budgetCategories = budgets.map((b) => b.category)
 
       const relevantTransactions = allTransactions.filter(
         (tr) =>
           budgetCategories.includes(tr.category) &&
-          tr.transaction_date.startsWith(CURRENT_MONTH)
+          tr.transaction_date.startsWith(period)
       )
 
       const spentWithinBudgets = relevantTransactions.reduce(
@@ -42,15 +47,12 @@ export default function useBudgets() {
         0
       )
 
-      const spentByCategory = budgetCategories.reduce(
-        (acc, category) => {
-          acc[category] = relevantTransactions
-            .filter((tr) => tr.category === category)
-            .reduce((sum, tr) => sum + Math.abs(tr.amount), 0)
-          return acc
-        },
-        {} as Record<string, number>
-      )
+      const spentByCategory = budgetCategories.reduce((acc, category) => {
+        acc[category] = relevantTransactions
+          .filter((tr) => tr.category === category)
+          .reduce((sum, tr) => sum + Math.abs(tr.amount), 0)
+        return acc
+      }, {} as BudgetSpending)
 
       const transactionsByCategory = budgetCategories.reduce(
         (acc, category) => {
@@ -63,24 +65,31 @@ export default function useBudgets() {
             )
           return acc
         },
-        {} as Record<string, Transaction[]>
+        {} as TransactionsByBudget
       )
 
       const latestTransactionsByCategory = budgetCategories.reduce(
         (acc, category) => {
-          acc[category] = transactionsByCategory[category].slice(0, 3)
+          acc[category] = transactionsByCategory[category].slice(0, 2)
           return acc
         },
-        {} as Record<string, Transaction[]>
+        {} as TransactionsByBudget
       )
 
+      const sortedBudgets = budgets.sort((a, b) => {
+        const firstBudgetSpending = spentByCategory[a.category]
+        const secondBudgetSpending = spentByCategory[b.category]
+
+        return secondBudgetSpending - firstBudgetSpending
+      })
+
       return {
-        budgets,
+        budgets: sortedBudgets,
         usedCategories: budgetCategories,
         spentWithinBudgets,
         spentByCategory,
-        totalLimit: budgets.reduce((sum, budget) => sum + budget.maximum, 0),
-        usedColors: budgets.map((budget) => budget.theme),
+        totalLimit,
+        usedColors,
         transactionsByCategory,
         latestTransactionsByCategory,
       }

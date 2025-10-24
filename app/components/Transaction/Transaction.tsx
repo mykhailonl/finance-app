@@ -21,7 +21,7 @@ export const Transaction = ({
     }
   }
 
-  const formattedAmount = formatAmountToString(transaction.amount)
+  const formattedAmount = formatAmountToString({ amount: transaction.amount })
   const formattedDate = formatDate(transaction.transaction_date)
 
   return (

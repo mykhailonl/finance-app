@@ -3,15 +3,18 @@ import { Button } from '~/components/Button'
 import { ProgressSection } from '~/components/ProgressSection'
 import { SectionHeader } from '~/components/SectionHeader'
 import { SectionWrapper } from '~/components/SectionWrapper'
+import { TransactionListSection } from '~/components/TransactionListSection'
 import { useModal } from '~/hooks/useModal'
 import type { Pot as PotType } from '~/types'
+import type { TransactionListType } from '~/types/TransactionTypes'
 import { formatAmount } from '~/utils/formatAmount'
 
 type Props = {
   pot: PotType
+  transactions: TransactionListType
 }
 
-export const Pot = ({ pot }: Props) => {
+export const Pot = ({ pot, transactions }: Props) => {
   const { openModal } = useModal()
 
   const formattedSaved = formatAmount(pot.total)
@@ -43,6 +46,19 @@ export const Pot = ({ pot }: Props) => {
           Withdraw
         </Button>
       </div>
+
+      <TransactionListSection
+        transactions={transactions}
+        title="Latest Transaction"
+        link={`/transactions?page=1&filterBy=${'Transfer'}&potId=${pot.id}`}
+        linkText="See All"
+        emptyTextState="No transactions for this pot yet"
+        styles={{
+          containerStyles: 'h-[124px]',
+          listStyles: 'grow',
+          transactionStyles: 'grow',
+        }}
+      />
     </SectionWrapper>
   )
 }

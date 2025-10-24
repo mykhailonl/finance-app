@@ -7,13 +7,23 @@ import {
   type SortOption,
 } from '~/types/DropdownType'
 
-export type ParamType = 'sortBy' | 'filterBy' | 'page' | 'query'
+export type ParamType =
+  | 'sortBy'
+  | 'filterBy'
+  | 'page'
+  | 'query'
+  | 'month'
+  | 'year'
+  | 'potId'
 
-type ParamValueMap = {
+export type ParamValueMap = {
   sortBy: SortOption
   filterBy: FilterOption
   page: number
   query: string
+  month: string
+  year: string
+  potId?: number
 }
 
 //#region validators
@@ -33,13 +43,39 @@ const isValidPageNumber = (value: string): value is string => {
 
   return !isNaN(num) && num > 0
 }
+
+const isValidMonth = (month: string) => {
+  const normalizedMonth = Number(month)
+
+  return (
+    Number.isInteger(normalizedMonth) &&
+    normalizedMonth >= 1 &&
+    normalizedMonth <= 12
+  )
+}
+
+const isValidYear = (year: string) => {
+  const normalizedYear = Number(year)
+
+  return (
+    Number.isInteger(normalizedYear) &&
+    normalizedYear >= 2022 &&
+    normalizedYear <= 2030
+  )
+}
+
+const isValidPotId = (value: string): value is string => {
+  const num = parseInt(value, 10)
+
+  return !isNaN(num) && num > 0
+}
 //#endregion
 
 /**
  * Type-safe hook for working with URL search parameters
  *
  * @template T - Parameter type from ParamType
- * @param paramName - Parameter name ('sortBy' | 'filterBy' | 'page' | 'query')
+ * @param paramName - Parameter name ('sortBy' | 'filterBy' | 'page' | 'query' | 'month' | 'year' | 'potId')
  *
  * @returns Tuple [value, setValue] where:
  * - value: current parameter value (automatically typed)
@@ -68,6 +104,8 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
     filterBy: 'all',
     page: 1,
     query: '',
+    month: '8',
+    year: '2025',
   }
 
   const validators = {
@@ -75,12 +113,19 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
     filterBy: isValidFilterOption,
     page: isValidPageNumber,
     query: null,
+    month: isValidMonth,
+    year: isValidYear,
+    potId: isValidPotId,
   } as const
 
   const paramValue = searchParams.get(paramName)
 
   const parseValue = (rawValue: string | null): ParamValueMap[T] => {
     if (!rawValue) {
+      if (paramName === 'potId') {
+        return undefined as ParamValueMap[T]
+      }
+
       return defaultValue[paramName]
     }
 
@@ -88,12 +133,18 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
       return rawValue as ParamValueMap[T]
     }
 
+    if (paramName === 'potId') {
+      return parseInt(rawValue, 10) as ParamValueMap[T]
+    }
+
     const validator = validators[paramName]
+
     if (!validator) {
       return defaultValue[paramName]
     }
 
     const isValid = validator(rawValue)
+
     if (!isValid) {
       return defaultValue[paramName]
     }
@@ -114,17 +165,15 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
       newSearchParams.set('page', '1')
     }
 
-    if (
-      paramName === 'query' &&
-      (!newValue || (newValue as string).trim() === '')
-    ) {
+    const defaultVal = defaultValue[paramName]
+
+    if (newValue === defaultVal) {
       newSearchParams.delete(paramName)
     } else {
       const stringValue =
         paramName === 'page'
           ? (newValue as number).toString()
           : (newValue as string)
-
       newSearchParams.set(paramName, stringValue)
     }
 

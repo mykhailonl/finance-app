@@ -111,6 +111,12 @@ export const FILTER_OPTIONS: DropdownOptions<FilterOption> = [
   { value: 'Lifestyle', label: 'Lifestyle' },
   { value: 'Shopping', label: 'Shopping' },
   { value: 'General', label: 'General' },
+  { value: 'Transfer', label: 'Transfer' },
+  { value: 'Gift', label: 'Gift' },
+  { value: 'Interest', label: 'Interest' },
+  { value: 'Other', label: 'Other' },
+  { value: 'Salary', label: 'Salary' },
+  { value: 'Sales', label: 'Sales' },
 ]
 
 export const TRANSACTION_TYPE_OPTIONS: DropdownOptions<TransactionType> = [
@@ -213,4 +219,5 @@ export type DropdownProps<T extends DropdownOptionType> = {
   mobileView?: boolean
   usedValues?: T[]
   small?: boolean
+  usedOptionFirst?: boolean
 }

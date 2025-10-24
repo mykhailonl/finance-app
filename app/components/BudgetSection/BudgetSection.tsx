@@ -1,13 +1,8 @@
-import { Fragment } from 'react'
-
-import { Divider } from '~/components/Divider'
 import { InfoCard } from '~/components/InfoCard'
-import { NoContentFound } from '~/components/NoContentFound'
 import { ProgressBar } from '~/components/ProgressBar'
 import { SectionHeader } from '~/components/SectionHeader'
-import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
-import { WidgetTransaction } from '~/components/WidgetTransaction'
+import { TransactionListSection } from '~/components/TransactionListSection'
 import type { BudgetSectionProps } from '~/types/BudgetTypes'
 import { formatAmount } from '~/utils/formatAmount'
 
@@ -21,7 +16,6 @@ export const BudgetSection = ({
   const availableBudgetLeft =
     budget.maximum - spentThisMonth > 0 ? budget.maximum - spentThisMonth : 0
   const spentPercent = Math.round((spentThisMonth / budget.maximum) * 100)
-  const noTransactionsYet = !transactions.length
 
   return (
     <SectionWrapper>
@@ -39,38 +33,13 @@ export const BudgetSection = ({
         </div>
       </div>
 
-      <div className="flex flex-col p-4 bg-beige-100 rounded-xl gap-5 md:p-5">
-        <SectionTitleBlock
-          title="Latest Spending"
-          linkText="See All"
-          link={`/transactions?page=1&filterBy=${budget.category}`}
-          small
-          disabled={noTransactionsYet}
-        />
-
-        {noTransactionsYet ? (
-          <NoContentFound
-            text="No transactions for this budget yet"
-            styles={{ containerStyles: 'py-4' }}
-          />
-        ) : (
-          <div className="flex flex-col gap-3">
-            {transactions.map((transaction, index) => (
-              <Fragment key={transaction.transaction_date}>
-                <WidgetTransaction
-                  transaction={transaction}
-                  hideAvatarOnMobile
-                  small
-                />
-
-                {index < transactions.length - 1 && (
-                  <Divider styles="bg-grey-500 opacity-15" />
-                )}
-              </Fragment>
-            ))}
-          </div>
-        )}
-      </div>
+      <TransactionListSection
+        transactions={transactions}
+        title="Latest Spending"
+        link={`/transactions?page=1&filterBy=${budget.category}`}
+        linkText="See All"
+        emptyTextState="No transactions for this budget yet"
+      />
     </SectionWrapper>
   )
 }

@@ -22,14 +22,8 @@ export const Input = <T extends string | number>({
   //#endregion
 
   const [showPass, setShowPass] = useState(false)
-  const [valueToDisplay, setValueToDisplay] = useState(
-    isNumberInput && input.value === 0 ? '' : input.value
-  )
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
-    setValueToDisplay(newValue)
-
     input.onChange(e.target.value as T)
   }
 
@@ -67,7 +61,7 @@ export const Input = <T extends string | number>({
             !type && 'flex'
           )}
           placeholder={input.placeholder}
-          value={valueToDisplay}
+          value={isNumberInput && input.value === 0 ? '' : input.value}
           onChange={handleInputChange}
           onBlur={input.onBlur}
           maxLength={input.maxLength}

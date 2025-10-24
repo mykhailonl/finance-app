@@ -1,13 +1,14 @@
 import cn from 'classnames'
 
+import type { PaginationButtonProps } from '~/types/ButtonTypes'
 import { iconComponents } from '~/types/IconType'
 
-type Props = {
-  role: 'prev' | 'next'
-  disabled: boolean
-  onClick: () => void
-}
-export const PaginationButton = ({ role, disabled, onClick }: Props) => {
+export const PaginationButton = ({
+  role,
+  disabled,
+  showText = false,
+  onClick,
+}: PaginationButtonProps) => {
   const Icon = iconComponents['caretDown']
 
   const isNextButton = role === 'next'
@@ -21,7 +22,9 @@ export const PaginationButton = ({ role, disabled, onClick }: Props) => {
       disabled={disabled}
       onClick={onClick}
     >
-      {isNextButton && <p className="hidden text-preset-4 md:flex ">Next</p>}
+      {isNextButton && showText && (
+        <p className="hidden text-preset-4 md:flex ">Next</p>
+      )}
 
       <div
         className={cn(
@@ -33,7 +36,9 @@ export const PaginationButton = ({ role, disabled, onClick }: Props) => {
         <Icon className="w-4 h-4" />
       </div>
 
-      {!isNextButton && <p className="hidden text-preset-4 md:flex">Prev</p>}
+      {!isNextButton && showText && (
+        <p className="hidden text-preset-4 md:flex">Prev</p>
+      )}
     </button>
   )
 }

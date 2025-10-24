@@ -28,6 +28,7 @@ export const Pagination = ({ totalPages, hasNext, hasPrev }: Props) => {
       <PaginationButton
         role="prev"
         disabled={!hasPrev}
+        showText
         onClick={() => setPage(page - 1)}
       />
 
@@ -48,6 +49,7 @@ export const Pagination = ({ totalPages, hasNext, hasPrev }: Props) => {
       <PaginationButton
         role="next"
         disabled={!hasNext}
+        showText
         onClick={() => setPage(page + 1)}
       />
     </div>

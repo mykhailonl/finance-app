@@ -1,16 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { useAuth } from '~/hooks/useAuth'
 import { transactionService } from '~/services/transactionService'
 import type { TransactionUpdate } from '~/types'
 
 export function useTransactionMutations() {
   const queryClient = useQueryClient()
+  const { user } = useAuth()
 
   const createTransaction = useMutation({
     mutationFn: transactionService.create,
     networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({
+        queryKey: ['user-balance-function', user?.id],
+      })
     },
   })
 
@@ -20,6 +25,9 @@ export function useTransactionMutations() {
     networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({
+        queryKey: ['user-balance-function', user?.id],
+      })
     },
   })
 
@@ -28,6 +36,9 @@ export function useTransactionMutations() {
     networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({
+        queryKey: ['user-balance-function', user?.id],
+      })
     },
   })
 

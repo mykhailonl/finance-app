@@ -10,6 +10,7 @@ type Props = {
   hideAvatarOnMobile?: boolean
   small?: boolean
   showCategory?: boolean
+  styles?: string
 }
 
 export const WidgetTransaction = ({
@@ -17,12 +18,16 @@ export const WidgetTransaction = ({
   hideAvatarOnMobile = false,
   small = false,
   showCategory = false,
+  styles,
 }: Props) => {
-  const formattedAmount = formatAmountToString(transaction.amount)
+  const formattedAmount = formatAmountToString({
+    amount: transaction.amount,
+    isPot: transaction.transaction_type === 'transfer',
+  })
   const formattedDate = formatDate(transaction.transaction_date)
 
   return (
-    <div className="flex items-center gap-3">
+    <div className={cn('flex items-center gap-3', styles)}>
       <div className="flex self-stretch gap-3 items-center grow">
         <TransactionAvatar
           transaction={transaction}

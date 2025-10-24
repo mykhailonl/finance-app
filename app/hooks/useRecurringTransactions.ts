@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { CURRENT_MONTH } from '~/constants/dates'
+import { useAuth } from '~/hooks/useAuth'
 import { useTransactions } from '~/hooks/useTransactions'
 import type { Transaction } from '~/types'
 import type { SortOption } from '~/types/DropdownType'
@@ -42,13 +42,20 @@ type Params = {
   sortBy: SortOption
   page: number
   query: string
+  period: string
 }
 
-export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
+export const useRecurringTransactions = ({
+  sortBy,
+  page,
+  query,
+  period = '2025-08',
+}: Params) => {
+  const { user } = useAuth()
   const { data: transactions } = useTransactions()
 
   return useSuspenseQuery<UseRecurringTransactionsReturn>({
-    queryKey: ['recurring', sortBy, page, query],
+    queryKey: ['recurring', sortBy, page, query, period, user?.id],
     queryFn: async () => {
       const recurringTransactions = transactions.filter(
         (transaction: Transaction) => transaction.recurring
@@ -59,6 +66,7 @@ export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
           if (!acc.find((item: Transaction) => item.name === tr.name)) {
             acc.push(tr)
           }
+
           return acc
         },
         []
@@ -78,7 +86,7 @@ export const useRecurringTransactions = ({ sortBy, page, query }: Params) => {
             (tr: Transaction) =>
               tr.name === transaction.name &&
               tr.recurring &&
-              tr.transaction_date.startsWith(CURRENT_MONTH)
+              tr.transaction_date.startsWith(period)
           )
         }),
       }

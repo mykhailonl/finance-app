@@ -2,12 +2,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { toast } from 'sonner'
 
+import { useAuth } from '~/hooks/useAuth'
 import { useBudgetMutations } from '~/hooks/useBudgetMutations'
 import { useDevice } from '~/hooks/useDevice'
 import { useModal } from '~/hooks/useModal'
 import { usePotMutations } from '~/hooks/usePotMutations'
+import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 import { useTransactionMutations } from '~/hooks/useTransactionMutations'
-import { useTransactions } from '~/hooks/useTransactions'
 import { useUndoableDelete } from '~/hooks/useUndoableDelete'
 import {
   AddBudgetModal,
@@ -33,12 +34,18 @@ import type {
   TransactionInsert,
   TransactionUpdate,
 } from '~/types'
+import { normalizePeriod } from '~/utils/normalizePeriod'
 
 export const ModalContainer = () => {
   const { isMobile } = useDevice()
   const { modalState, closeModal } = useModal()
   const { deleteWithUndo } = useUndoableDelete()
-  const { data: allTransactions } = useTransactions()
+  const { user } = useAuth()
+
+  const [month] = useSearchParamValue('month')
+  const [year] = useSearchParamValue('year')
+
+  const period = normalizePeriod(month, year)
 
   const budgetMutations = useBudgetMutations()
   const potMutations = usePotMutations()
@@ -81,7 +88,7 @@ export const ModalContainer = () => {
       closeModal()
 
       deleteWithUndo({
-        queryKey: ['budgets', allTransactions?.length],
+        queryKey: ['budgets', period, user?.id],
         idToDelete: modalState.budget.id,
         actualDelete: () =>
           budgetMutations.deleteBudget.mutateAsync(modalState.budget.id),
@@ -125,11 +132,26 @@ export const ModalContainer = () => {
       closeModal()
 
       deleteWithUndo({
-        queryKey: ['pots'],
+        queryKey: ['pots', user?.id],
         idToDelete: modalState.pot.id,
-        actualDelete: () =>
-          potMutations.deletePot.mutateAsync(modalState.pot.id),
-        message: `Pot ${modalState.pot.name} deleted.`,
+        actualDelete: async () => {
+          if (modalState.pot.total > 0) {
+            transactionMutations.createTransaction.mutate({
+              name: `Refund of remaining balance from ${modalState.pot.name}`,
+              amount: modalState.pot.total,
+              category: 'Transfer',
+              transaction_date: new Date().toISOString(),
+              transaction_type: 'transfer',
+              pot_id: null,
+            })
+          }
+
+          await potMutations.deletePot.mutateAsync(modalState.pot.id)
+        },
+        message: `Pot ${modalState.pot.name} deleted${
+          modalState.pot.total > 0 &&
+          `, ${modalState.pot.total} returned to balance`
+        }.`,
         errorMessage: 'Failed to delete pot.',
       })
     }
@@ -417,31 +439,4 @@ export const ModalContainer = () => {
       </AnimatePresence>
     </Overlays>
   )
-  // return (
-  //   <Overlays>
-  //     <AnimatePresence>
-  //       {modalState && (
-  //         <motion.div
-  //           className="fixed inset-0 z-50 bg-black/50 px-4"
-  //           initial={{ opacity: 0 }}
-  //           animate={{ opacity: 1 }}
-  //           exit={{ opacity: 0 }}
-  //           transition={{ duration: 0.2 }}
-  //           onClick={closeModal}
-  //         >
-  //           <motion.div
-  //             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-  //             initial={{ opacity: 0, scale: 0.95 }}
-  //             animate={{ opacity: 1, scale: 1 }}
-  //             exit={{ opacity: 0, scale: 0.95 }}
-  //             transition={{ duration: 0.2, delay: 0.05 }}
-  //             onClick={(e) => e.stopPropagation()}
-  //           >
-  //             {renderModal()}
-  //           </motion.div>
-  //         </motion.div>
-  //       )}
-  //     </AnimatePresence>
-  //   </Overlays>
-  // )
 }

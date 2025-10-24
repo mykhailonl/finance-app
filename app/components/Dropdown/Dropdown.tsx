@@ -20,6 +20,7 @@ export const Dropdown = <T extends DropdownOptionType>({
   mobileView,
   usedValues,
   small,
+  usedOptionFirst = false,
 }: DropdownProps<T>) => {
   //#region states
   const [isOpen, setIsOpen] = useState(false)
@@ -51,10 +52,19 @@ export const Dropdown = <T extends DropdownOptionType>({
   const isSortDropdown = label.labelText === 'Sort By'
   const isFilterDropdown = label.labelText === 'Category'
 
-  const selectedLabel = options.find((opt) => opt.value === value)
+  const selectedLabel = options.find((opt) => opt.value === value) || options[0]
 
   const currentColorClass =
     showColorTag && THEME_TO_TW_TEXT[value as ThemeColor]
+
+  const sortedOptions = usedOptionFirst
+    ? [
+        selectedLabel,
+        ...options
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .filter((opt) => opt.value !== selectedLabel.value),
+      ]
+    : options
 
   return (
     <div className={cn('flex gap-1 items-center self-stretch', styles)}>
@@ -75,7 +85,7 @@ export const Dropdown = <T extends DropdownOptionType>({
         {/* icon only */}
         <div
           className={cn(
-            'md:hidden cursor-custom',
+            'md:hidden cursor-custom p-3',
             mobileView ? 'flex' : 'hidden'
           )}
           onClick={() => setIsOpen(!isOpen)}
@@ -90,7 +100,7 @@ export const Dropdown = <T extends DropdownOptionType>({
           className={cn(
             'text-nowrap md:flex items-center px-5 py-3 gap-4 rounded-lg bg-white cursor-custom border border-beige-500 hover:border-grey-500 active:border-grey-900',
             !mobileView ? 'flex' : 'hidden',
-            isSortDropdown ? 'min-w-[114px]' : 'min-w-[177px]',
+            isSortDropdown ? 'min-w-[118px]' : 'min-w-[177px]',
             small && 'min-w-fit md:min-w-[177px]' // !
           )}
           onClick={() => setIsOpen(!isOpen)}
@@ -116,7 +126,7 @@ export const Dropdown = <T extends DropdownOptionType>({
               mobileView ? 'top-13 md:top-16' : 'w-full top-16'
             )}
           >
-            {options.map((option, index) => {
+            {sortedOptions.map((option, index) => {
               const isSelected = value === option.value
 
               const optionColorClass =

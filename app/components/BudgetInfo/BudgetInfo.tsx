@@ -2,15 +2,10 @@ import cn from 'classnames'
 
 import { Divider } from '~/components/Divider'
 import { THEME_TO_TW_CLASS } from '~/constants/theme'
-import type { Budget } from '~/types'
+import type { BudgetInfoProps } from '~/types/BudgetTypes'
 import { formatAmount } from '~/utils/formatAmount'
 
-type Props = {
-  budget: Budget
-  spent: number
-}
-
-export const BudgetInfo = ({ budget, spent }: Props) => {
+export const BudgetInfo = ({ budget, spent }: BudgetInfoProps) => {
   const colorStyle = THEME_TO_TW_CLASS[budget.theme]
   const formattedMax = formatAmount(budget.maximum)
   const formattedSpent = formatAmount(spent)

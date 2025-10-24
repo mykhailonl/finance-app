@@ -1,4 +1,5 @@
 import type { User } from '@supabase/supabase-js'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   createContext,
   type PropsWithChildren,
@@ -14,12 +15,15 @@ import supabase from '~/utils/supabase'
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const queryClient = useQueryClient()
+
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
+
       setLoading(false)
     })
 
@@ -27,6 +31,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null)
+
       setLoading(false)
     })
 
@@ -35,23 +40,29 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signIn = useCallback(async (email: string, password: string) => {
     setLoading(true)
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
+
     setLoading(false)
+
     return { data, error }
   }, [])
 
   const signUp = useCallback(
     async (email: string, password: string, options?: { data?: object }) => {
       setLoading(true)
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options,
       })
+
       setLoading(false)
+
       return { data, error }
     },
     []
@@ -59,10 +70,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signOut = useCallback(async () => {
     setLoading(true)
+
     const { error } = await supabase.auth.signOut()
+
+    await queryClient.invalidateQueries()
+
     setLoading(false)
+
     return { error }
-  }, [])
+  }, [queryClient])
 
   const value = {
     user,

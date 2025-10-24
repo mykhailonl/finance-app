@@ -47,7 +47,7 @@ export function usePotMutations() {
       potName: string
     }) => {
       await transactionService.create({
-        name: `Transfer to ${potName}`,
+        name: `Main → ${potName}`,
         amount: -amount,
         category: 'Transfer',
         transaction_type: 'transfer',
@@ -82,7 +82,7 @@ export function usePotMutations() {
       potName: string
     }) => {
       await transactionService.create({
-        name: `Withdraw from ${potName}`,
+        name: `${potName} → Main`,
         amount: amount,
         category: 'Transfer',
         transaction_type: 'transfer',

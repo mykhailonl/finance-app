@@ -11,6 +11,7 @@ type PaginationParams = {
   sortBy?: SortOption
   filterBy?: FilterOption
   query?: string
+  potId?: number
 }
 
 export const useTransactionFilters = ({
@@ -18,6 +19,7 @@ export const useTransactionFilters = ({
   sortBy = 'latest',
   filterBy = 'all',
   query = '',
+  potId,
 }: PaginationParams) => {
   const { data: allTransactions } = useTransactions()
 
@@ -30,6 +32,10 @@ export const useTransactionFilters = ({
 
     if (query) {
       filtered = filterByQuery(filtered, query)
+    }
+
+    if (potId) {
+      filtered = filtered.filter((tr) => tr.pot_id === potId)
     }
 
     const sorted = sortTransactions(filtered, sortBy)
@@ -45,5 +51,5 @@ export const useTransactionFilters = ({
       hasPrev: paginationResult.hasPrev,
       allFiltered: sorted,
     }
-  }, [allTransactions, page, sortBy, filterBy, query])
+  }, [allTransactions, page, sortBy, filterBy, query, potId])
 }
