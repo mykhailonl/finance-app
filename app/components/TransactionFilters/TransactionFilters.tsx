@@ -1,22 +1,23 @@
 import { Dropdown } from '~/components/Dropdown'
 import { Input } from '~/components/Input'
+import { ResetButton } from '~/components/ResetButton'
 import { useDevice } from '~/hooks/useDevice'
 import { useSearchParamValue } from '~/hooks/useSearchParamValue'
 import { FILTER_OPTIONS, SORT_OPTIONS } from '~/types/DropdownType'
 
 export const TransactionFilters = () => {
-  const { isTablet } = useDevice()
+  const { isDesktop } = useDevice()
 
   //#region values
   const [sortBy, setSortBy] = useSearchParamValue('sortBy')
   const [filterBy, setFilterBy] = useSearchParamValue('filterBy')
   const [query, setQuery] = useSearchParamValue('query')
 
-  const inputPlaceholder = isTablet ? 'Search' : 'Search transaction'
+  const inputPlaceholder = isDesktop ? 'Search transaction' : 'Search'
   //#endregion
 
   return (
-    <div className="flex gap-6 items-center justify-between">
+    <div className="flex gap-5 items-center justify-between">
       <Input
         label={{ showLabel: false }}
         input={{
@@ -28,10 +29,10 @@ export const TransactionFilters = () => {
           showHelper: false,
         }}
         showSearchIcon
-        styles="max-w-[320px] grow"
+        styles="min-w-[121px] max-w-[320px] grow"
       />
 
-      <div className="flex gap-6">
+      <div className="flex gap-2 md:gap-3">
         <Dropdown
           label={{
             showLabel: true,
@@ -44,6 +45,7 @@ export const TransactionFilters = () => {
           showCaret
           styles="gap-2"
           mobileView
+          usedOptionFirst
         />
 
         <Dropdown
@@ -54,7 +56,10 @@ export const TransactionFilters = () => {
           showCaret
           styles="gap-2"
           mobileView
+          usedOptionFirst
         />
+
+        <ResetButton />
       </div>
     </div>
   )
