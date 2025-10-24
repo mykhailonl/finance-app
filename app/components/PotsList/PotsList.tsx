@@ -16,6 +16,11 @@ export const PotsList = ({ pots }: Props) => {
           .filter(
             (tr) => tr.transaction_type === 'transfer' && tr.pot_id === el.id
           )
+          .sort(
+            (a, b) =>
+              new Date(b.transaction_date).getTime() -
+              new Date(a.transaction_date).getTime()
+          )
           .slice(0, 1)
 
         return <Pot key={el.name} pot={el} transactions={potTransactions} />

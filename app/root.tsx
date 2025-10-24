@@ -41,19 +41,22 @@ function AppContent() {
     )
   }
 
-  if (!user) {
+  // If there is user (real or demo) - showing app
+  if (user) {
+    // Public pages - redirect into the app
     if (isPublicRoute) {
-      return <Outlet />
+      return <Navigate to="/" replace />
     }
 
-    return <Navigate to="/login" replace />
+    return <Outlet />
   }
 
+  // If no user and not demo mode - showing public routes or redirect
   if (isPublicRoute) {
-    return <Navigate to="/" replace />
+    return <Outlet />
   }
 
-  return <Outlet />
+  return <Navigate to="/login" replace />
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -117,7 +120,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
     <main className="pt-16 p-4 container mx-auto">
       <h1>{message}</h1>
+
       <p>{details}</p>
+
       {stack && (
         <pre className="w-full p-4 overflow-x-auto">
           <code>{stack}</code>

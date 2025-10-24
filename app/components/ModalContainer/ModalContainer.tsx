@@ -40,7 +40,7 @@ export const ModalContainer = () => {
   const { isMobile } = useDevice()
   const { modalState, closeModal } = useModal()
   const { deleteWithUndo } = useUndoableDelete()
-  const { user } = useAuth()
+  const { user, isDemoMode } = useAuth()
 
   const [month] = useSearchParamValue('month')
   const [year] = useSearchParamValue('year')
@@ -85,16 +85,28 @@ export const ModalContainer = () => {
 
   const handleDeleteBudget = () => {
     if (modalState?.type === 'budget-delete') {
-      closeModal()
+      if (isDemoMode) {
+        // In demo mode deleting without UNDO functionality
+        budgetMutations.deleteBudget.mutate(modalState.budget.id, {
+          onSuccess: () => {
+            closeModal()
+            toast.success(`${modalState.budget.category} deleted.`)
+          },
+          onError: () => toast.error('Failed to delete budget.'),
+        })
+      } else {
+        // With UNDO functionality in real user mode
+        closeModal()
 
-      deleteWithUndo({
-        queryKey: ['budgets', period, user?.id],
-        idToDelete: modalState.budget.id,
-        actualDelete: () =>
-          budgetMutations.deleteBudget.mutateAsync(modalState.budget.id),
-        message: `${modalState.budget.category} deleted.`,
-        errorMessage: 'Failed to delete budget.',
-      })
+        deleteWithUndo({
+          queryKey: ['budgets', period, user?.id],
+          idToDelete: modalState.budget.id,
+          actualDelete: () =>
+            budgetMutations.deleteBudget.mutateAsync(modalState.budget.id),
+          message: `${modalState.budget.category} deleted.`,
+          errorMessage: 'Failed to delete budget.',
+        })
+      }
     }
   }
   //#endregion
@@ -129,74 +141,121 @@ export const ModalContainer = () => {
 
   const handleDeletePot = () => {
     if (modalState?.type === 'pot-delete') {
-      closeModal()
+      if (isDemoMode) {
+        // Deleting without UNDO functionality in demo mode
+        if (modalState.pot.total > 0) {
+          transactionMutations.createTransaction.mutate({
+            name: `Refund of remaining balance from ${modalState.pot.name}`,
+            amount: modalState.pot.total,
+            category: 'Transfer',
+            transaction_date: new Date().toISOString(),
+            transaction_type: 'transfer',
+            pot_id: null,
+          })
+        }
 
-      deleteWithUndo({
-        queryKey: ['pots', user?.id],
-        idToDelete: modalState.pot.id,
-        actualDelete: async () => {
-          if (modalState.pot.total > 0) {
-            transactionMutations.createTransaction.mutate({
-              name: `Refund of remaining balance from ${modalState.pot.name}`,
-              amount: modalState.pot.total,
-              category: 'Transfer',
-              transaction_date: new Date().toISOString(),
-              transaction_type: 'transfer',
-              pot_id: null,
-            })
+        potMutations.deletePot.mutate(modalState.pot.id, {
+          onSuccess: () => {
+            closeModal()
+            toast.success(
+              `Pot ${modalState.pot.name} deleted${
+                modalState.pot.total > 0 &&
+                `, ${modalState.pot.total} returned to balance`
+              }.`
+            )
+          },
+          onError: () => toast.error('Failed to delete pot.'),
+        })
+      } else {
+        // With UNDO functionality in real user mode
+        closeModal()
+
+        deleteWithUndo({
+          queryKey: ['pots', user?.id],
+          idToDelete: modalState.pot.id,
+          actualDelete: async () => {
+            if (modalState.pot.total > 0) {
+              transactionMutations.createTransaction.mutate({
+                name: `Refund of remaining balance from ${modalState.pot.name}`,
+                amount: modalState.pot.total,
+                category: 'Transfer',
+                transaction_date: new Date().toISOString(),
+                transaction_type: 'transfer',
+                pot_id: null,
+              })
+            }
+
+            await potMutations.deletePot.mutateAsync(modalState.pot.id)
+          },
+          message: `Pot ${modalState.pot.name} deleted${
+            modalState.pot.total > 0
+              ? `, ${modalState.pot.total} returned to balance`
+              : ''
+          }.`,
+          errorMessage: 'Failed to delete pot.',
+        })
+      }
+    }
+  }
+
+  const handleAddMoneyToPot = (amount: number): Promise<void> => {
+    if (modalState?.type === 'pot-add-money') {
+      return new Promise<void>((resolve, reject) => {
+        potMutations.addMoneyToPot.mutate(
+          {
+            id: modalState.pot.id,
+            amount,
+            currentTotal: modalState.pot.total,
+            potName: modalState.pot.name,
+          },
+          {
+            onSuccess: () => {
+              closeModal()
+
+              toast.success(`Money added to ${modalState.pot.name}.`)
+
+              resolve()
+            },
+            onError: () => {
+              toast.error('Failed to add money to pot.')
+
+              reject()
+            },
           }
-
-          await potMutations.deletePot.mutateAsync(modalState.pot.id)
-        },
-        message: `Pot ${modalState.pot.name} deleted${
-          modalState.pot.total > 0 &&
-          `, ${modalState.pot.total} returned to balance`
-        }.`,
-        errorMessage: 'Failed to delete pot.',
+        )
       })
     }
+    return Promise.resolve()
   }
 
-  const handleAddMoneyToPot = (amount: number) => {
-    if (modalState?.type === 'pot-add-money') {
-      potMutations.addMoneyToPot.mutate(
-        {
-          id: modalState.pot.id,
-          amount,
-          currentTotal: modalState.pot.total,
-          potName: modalState.pot.name,
-        },
-        {
-          onSuccess: () => {
-            closeModal()
-
-            toast.success(`Money added to ${modalState.pot.name}.`)
-          },
-          onError: () => toast.error('Failed to add money to pot.'),
-        }
-      )
-    }
-  }
-
-  const handleWithdrawMoneyFromPot = (amount: number) => {
+  const handleWithdrawMoneyFromPot = (amount: number): Promise<void> => {
     if (modalState?.type === 'pot-withdraw-money') {
-      potMutations.withdrawMoneyFromPot.mutate(
-        {
-          id: modalState.pot.id,
-          amount,
-          currentTotal: modalState.pot.total,
-          potName: modalState.pot.name,
-        },
-        {
-          onSuccess: () => {
-            closeModal()
-
-            toast.success(`Money withdrawn from ${modalState.pot.name}.`)
+      return new Promise<void>((resolve, reject) => {
+        potMutations.withdrawMoneyFromPot.mutate(
+          {
+            id: modalState.pot.id,
+            amount,
+            currentTotal: modalState.pot.total,
+            potName: modalState.pot.name,
           },
-          onError: () => toast.error('Failed to withdraw money from pot.'),
-        }
-      )
+          {
+            onSuccess: () => {
+              closeModal()
+
+              toast.success(`Money withdrawn from ${modalState.pot.name}.`)
+
+              resolve()
+            },
+            onError: () => {
+              toast.error('Failed to withdraw money from pot.')
+
+              reject()
+            },
+          }
+        )
+      })
     }
+    return Promise.resolve()
   }
   //#endregion
 
@@ -233,18 +292,34 @@ export const ModalContainer = () => {
 
   const handleDeleteTransaction = () => {
     if (modalState?.type === 'transaction-delete') {
-      closeModal()
+      if (isDemoMode) {
+        // Deleting without UNDO functionality in demo mode
+        transactionMutations.deleteTransaction.mutate(
+          modalState.transaction.id,
+          {
+            onSuccess: () => {
+              closeModal()
 
-      deleteWithUndo({
-        queryKey: ['transactions'],
-        idToDelete: modalState.transaction.id,
-        actualDelete: () =>
-          transactionMutations.deleteTransaction.mutateAsync(
-            modalState.transaction.id
-          ),
-        message: 'Transaction deleted.',
-        errorMessage: 'Failed to delete transaction.',
-      })
+              toast.success('Transaction deleted.')
+            },
+            onError: () => toast.error('Failed to delete transaction.'),
+          }
+        )
+      } else {
+        // With UNDO functionality in real user mode
+        closeModal()
+
+        deleteWithUndo({
+          queryKey: ['transactions'],
+          idToDelete: modalState.transaction.id,
+          actualDelete: () =>
+            transactionMutations.deleteTransaction.mutateAsync(
+              modalState.transaction.id
+            ),
+          message: 'Transaction deleted.',
+          errorMessage: 'Failed to delete transaction.',
+        })
+      }
     }
   }
   //#endregion

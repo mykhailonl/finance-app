@@ -1,10 +1,17 @@
 import type { AuthError, User } from '@supabase/supabase-js'
 
+import type { DemoDataOverrides } from '~/constants/demoData'
+
 export type AuthModalTypes = { type: 'logout' }
 
 export interface AuthContextType {
   user: User | null
   loading: boolean
+
+  isDemoMode: boolean
+  demoOverrides: DemoDataOverrides
+  updateDemoData: (key: keyof DemoDataOverrides, value: any) => void
+
   signIn: (
     email: string,
     password: string

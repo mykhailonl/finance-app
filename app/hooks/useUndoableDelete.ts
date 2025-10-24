@@ -63,14 +63,19 @@ export const useUndoableDelete = () => {
       },
     })
 
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = setTimeout(async () => {
       timeoutRef.current = undefined
 
-      actualDelete().catch(() => {
+      try {
+        await actualDelete()
+        // Reloading data from source after deletion
+        await queryClient.refetchQueries({ queryKey })
+      } catch {
+        // Invalidate and reload on error
         queryClient.invalidateQueries({ queryKey })
 
         toast.error(errorMessage)
-      })
+      }
     }, 4000) // 4s is a default animation duration on toasts
   }
 
