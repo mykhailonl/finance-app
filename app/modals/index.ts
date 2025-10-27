@@ -20,3 +20,7 @@ export { RestrictionTransactionModal } from './RestrictionTransactionModal'
 export { LoginModal } from './LoginModal'
 export { LogoutModal } from './LogoutModal'
 export { SignupModal } from './SignupModal'
+
+// Demo modals
+export { DemoModal } from './DemoModal'
+export { EndDemoModal } from './EndDemoModal'

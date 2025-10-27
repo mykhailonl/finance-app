@@ -46,6 +46,7 @@ export const TransactionListSection = ({
                   hideAvatarOnMobile
                   small
                   styles={styles?.transactionStyles}
+                  isPotFormatting
                 />
 
                 {index < transactions.length - 1 && (

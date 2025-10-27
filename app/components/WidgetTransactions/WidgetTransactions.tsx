@@ -1,11 +1,12 @@
+import { Divider } from '@mui/material'
 import { Fragment } from 'react'
 
-import { Divider } from '~/components/Divider'
 import { NoContentFound } from '~/components/NoContentFound'
 import { SectionTitleBlock } from '~/components/SectionTitleBlock'
 import { SectionWrapper } from '~/components/SectionWrapper'
 import { WidgetTransaction } from '~/components/WidgetTransaction'
 import { useTransactions } from '~/hooks/useTransactions'
+import { sortTransactions } from '~/utils/sortTransactions'
 
 export const WidgetTransactions = ({
   showCategory = false,
@@ -13,7 +14,8 @@ export const WidgetTransactions = ({
   showCategory?: boolean
 }) => {
   const { data: transactions } = useTransactions()
-  const slicedTransactions = transactions.slice(0, 5)
+  const sorted = sortTransactions(transactions, 'latest')
+  const slicedTransactions = sorted.slice(0, 5)
 
   const noTransactionsYet = !transactions.length
 

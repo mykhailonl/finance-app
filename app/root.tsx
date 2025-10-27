@@ -27,13 +27,13 @@ import type { Route } from './+types/root'
 const queryClient = new QueryClient()
 
 function AppContent() {
-  const { user, loading } = useAuth()
+  const { user, loading, demoInitialized } = useAuth()
   const location = useLocation()
 
   const publicRoutes = ['/signup', '/forgot-password', '/login']
   const isPublicRoute = publicRoutes.includes(location.pathname)
 
-  if (loading) {
+  if (loading || !demoInitialized) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div>Loading...</div>

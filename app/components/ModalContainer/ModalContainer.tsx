@@ -18,9 +18,11 @@ import {
   DeleteBudgetModal,
   DeletePotModal,
   DeleteTransactionModal,
+  DemoModal,
   EditBudgetModal,
   EditPotModal,
   EditTransactionModal,
+  EndDemoModal,
   LogoutModal,
   RestrictionTransactionModal,
   WithdrawFromPotModal,
@@ -454,6 +456,13 @@ export const ModalContainer = () => {
       //#region auth modals
       case 'logout':
         return <LogoutModal />
+      //#endregion
+
+      //#region demo modals
+      case 'demo':
+        return <DemoModal />
+      case 'endDemo':
+        return <EndDemoModal />
       //#endregion
 
       default:

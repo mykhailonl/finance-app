@@ -9,6 +9,15 @@ export const ActiveFilters = () => {
   const [, setFilterBy] = useSearchParamValue('filterBy')
   const [, setQuery] = useSearchParamValue('query')
 
+  const tagValue = {
+    latest: 'Latest',
+    oldest: 'Oldest',
+    alphAsc: 'A to Z',
+    alphDesc: 'Z to A',
+    highest: 'Highest',
+    lowest: 'Lowest',
+  }
+
   return (
     <div className="flex flex-wrap items-center gap-2 lg:px-4">
       <span className="text-gray-500 text-preset-4">Active filters:</span>
@@ -16,7 +25,7 @@ export const ActiveFilters = () => {
       {sortBy && (
         <FilterTag
           label="Sort"
-          value={sortBy}
+          value={tagValue[sortBy]}
           onClick={() => {
             setSortBy('latest')
           }}

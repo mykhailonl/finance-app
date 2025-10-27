@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router'
+
 import { Button } from '~/components/Button'
 import { ModalDescription } from '~/components/ModalDescription'
 import { ModalTitle } from '~/components/ModalTitle'
@@ -5,33 +7,35 @@ import { SectionWrapper } from '~/components/SectionWrapper'
 import { useAuth } from '~/hooks/useAuth'
 import { useModal } from '~/hooks/useModal'
 
-export const LogoutModal = () => {
+export const EndDemoModal = () => {
   const { closeModal } = useModal()
   const { signOut } = useAuth()
+  const navigate = useNavigate()
 
-  const handleLogout = async () => {
+  const handleEndDemo = async () => {
     await signOut()
 
     closeModal()
+
+    navigate('/login')
   }
 
   return (
     <SectionWrapper styles="min-w-[335px] md:w-[560px]">
-      <ModalTitle title="Confirm Log out" />
-
-      <ModalDescription text="You'll be signed out of your account and need to sign in again to access your data." />
+      <ModalTitle title="End Demo Mode?" />
+      <ModalDescription text="Your demo data will be cleared. Create an account to save your financial information." />
 
       <div className="flex gap-4">
         <Button
           variant="secondary"
-          styles="grow p-4"
+          styles="p-4 grow"
           onClick={() => closeModal()}
         >
-          Cancel
+          Continue Demo
         </Button>
 
-        <Button variant="danger" styles="grow p-4" onClick={handleLogout}>
-          Log Out
+        <Button variant="danger" styles="p-4 grow" onClick={handleEndDemo}>
+          End Demo
         </Button>
       </div>
     </SectionWrapper>

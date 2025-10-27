@@ -1,14 +1,18 @@
 import cn from 'classnames'
 import { type FormEvent } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 
 import { Button } from '~/components/Button'
 import { Input } from '~/components/Input'
+import { useAuth } from '~/hooks/useAuth'
 import { useForm } from '~/hooks/useForm'
 import { authService } from '~/services/authService'
 import { authValidators } from '~/validators'
 
 export const LoginModal = () => {
+  const { enterDemoMode } = useAuth()
+  const navigate = useNavigate()
+
   const {
     values,
     setFieldValue,
@@ -45,6 +49,12 @@ export const LoginModal = () => {
         setGeneralError(errorMessage)
       }
     }
+  }
+
+  const handleTryDemo = () => {
+    enterDemoMode()
+
+    navigate('/')
   }
 
   return (
@@ -96,9 +106,15 @@ export const LoginModal = () => {
         />
       </form>
 
-      <Button variant="primary" styles="p-4" type="submit" form="login-form">
-        Login
-      </Button>
+      <div className="flex flex-col gap-4">
+        <Button variant="primary" styles="p-4" type="submit" form="login-form">
+          Login
+        </Button>
+
+        <Button variant="secondary" styles="p-4" onClick={handleTryDemo}>
+          Try Demo Mode
+        </Button>
+      </div>
 
       {generalError && (
         <p className="text-red-500 text-preset-4">{generalError}</p>

@@ -20,7 +20,7 @@ interface UseBudgetsReturn {
   latestTransactionsByCategory: TransactionsByBudget
 }
 
-export default function useBudgets(period: string = '2025-08') {
+export default function useBudgets(period: string = '2025-10') {
   const { user, isDemoMode, demoOverrides } = useAuth()
   const { data: allTransactions } = useTransactions()
 

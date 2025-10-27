@@ -11,6 +11,7 @@ type Props = {
   small?: boolean
   showCategory?: boolean
   styles?: string
+  isPotFormatting?: boolean
 }
 
 export const WidgetTransaction = ({
@@ -19,10 +20,11 @@ export const WidgetTransaction = ({
   small = false,
   showCategory = false,
   styles,
+  isPotFormatting,
 }: Props) => {
   const formattedAmount = formatAmountToString({
     amount: transaction.amount,
-    isPot: transaction.transaction_type === 'transfer',
+    isPot: transaction.transaction_type === 'transfer' && isPotFormatting,
   })
   const formattedDate = formatDate(transaction.transaction_date)
 

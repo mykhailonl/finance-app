@@ -11,6 +11,8 @@ export interface AuthContextType {
   isDemoMode: boolean
   demoOverrides: DemoDataOverrides
   updateDemoData: (key: keyof DemoDataOverrides, value: any) => void
+  clearDemoData: () => void
+  demoInitialized: boolean
 
   signIn: (
     email: string,
@@ -30,4 +32,5 @@ export interface AuthContextType {
   signOut: () => Promise<{
     error: AuthError | null
   }>
+  enterDemoMode: () => void
 }
