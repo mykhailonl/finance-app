@@ -1,0 +1,1 @@
+import{a as t}from"./chunk-EF7DTUVF-DUQZMWWT.js";import{c as r}from"./Button-DqqQBIgQ.js";const a=()=>{const o=t.useContext(r);if(!o)throw new Error("useModal must be used within ModalProvider");return o};export{a as u};

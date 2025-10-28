@@ -1,0 +1,1 @@
+import{a as o}from"./chunk-EF7DTUVF-DUQZMWWT.js";import{d as r}from"./Button-DqqQBIgQ.js";const u=()=>{const t=o.useContext(r);if(t===void 0)throw new Error("useAuth must be used within an AuthProvider");return t};export{u};
