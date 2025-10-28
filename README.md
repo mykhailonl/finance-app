@@ -11,7 +11,7 @@ manage budgets, set savings goals, and visualize spending patterns.
 
 [![TanStack Query](https://img.shields.io/badge/TanStack%20Query-v5-FF4154?logo=react-query&logoColor=white)](https://tanstack.com/query)
 
-**[Live Demo](#)** • **[Features](#features)** • **[Tech Stack](#tech-stack)**
+**[Live Demo](https://mykhailonl.github.io/finance-app/)** • **[Features](#features)** • **[Tech Stack](#tech-stack)**
 
 ---
 

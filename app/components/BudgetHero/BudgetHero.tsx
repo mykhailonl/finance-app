@@ -11,6 +11,7 @@ export const BudgetHero = ({ budgets, categorySpent }: BudgetHeroProps) => {
 
       <div className="flex flex-col gap-4">
         {budgets
+          .slice()
           .sort((a, b) => {
             const firstCategorySpending = categorySpent[a.category]
             const secondCategorySpending = categorySpent[b.category]
