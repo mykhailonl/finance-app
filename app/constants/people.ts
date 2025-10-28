@@ -1,21 +1,23 @@
 import type { PersonName } from '~/types'
 
+const BASENAME = '/finance-app'
+
 export const peopleAvatars: Record<PersonName, string> = {
-  Emma: '/assets/images/avatars/emma-richardson.jpg',
-  Daniel: '/assets/images/avatars/daniel-carter.jpg',
-  Ella: '/assets/images/avatars/ella-phillips.jpg',
-  Ethan: '/assets/images/avatars/ethan-clark.jpg',
-  Harper: '/assets/images/avatars/harper-edwards.jpg',
-  James: '/assets/images/avatars/james-thompson.jpg',
-  Liam: '/assets/images/avatars/liam-hughes.jpg',
-  Lily: '/assets/images/avatars/lily-ramirez.jpg',
-  Mason: '/assets/images/avatars/mason-martinez.jpg',
-  Rina: '/assets/images/avatars/rina-sato.jpg',
-  Sebastian: '/assets/images/avatars/sebastian-cook.jpg',
-  Sofia: '/assets/images/avatars/sofia-peterson.jpg',
-  Sun: '/assets/images/avatars/sun-park.jpg',
-  William: '/assets/images/avatars/william-harris.jpg',
-  Yuna: '/assets/images/avatars/yuna-kim.jpg',
+  Emma: `${BASENAME}/assets/images/avatars/emma-richardson.jpg`,
+  Daniel: `${BASENAME}/assets/images/avatars/daniel-carter.jpg`,
+  Ella: `${BASENAME}/assets/images/avatars/ella-phillips.jpg`,
+  Ethan: `${BASENAME}/assets/images/avatars/ethan-clark.jpg`,
+  Harper: `${BASENAME}/assets/images/avatars/harper-edwards.jpg`,
+  James: `${BASENAME}/assets/images/avatars/james-thompson.jpg`,
+  Liam: `${BASENAME}/assets/images/avatars/liam-hughes.jpg`,
+  Lily: `${BASENAME}/assets/images/avatars/lily-ramirez.jpg`,
+  Mason: `${BASENAME}/assets/images/avatars/mason-martinez.jpg`,
+  Rina: `${BASENAME}/assets/images/avatars/rina-sato.jpg`,
+  Sebastian: `${BASENAME}/assets/images/avatars/sebastian-cook.jpg`,
+  Sofia: `${BASENAME}/assets/images/avatars/sofia-peterson.jpg`,
+  Sun: `${BASENAME}/assets/images/avatars/sun-park.jpg`,
+  William: `${BASENAME}/assets/images/avatars/william-harris.jpg`,
+  Yuna: `${BASENAME}/assets/images/avatars/yuna-kim.jpg`,
 }
 
 export type AvatarType = {
