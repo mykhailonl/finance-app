@@ -106,7 +106,7 @@ export default function useBudgets(period: string = '2025-10') {
 
       const transactionsByCategory = budgetCategories.reduce(
         (acc, category) => {
-          acc[category] = relevantTransactions
+          acc[category] = [...relevantTransactions]
             .filter((tr) => tr.category === category)
             .sort(
               (a, b) =>
@@ -126,7 +126,7 @@ export default function useBudgets(period: string = '2025-10') {
         {} as TransactionsByBudget
       )
 
-      const sortedBudgets = budgets.sort((a, b) => {
+      const sortedBudgets = [...budgets].sort((a, b) => {
         const firstBudgetSpending = spentByCategory[a.category]
         const secondBudgetSpending = spentByCategory[b.category]
 

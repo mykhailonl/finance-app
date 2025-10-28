@@ -12,12 +12,12 @@ export const useTransactions = () => {
   return useSuspenseQuery<Transaction[]>({
     queryKey: ['transactions', user?.id],
     queryFn: async () => {
+      let transactions: Transaction[]
+
       if (isDemoMode) {
         // Using data from localStorage if available
         if (demoOverrides.transactions) {
-          return demoOverrides.transactions.sort((a, b) =>
-            a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-          )
+          transactions = demoOverrides.transactions
         }
 
         // Trying to read DB if first time in demo
@@ -33,6 +33,7 @@ export const useTransactions = () => {
           }
 
           if (data && data.length > 0) {
+            console.log('🗄️ From DB:', data.length)
             return data
           }
 
@@ -55,12 +56,17 @@ export const useTransactions = () => {
             created_at: new Date().toISOString(),
           })) as Transaction[]
         }
+      } else {
+        transactions = await transactionService.getAll()
       }
 
-      // Real user mode
-      return transactionService.getAll()
+      return [...transactions].sort(
+        (a, b) =>
+          new Date(b.transaction_date).getTime() -
+          new Date(a.transaction_date).getTime()
+      )
     },
     networkMode: 'offlineFirst',
-    staleTime: 5 * 60 * 1000,
+    staleTime: isDemoMode ? 0 : 5 * 60 * 1000,
   })
 }

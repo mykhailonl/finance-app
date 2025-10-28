@@ -60,7 +60,7 @@ export const TransactionList = ({
               </div>
 
               {transactions.map((el, index) => (
-                <Fragment key={el.transaction_date}>
+                <Fragment key={el.id}>
                   <Transaction transaction={el} />
 
                   {index < transactions.length - 1 && <Divider />}

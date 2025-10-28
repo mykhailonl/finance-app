@@ -44,7 +44,13 @@ export function useTransactionMutations() {
     },
     networkMode: 'offlineFirst',
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      if (isDemoMode) {
+        queryClient.invalidateQueries({
+          queryKey: ['transactions', DEMO_USER_ID],
+        })
+      } else {
+        queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      }
       queryClient.invalidateQueries({
         queryKey: ['user-balance-function', user?.id],
       })
@@ -93,7 +99,13 @@ export function useTransactionMutations() {
     },
     networkMode: 'offlineFirst',
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      if (isDemoMode) {
+        queryClient.invalidateQueries({
+          queryKey: ['transactions', DEMO_USER_ID],
+        })
+      } else {
+        queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      }
       queryClient.invalidateQueries({
         queryKey: ['user-balance-function', user?.id],
       })
@@ -130,7 +142,13 @@ export function useTransactionMutations() {
     },
     networkMode: 'offlineFirst',
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      if (isDemoMode) {
+        queryClient.invalidateQueries({
+          queryKey: ['transactions', DEMO_USER_ID],
+        })
+      } else {
+        queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      }
       queryClient.invalidateQueries({
         queryKey: ['user-balance-function', user?.id],
       })
