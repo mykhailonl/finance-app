@@ -6,16 +6,23 @@ import {
   INITIAL_DEMO_TRANSACTIONS,
 } from '~/constants/demoData'
 import { useAuth } from '~/hooks/useAuth'
+import { useRateLimiter } from '~/hooks/useRateLimiter'
 import { potService } from '~/services/potService'
 import { transactionService } from '~/services/transactionService'
 import type { Pot, PotInsert, PotUpdate, Transaction } from '~/types'
 
 export function usePotMutations() {
+  const { checkRateLimit } = useRateLimiter(40)
+
   const queryClient = useQueryClient()
   const { isDemoMode, demoOverrides, updateDemoData } = useAuth()
 
   const createPot = useMutation({
     mutationFn: async (data: PotInsert) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentPots =
           demoOverrides.pots ||
@@ -45,10 +52,17 @@ export function usePotMutations() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pots'] })
     },
+    onError: (error) => {
+      console.error('Failed to create pot:', error.message)
+    },
   })
 
   const updatePot = useMutation({
     mutationFn: async ({ id, updates }: { id: number; updates: PotUpdate }) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentPots =
           demoOverrides.pots ||
@@ -80,10 +94,17 @@ export function usePotMutations() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pots'] })
     },
+    onError: (error) => {
+      console.error('Failed to update pot:', error.message)
+    },
   })
 
   const deletePot = useMutation({
     mutationFn: async (id: number) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentPots =
           demoOverrides.pots ||
@@ -108,6 +129,9 @@ export function usePotMutations() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pots'] })
     },
+    onError: (error) => {
+      console.error('Failed to delete pot:', error.message)
+    },
   })
 
   const addMoneyToPot = useMutation({
@@ -122,6 +146,10 @@ export function usePotMutations() {
       currentTotal: number
       potName: string
     }) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const transactionData = {
           name: `Main → ${potName}`,
@@ -196,6 +224,9 @@ export function usePotMutations() {
         queryClient.invalidateQueries({ queryKey: ['transactions'] }),
       ])
     },
+    onError: (error) => {
+      console.error('Failed to add money to pot:', error.message)
+    },
   })
 
   const withdrawMoneyFromPot = useMutation({
@@ -210,6 +241,10 @@ export function usePotMutations() {
       currentTotal: number
       potName: string
     }) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const transactionData = {
           name: `${potName} → Main`,
@@ -283,6 +318,9 @@ export function usePotMutations() {
         }),
         queryClient.invalidateQueries({ queryKey: ['transactions'] }),
       ])
+    },
+    onError: (error) => {
+      console.error('Failed to withdraw money from pot:', error.message)
     },
   })
 

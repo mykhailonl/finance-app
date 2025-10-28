@@ -2,15 +2,22 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { DEMO_USER_ID, INITIAL_DEMO_BUDGETS } from '~/constants/demoData'
 import { useAuth } from '~/hooks/useAuth'
+import { useRateLimiter } from '~/hooks/useRateLimiter'
 import { budgetService } from '~/services/budgetService'
 import type { Budget, BudgetInsert, BudgetUpdate } from '~/types'
 
 export function useBudgetMutations() {
+  const { checkRateLimit } = useRateLimiter(50)
+
   const queryClient = useQueryClient()
   const { isDemoMode, demoOverrides, updateDemoData } = useAuth()
 
   const createBudget = useMutation({
     mutationFn: async (data: BudgetInsert) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentBudgets =
           demoOverrides.budgets ||
@@ -40,6 +47,9 @@ export function useBudgetMutations() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
     },
+    onError: (error) => {
+      console.error('Failed to create budget:', error.message)
+    },
   })
 
   const updateBudget = useMutation({
@@ -50,6 +60,10 @@ export function useBudgetMutations() {
       id: number
       updates: BudgetUpdate
     }) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentBudgets = demoOverrides.budgets || INITIAL_DEMO_BUDGETS
 
@@ -73,10 +87,17 @@ export function useBudgetMutations() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
     },
+    onError: (error) => {
+      console.error('Failed to update budget:', error.message)
+    },
   })
 
   const deleteBudget = useMutation({
     mutationFn: async (id: number) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentBudgets = demoOverrides.budgets || INITIAL_DEMO_BUDGETS
         updateDemoData(
@@ -92,6 +113,9 @@ export function useBudgetMutations() {
     networkMode: 'offlineFirst',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['budgets'] })
+    },
+    onError: (error) => {
+      console.error('Failed to delete budget:', error.message)
     },
   })
 

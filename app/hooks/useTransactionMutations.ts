@@ -2,15 +2,22 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { DEMO_USER_ID, INITIAL_DEMO_TRANSACTIONS } from '~/constants/demoData'
 import { useAuth } from '~/hooks/useAuth'
+import { useRateLimiter } from '~/hooks/useRateLimiter'
 import { transactionService } from '~/services/transactionService'
 import type { Transaction, TransactionInsert, TransactionUpdate } from '~/types'
 
 export function useTransactionMutations() {
+  const { checkRateLimit } = useRateLimiter(100)
+
   const queryClient = useQueryClient()
   const { user, isDemoMode, demoOverrides, updateDemoData } = useAuth()
 
   const createTransaction = useMutation({
     mutationFn: async (data: TransactionInsert) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentTransactions =
           demoOverrides.transactions ||
@@ -42,6 +49,9 @@ export function useTransactionMutations() {
         queryKey: ['user-balance-function', user?.id],
       })
     },
+    onError: (error) => {
+      console.error('Failed to create transaction:', error.message)
+    },
   })
 
   const updateTransaction = useMutation({
@@ -52,6 +62,10 @@ export function useTransactionMutations() {
       id: number
       updates: TransactionUpdate
     }) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentTransactions =
           demoOverrides.transactions ||
@@ -84,10 +98,17 @@ export function useTransactionMutations() {
         queryKey: ['user-balance-function', user?.id],
       })
     },
+    onError: (error) => {
+      console.error('Failed to update transaction:', error.message)
+    },
   })
 
   const deleteTransaction = useMutation({
     mutationFn: async (id: number) => {
+      if (!checkRateLimit()) {
+        throw new Error('Too many requests. Please wait a moment.')
+      }
+
       if (isDemoMode) {
         const currentTransactions =
           demoOverrides.transactions ||
@@ -113,6 +134,9 @@ export function useTransactionMutations() {
       queryClient.invalidateQueries({
         queryKey: ['user-balance-function', user?.id],
       })
+    },
+    onError: (error) => {
+      console.error('Failed to delete transaction:', error.message)
     },
   })
 
