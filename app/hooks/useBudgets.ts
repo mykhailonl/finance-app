@@ -7,7 +7,6 @@ import { budgetService } from '~/services/budgetService'
 import type { Budget, ThemeColor, TransactionCategory } from '~/types'
 import type { BudgetSpending } from '~/types/BudgetTypes'
 import type { TransactionsByBudget } from '~/types/TransactionTypes'
-import supabase from '~/utils/supabase'
 
 interface UseBudgetsReturn {
   budgets: Budget[]
@@ -30,51 +29,18 @@ export default function useBudgets(period: string = '2025-10') {
       let budgets: Budget[]
 
       if (isDemoMode) {
-        // Using data from localStorage if available
         if (demoOverrides.budgets) {
-          // Deep clone to prevent frozen object issues in production builds
           budgets = structuredClone(demoOverrides.budgets)
         } else {
-          // First time in demo mode - trying to read DB
-          try {
-            const { data, error } = await supabase
-              .from('budgets')
-              .select('*')
-              .eq('user_id', DEMO_USER_ID)
-              .order('created_at', { ascending: true })
-
-            if (error) {
-              throw error
-            }
-
-            if (data && data.length > 0) {
-              budgets = data
-            } else {
-              // Fallback if empty
-              budgets = INITIAL_DEMO_BUDGETS.map((budget, idx) => ({
-                ...budget,
-                id: idx + 1,
-                user_id: DEMO_USER_ID,
-                created_at: new Date().toISOString(),
-                updated_at: new Date().toISOString(),
-              })) as Budget[]
-            }
-          } catch (error) {
-            console.warn(
-              'Failed to fetch demo budgets from DB, using fallback',
-              error
-            )
-            budgets = INITIAL_DEMO_BUDGETS.map((budget, idx) => ({
-              ...budget,
-              id: idx + 1,
-              user_id: DEMO_USER_ID,
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
-            })) as Budget[]
-          }
+          budgets = INITIAL_DEMO_BUDGETS.map((budget, idx) => ({
+            ...budget,
+            id: idx + 1,
+            user_id: DEMO_USER_ID,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          })) as Budget[]
         }
       } else {
-        // Real  user mode
         budgets = await budgetService.getAll()
       }
 

@@ -19,15 +19,15 @@ export function useBudgetMutations() {
       }
 
       if (isDemoMode) {
-        const currentBudgets =
-          demoOverrides.budgets ||
-          (INITIAL_DEMO_BUDGETS.map((b, idx) => ({
-            ...b,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Budget[])
+        const currentBudgets = demoOverrides.budgets
+          ? structuredClone(demoOverrides.budgets)
+          : (INITIAL_DEMO_BUDGETS.map((b, idx) => ({
+              ...b,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Budget[])
 
         const newBudget: Budget = {
           ...data,
@@ -65,7 +65,15 @@ export function useBudgetMutations() {
       }
 
       if (isDemoMode) {
-        const currentBudgets = demoOverrides.budgets || INITIAL_DEMO_BUDGETS
+        const currentBudgets = demoOverrides.budgets
+          ? structuredClone(demoOverrides.budgets)
+          : (INITIAL_DEMO_BUDGETS.map((b, idx) => ({
+              ...b,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Budget[])
 
         const updated = currentBudgets.map((b) =>
           b.id === id
@@ -99,7 +107,16 @@ export function useBudgetMutations() {
       }
 
       if (isDemoMode) {
-        const currentBudgets = demoOverrides.budgets || INITIAL_DEMO_BUDGETS
+        const currentBudgets = demoOverrides.budgets
+          ? structuredClone(demoOverrides.budgets)
+          : (INITIAL_DEMO_BUDGETS.map((b, idx) => ({
+              ...b,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Budget[])
+
         updateDemoData(
           'budgets',
           currentBudgets.filter((b) => b.id !== id)

@@ -222,7 +222,7 @@ this feature is disabled to avoid complexity with localStorage synchronization.
 
 Visit the live demo - no installation required!
 
-**[Live Demo](#)**
+**[Live Demo](https://mykhailonl.github.io/finance-app/)**
 
 You can either:
 

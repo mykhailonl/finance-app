@@ -24,15 +24,15 @@ export function usePotMutations() {
       }
 
       if (isDemoMode) {
-        const currentPots =
-          demoOverrides.pots ||
-          (INITIAL_DEMO_POTS.map((pot, idx) => ({
-            ...pot,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Pot[])
+        const currentPots = demoOverrides.pots
+          ? structuredClone(demoOverrides.pots)
+          : (INITIAL_DEMO_POTS.map((pot, idx) => ({
+              ...pot,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Pot[])
 
         const newPot = {
           ...data,
@@ -64,15 +64,15 @@ export function usePotMutations() {
       }
 
       if (isDemoMode) {
-        const currentPots =
-          demoOverrides.pots ||
-          (INITIAL_DEMO_POTS.map((pot, idx) => ({
-            ...pot,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Pot[])
+        const currentPots = demoOverrides.pots
+          ? structuredClone(demoOverrides.pots)
+          : (INITIAL_DEMO_POTS.map((pot, idx) => ({
+              ...pot,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Pot[])
 
         const updated = currentPots.map((pot) =>
           pot.id === id
@@ -106,15 +106,15 @@ export function usePotMutations() {
       }
 
       if (isDemoMode) {
-        const currentPots =
-          demoOverrides.pots ||
-          (INITIAL_DEMO_POTS.map((pot, idx) => ({
-            ...pot,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Pot[])
+        const currentPots = demoOverrides.pots
+          ? structuredClone(demoOverrides.pots)
+          : (INITIAL_DEMO_POTS.map((pot, idx) => ({
+              ...pot,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Pot[])
 
         updateDemoData(
           'pots',
@@ -169,26 +169,26 @@ export function usePotMutations() {
           recurring: false,
         } as Transaction
 
-        const currentTransactions =
-          demoOverrides.transactions ||
-          (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
-            ...tr,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-          })) as Transaction[])
+        const currentTransactions = demoOverrides.transactions
+          ? structuredClone(demoOverrides.transactions)
+          : (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
+              ...tr,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+            })) as Transaction[])
 
         updateDemoData('transactions', [newTransaction, ...currentTransactions])
 
-        const currentPots =
-          demoOverrides.pots ||
-          (INITIAL_DEMO_POTS.map((pot, idx) => ({
-            ...pot,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Pot[])
+        const currentPots = demoOverrides.pots
+          ? structuredClone(demoOverrides.pots)
+          : (INITIAL_DEMO_POTS.map((pot, idx) => ({
+              ...pot,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Pot[])
 
         const updatedPots = currentPots.map((pot) =>
           pot.id === id
@@ -264,26 +264,26 @@ export function usePotMutations() {
           recurring: false,
         } as Transaction
 
-        const currentTransactions =
-          demoOverrides.transactions ||
-          (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
-            ...tr,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-          })) as Transaction[])
+        const currentTransactions = demoOverrides.transactions
+          ? structuredClone(demoOverrides.transactions)
+          : (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
+              ...tr,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+            })) as Transaction[])
 
         updateDemoData('transactions', [newTransaction, ...currentTransactions])
 
-        const currentPots =
-          demoOverrides.pots ||
-          (INITIAL_DEMO_POTS.map((pot, idx) => ({
-            ...pot,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          })) as Pot[])
+        const currentPots = demoOverrides.pots
+          ? structuredClone(demoOverrides.pots)
+          : (INITIAL_DEMO_POTS.map((pot, idx) => ({
+              ...pot,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })) as Pot[])
 
         const updatedPots = currentPots.map((pot) =>
           pot.id === id
