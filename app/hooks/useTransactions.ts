@@ -17,7 +17,8 @@ export const useTransactions = () => {
       if (isDemoMode) {
         // Using data from localStorage if available
         if (demoOverrides.transactions) {
-          transactions = demoOverrides.transactions
+          // Deep clone to prevent frozen object issues in production builds
+          transactions = structuredClone(demoOverrides.transactions)
         }
 
         // Trying to read DB if first time in demo
@@ -59,11 +60,13 @@ export const useTransactions = () => {
         transactions = await transactionService.getAll()
       }
 
-      return [...transactions].sort(
-        (a, b) =>
-          new Date(b.transaction_date).getTime() -
-          new Date(a.transaction_date).getTime()
-      )
+      return transactions
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.transaction_date).getTime() -
+            new Date(a.transaction_date).getTime()
+        )
     },
     networkMode: 'offlineFirst',
     staleTime: isDemoMode ? 0 : 5 * 60 * 1000,

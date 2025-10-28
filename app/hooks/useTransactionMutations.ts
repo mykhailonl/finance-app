@@ -19,14 +19,15 @@ export function useTransactionMutations() {
       }
 
       if (isDemoMode) {
-        const currentTransactions =
-          demoOverrides.transactions ||
-          (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
-            ...tr,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-          })) as Transaction[])
+        // Deep clone to prevent frozen object issues
+        const currentTransactions = demoOverrides.transactions
+          ? structuredClone(demoOverrides.transactions)
+          : (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
+              ...tr,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+            })) as Transaction[])
 
         const newTransaction = {
           ...data,
@@ -73,14 +74,15 @@ export function useTransactionMutations() {
       }
 
       if (isDemoMode) {
-        const currentTransactions =
-          demoOverrides.transactions ||
-          (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
-            ...tr,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-          })) as Transaction[])
+        // Deep clone to prevent frozen object issues
+        const currentTransactions = demoOverrides.transactions
+          ? structuredClone(demoOverrides.transactions)
+          : (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
+              ...tr,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+            })) as Transaction[])
 
         const updated = currentTransactions.map((tr) =>
           tr.id === id
@@ -122,14 +124,15 @@ export function useTransactionMutations() {
       }
 
       if (isDemoMode) {
-        const currentTransactions =
-          demoOverrides.transactions ||
-          (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
-            ...tr,
-            id: idx + 1,
-            user_id: DEMO_USER_ID,
-            created_at: new Date().toISOString(),
-          })) as Transaction[])
+        // Deep clone to prevent frozen object issues
+        const currentTransactions = demoOverrides.transactions
+          ? structuredClone(demoOverrides.transactions)
+          : (INITIAL_DEMO_TRANSACTIONS.map((tr, idx) => ({
+              ...tr,
+              id: idx + 1,
+              user_id: DEMO_USER_ID,
+              created_at: new Date().toISOString(),
+            })) as Transaction[])
 
         updateDemoData(
           'transactions',
