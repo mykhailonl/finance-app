@@ -104,7 +104,7 @@ export const useSearchParamValue = <T extends ParamType>(paramName: T) => {
     filterBy: 'all',
     page: 1,
     query: '',
-    month: '8',
+    month: '10',
     year: '2025',
   }
 
