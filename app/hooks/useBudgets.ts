@@ -32,7 +32,8 @@ export default function useBudgets(period: string = '2025-10') {
       if (isDemoMode) {
         // Using data from localStorage if available
         if (demoOverrides.budgets) {
-          budgets = demoOverrides.budgets
+          // Deep clone to prevent frozen object issues in production builds
+          budgets = structuredClone(demoOverrides.budgets)
         } else {
           // First time in demo mode - trying to read DB
           try {
@@ -126,7 +127,7 @@ export default function useBudgets(period: string = '2025-10') {
         {} as TransactionsByBudget
       )
 
-      const sortedBudgets = [...budgets].sort((a, b) => {
+      const sortedBudgets = budgets.slice().sort((a, b) => {
         const firstBudgetSpending = spentByCategory[a.category]
         const secondBudgetSpending = spentByCategory[b.category]
 

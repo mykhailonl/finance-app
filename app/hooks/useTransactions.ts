@@ -33,7 +33,6 @@ export const useTransactions = () => {
           }
 
           if (data && data.length > 0) {
-            console.log('🗄️ From DB:', data.length)
             return data
           }
 
